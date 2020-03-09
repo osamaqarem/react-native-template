@@ -32,9 +32,10 @@ $ npx react-native init MyApp --template @osamaq/react-native-template
 
 ### MacOS
 
-Configure native iOS and Android with Sentry SDK
+Configure Sentry SDK for iOS and Android and connect your account.
 
 ```bash
+$ cd MyApp/
 $ npx sentry-wizard -i reactNative -p ios android
 ```
 
@@ -47,9 +48,10 @@ $ cd ..
 
 ### Other Platforms
 
-Configure only native Android with Sentry SDK
+Configure Sentry SDK for Android and connect your account.
 
 ```bash
+$ cd MyApp/
 $ npx sentry-wizard -i reactNative -p android
 ```
 
