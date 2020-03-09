@@ -67,3 +67,4 @@ buck-out/
 secret.js
 
 package-lock.json
+sentry.properties

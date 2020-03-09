@@ -1,6 +1,7 @@
 import NetInfo from "@react-native-community/netinfo"
 
 class NetworkHelper {
+  public pingingUrl = "https://clients3.google.com/generate_204"
   public isInternetReachable = false
 
   public unsubscribe = NetInfo.addEventListener(state => {

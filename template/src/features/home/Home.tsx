@@ -22,7 +22,11 @@ const Home = ({ navigation }: Props) => {
   return (
     <SafeAreaView style={styles.container}>
       {(loading && <ActivityIndicator />) || (
-        <Button onPress={() => dispatch(logout())} title="LOGOUT" />
+        <Button
+          onPress={() => dispatch(logout())}
+          title="SIGN OUT"
+          testID="signOutBtn"
+        />
       )}
     </SafeAreaView>
   )

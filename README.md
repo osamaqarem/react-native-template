@@ -20,6 +20,7 @@ A minimal but scalable template with common libraries and utilities.
 - [AsyncStorage](https://github.com/react-native-community/async-storage)
 - [NetInfo](https://github.com/react-native-community/react-native-netinfo)
 - [FastImage](https://github.com/DylanVann/react-native-fast-image)
+- [Detox](https://github.com/wix/Detox)
 - Good practice/convenience — error boundary, architecture, services & utils...
 
 ## Getting Started
@@ -57,5 +58,4 @@ $ npx sentry-wizard -i reactNative -p android
 
 ## TODO
 
-- [ ] Add [Detox](https://github.com/wix/Detox)
 - [ ] Add CodePush/OTA

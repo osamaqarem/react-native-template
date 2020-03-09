@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* HelloWorldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* HelloWorldTests.m */; };
 		0FACCE1D01D31841C40F2638 /* libPods-HelloWorld-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB5F6DF248E087520AE31B8 /* libPods-HelloWorld-tvOSTests.a */; };
@@ -199,6 +198,14 @@
 				2D02E4901E0B4A5D006451C7 /* HelloWorld-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F5D8178D294C4E93A8F6F12B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			path = Application;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

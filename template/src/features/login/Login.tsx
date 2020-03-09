@@ -54,7 +54,9 @@ const Login = ({ navigation }: Props) => {
           <View style={styles.signinBtn}>
             {(loading && (
               <ActivityIndicator color="" style={{ top: 10 }} />
-            )) || <Button title="SIGN IN" onPress={signin} />}
+            )) || (
+              <Button title="SIGN IN" onPress={signin} testID="signInBtn" />
+            )}
           </View>
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionTitle}>Step One</Text>

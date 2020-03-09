@@ -12,6 +12,7 @@ import { Provider } from "react-redux"
 import ErrorBoundary from "./src/features/errorboundary/ErrorBoundary"
 import Navigator from "./src/features/navigation/Navigator"
 import store from "./src/redux/store"
+import NetworkHelper from "./src/common/helpers/NetworkHelper"
 
 function setup() {
   // React Navigation, optimize memory usage.
@@ -23,9 +24,7 @@ function setup() {
     Sentry.init({
       dsn: DSN,
       beforeBreadcrumb(breadcrumb, _) {
-        if (
-          breadcrumb?.data?.url === "https://clients3.google.com/generate_204"
-        ) {
+        if (breadcrumb?.data?.url === NetworkHelper.pingingUrl) {
           return null
         }
         return breadcrumb
