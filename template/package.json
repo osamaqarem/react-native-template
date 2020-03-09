@@ -1,0 +1,67 @@
+{
+  "name": "HelloWorld",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "android-release": "react-native run-android --variant=release",
+    "ios": "react-native run-ios",
+    "ios-release": "react-native run-ios --configuration Release",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint .",
+    "validate-typescript": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@react-native-community/async-storage": "^1.8.1",
+    "@react-native-community/masked-view": "^0.1.7",
+    "@react-native-community/netinfo": "^5.5.1",
+    "@react-navigation/native": "^5.0.9",
+    "@react-navigation/stack": "^5.1.1",
+    "@reduxjs/toolkit": "^1.2.5",
+    "@sentry/react-native": "^1.3.3",
+    "react": "16.12.0",
+    "react-native": "0.61.5",
+    "react-native-fast-image": "^7.0.2",
+    "react-native-gesture-handler": "^1.6.0",
+    "react-native-reanimated": "^1.7.0",
+    "react-native-safe-area-context": "^0.7.3",
+    "react-native-screens": "^2.2.0",
+    "react-native-splash-screen": "^3.2.0",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-observable": "^1.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/runtime": "^7.8.4",
+    "@types/jest": "^24.0.24",
+    "@types/react-native": "^0.61.15",
+    "@types/react-redux": "^7.1.4",
+    "@types/react-test-renderer": "16.9.1",
+    "@typescript-eslint/eslint-plugin": "^2.12.0",
+    "@typescript-eslint/parser": "^2.12.0",
+    "babel-jest": "^25.0.0",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.0.1",
+    "jest": "^25.1.0",
+    "metro-react-native-babel-preset": "^0.58.0",
+    "react-test-renderer": "16.12.0",
+    "reactotron-react-native": "^4.0.3",
+    "reactotron-redux": "^3.1.2",
+    "typescript": "^3.7.3"
+  },
+  "jest": {
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+}

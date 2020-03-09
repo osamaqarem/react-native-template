@@ -1,0 +1,26 @@
+{
+  "name": "@osamaq/react-native-template",
+  "version": "0.0.6",
+  "description": "[ TypeScript, Reactotron, Redux Toolkit, Redux Observable, React Navigation, Reanimated, AsyncStorage, NetInfo, FastImage ]",
+  "scripts": {},
+  "files": [
+    "template",
+    "template.config.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osamaq/react-native-template.git"
+  },
+  "keywords": [
+    "react-native",
+    "template",
+    "boilerplate",
+    "starter",
+    "typescript",
+    "redux",
+    "navigation"
+  ],
+  "author": "Osama Qarem <osamaqarem@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/osamaq/react-native-template"
+}
