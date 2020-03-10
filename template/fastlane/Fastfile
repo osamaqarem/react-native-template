@@ -1,0 +1,130 @@
+# See for a react-native tutorial
+# https://github.com/osamaq/reactnative-fastlane-appcenter
+
+platform :android do
+  desc 'Build the release APK.'
+  lane :build do
+    # gradle(task: 'clean', project_dir: 'android/')
+    gradle(task: 'assemble', build_type: 'release', project_dir: 'android/')
+  end
+
+  desc 'Upload the release APK to App Center.'
+  lane :upload do |options|
+    release_notes = options[:notes]
+    appcenter_upload(
+        api_token: ENV["APPCENTER_API_TOKEN"],
+        owner_name: ENV["APPCENTER_OWNER_NAME"],
+        app_name: ENV["APPCENTER_APP_NAME"],
+        apk: "./android/app/build/outputs/apk/release/app-release.apk",
+        notify_testers: ENV["NOTIFY_TESTERS"],
+        destinations: ENV["DESTINATIONS"],
+        release_notes: release_notes
+        )
+  end
+
+  desc 'Build the release APK, then upload to App Center.'
+  lane :beta do
+    build
+    upload
+  end
+
+
+  desc 'Increment versionCode and versionName.'
+  lane :inc_ver do
+    increment_version_code(
+      gradle_file_path: "./android/app/build.gradle",
+    )
+
+    increment_version_name(
+      gradle_file_path: "./android/app/build.gradle",
+    )
+  end
+
+  # To prepare the original icon set, see:
+  # https://developer.android.com/studio/write/image-asset-studio
+  desc 'Overwrite the current icon set with a badged version.'
+  lane :make_badge do
+    add_badge(
+      shield: "BETA-0.0.1-orange", 
+      no_badge: true,
+      dark: true,
+      shield_scale: "0.55",
+      shield_gravity: "Center",
+      shield_geometry: "+0+30%",
+      glob: "/android/app/src/main/res/mipmap-*/ic_launcher*.png",
+    )
+  end
+
+end
+
+
+platform :ios do
+  desc 'Upload the release IPA to App Center.'
+  lane :upload do |options|
+    release_notes = options[:notes]
+    appcenter_upload(
+        api_token: ENV["APPCENTER_API_TOKEN"],
+        owner_name: ENV["APPCENTER_OWNER_NAME"],
+        app_name: ENV["APPCENTER_APP_NAME"],
+        ipa: "./" + ENV['APP_NAME'] + ".ipa",
+        notify_testers: ENV["NOTIFY_TESTERS"],
+        destinations: ENV["DESTINATIONS"],
+        release_notes: release_notes
+        )
+  end
+
+  platform :ios do    
+    # You need to configure singing for iOS
+    # https://github.com/osamaq/reactnative-fastlane-appcenter#signing
+    desc 'Fetch certificates and provisioning profiles'
+    lane :certificates do
+      match(app_identifier: 'com.app.bundle')
+    end
+  end
+  
+  desc 'Fetch certificates. Build the iOS application.'
+  lane :build do
+    certificates
+    gym(
+      scheme: ENV['APP_NAME'], 
+      project: './ios/' + ENV['APP_NAME'] + '.xcodeproj', 
+      export_method: 'development'
+    )
+  end
+
+
+  desc 'Increment build and version.'
+  lane :inc_ver do
+    increment_build_number(
+      # use build_number to specify specific build number
+      xcodeproj: './ios/' + ENV['APP_NAME'] + '.xcodeproj'
+    )
+    
+    version = get_version_number(
+      xcodeproj: './ios/' + ENV['APP_NAME'] + '.xcodeproj',
+      target: ENV['APP_NAME']
+    )
+    increment_version_number(
+      xcodeproj: './ios/' + ENV['APP_NAME'] + '.xcodeproj',  
+      version_number: version
+    )
+    increment_version_number(
+      xcodeproj: './ios/' + ENV['APP_NAME'] + '.xcodeproj'
+    )
+  end
+
+  # To prepare the original icon set, you can use:
+  # https://appicon.co/
+  desc 'Overwrite the current icon set with a badged version.'
+  lane :make_badge do
+    add_badge(
+      shield: "BETA-0.0.1-orange", 
+      no_badge: true,
+      dark: true,
+      shield_scale: "0.85",
+      shield_gravity: "South",
+      shield_geometry: "+0+5%",
+      glob: "/ios/" + ENV['APP_NAME'] + "/Images.xcassets/AppIcon.appiconset/*.png",
+    )
+  end
+end

@@ -12,7 +12,8 @@ const epicMiddleware = createEpicMiddleware()
 const store = configureStore({
   reducer: rootReducer,
   middleware: [epicMiddleware, sentryMiddleware, ...getDefaultMiddleware()],
-  enhancers: [reactotron.createEnhancer()],
+  // Only create reactotron enhancer in DEV
+  enhancers: (__DEV__ && [reactotron.createEnhancer()]) || undefined,
   devTools: false
 })
 

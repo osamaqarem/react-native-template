@@ -8,13 +8,14 @@
     "ios": "react-native run-ios",
     "ios-release": "react-native run-ios --configuration Release",
     "start": "react-native start",
+    "detox:b:android": "detox build -c android.emu.debug",
+    "detox:t:android": "detox test -c android.emu.debug --reuse",
+    "detox:b:ios": "detox build -c ios.sim.debug",
+    "detox:t:ios": "detox test -c ios.sim.debug --reuse",
     "test": "jest",
-    "lint": "eslint .",
-    "validate-typescript": "tsc --noEmit",
-    "detoxbuild-android": "detox build -c android.emu.debug",
-    "detoxtest-android": "detox test -c android.emu.debug --reuse",
-    "detoxbuild-ios": "detox build -c ios.sim.debug",
-    "detoxtest-ios": "detox test -c ios.sim.debug --reuse"
+    "deploy:ios": "fastlane ios beta",
+    "deploy:android": "fastlane android beta",
+    "validate-typescript": "tsc --noEmit"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.8.1",

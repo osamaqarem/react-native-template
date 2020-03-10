@@ -5,12 +5,12 @@
 </div>
 <br/>
 
-A minimal but scalable template with common libraries and utilities.
+A minimal template with good architecture and common packages to let you focus on writing features right away.
 
 ## Preconfigured with
 
 - TypeScript
-- [Redux](https://redux.js.org/) + [Toolkit](https://redux-toolkit.js.org/)
+- [Redux](https://redux.js.org/) with [Redux Toolkit](https://redux-toolkit.js.org/)
 - [Redux Observable](https://redux-observable.js.org/)
 - [React Navigation](https://reactnavigation.org/) (**v5**)
 - [Reactotron](https://github.com/infinitered/reactotron)
@@ -59,3 +59,5 @@ $ npx sentry-wizard -i reactNative -p android
 ## TODO
 
 - [ ] Add CodePush/OTA
+- [ ] Unit testing scaffolding
+- [ ] Local fastlane scripts
