@@ -9,9 +9,11 @@
     "ios-release": "react-native run-ios --configuration Release",
     "start": "react-native start",
     "detox:b:android": "detox build -c android.emu.debug",
-    "detox:t:android": "detox test -c android.emu.debug --reuse",
+    "detox:t:android": "detox test -c android.emu.debug",
+    "detox:t:android:reuse": "detox test -c android.emu.debug --reuse",
     "detox:b:ios": "detox build -c ios.sim.debug",
-    "detox:t:ios": "detox test -c ios.sim.debug --reuse",
+    "detox:t:ios": "detox test -c ios.sim.debug",
+    "detox:t:ios:reuse": "detox test -c ios.sim.debug --reuse",
     "test": "jest",
     "deploy:ios": "fastlane ios beta",
     "deploy:android": "fastlane android beta",
@@ -86,7 +88,7 @@
         "build": "xcodebuild -workspace ios/HelloWorld.xcworkspace -scheme HelloWorld -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
         "device": {
-          "type": "iPhone 11 Pro"
+          "type": "iPhone 11"
         }
       }
     }

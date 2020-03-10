@@ -41,13 +41,6 @@ $ cd MyApp/
 $ npx sentry-wizard -i reactNative -p ios android
 ```
 
-Install pods
-
-```bash
-$ cd ios && pod install
-$ cd ..
-```
-
 ### Other Platforms
 
 Configure Sentry SDK for Android and connect your account.
