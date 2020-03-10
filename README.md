@@ -21,6 +21,7 @@ A minimal template with good architecture and common packages to let you focus o
 - [NetInfo](https://github.com/react-native-community/react-native-netinfo)
 - [FastImage](https://github.com/DylanVann/react-native-fast-image)
 - [Detox](https://github.com/wix/Detox)
+- [Fastlane](http://fastlane.tools/)
 - Good practice/convenience — error boundary, architecture, services & utils...
 
 ## Getting Started
@@ -59,5 +60,3 @@ $ npx sentry-wizard -i reactNative -p android
 ## TODO
 
 - [ ] Add CodePush/OTA
-- [ ] Unit testing scaffolding
-- [ ] Local fastlane scripts
