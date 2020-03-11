@@ -15,21 +15,16 @@ Install _fastlane_ using
 or alternatively using `brew cask install fastlane`
 
 # Available Actions
-### build
+### bump
 ```
-fastlane build
+fastlane bump
 ```
-Fetch certificates. Build the iOS application.
-### inc_ver
-```
-fastlane inc_ver
-```
-Increment build and version.
+Bump build numbers, and set the display version to match the pacakage.json version.
 ### make_badge
 ```
 fastlane make_badge
 ```
-Overwrite the current icon set with a badged version.
+Make new versioned icon badges.
 
 ----
 
@@ -39,40 +34,30 @@ Overwrite the current icon set with a badged version.
 fastlane android build
 ```
 Build the release APK.
-### android upload
+### android deploy
 ```
-fastlane android upload
-```
-Upload the release APK to App Center.
-### android beta
-```
-fastlane android beta
+fastlane android deploy
 ```
 Build the release APK, then upload to App Center.
-### android inc_ver
-```
-fastlane android inc_ver
-```
-Increment versionCode and versionName.
-### android make_badge
-```
-fastlane android make_badge
-```
-Overwrite the current icon set with a badged version.
 
 ----
 
 ## iOS
-### ios upload
-```
-fastlane ios upload
-```
-Upload the release IPA to App Center.
 ### ios certificates
 ```
 fastlane ios certificates
 ```
-Fetch certificates and provisioning profiles
+Fetch certificates and provisioning profiles.
+### ios build
+```
+fastlane ios build
+```
+Build the iOS application.
+### ios deploy
+```
+fastlane ios deploy
+```
+Fetch certificats then build the release IPA and upload to App Center.
 
 ----
 

@@ -1,7 +1,10 @@
-# See for a react-native tutorial
+# For fastlane basics with react-native, see
 # https://github.com/osamaq/reactnative-fastlane-appcenter
 
+# -------------Android Build & Deploy-------------#
 platform :android do
+  # For android, you should setup signing for release builds.
+  # Currently, the default debug keystore is used. 
   desc 'Build the release APK.'
   lane :build do
     gradle(task: 'clean', project_dir: 'android/')
@@ -9,7 +12,7 @@ platform :android do
   end
 
   desc 'Upload the release APK to App Center.'
-  lane :upload do |options|
+  private_lane :upload do |options|
     release_notes = options[:notes]
     appcenter_upload(
         api_token: ENV["APPCENTER_API_TOKEN"],
@@ -23,44 +26,32 @@ platform :android do
   end
 
   desc 'Build the release APK, then upload to App Center.'
-  lane :beta do
+  lane :deploy do
     build
     upload
   end
-
-
-  desc 'Increment versionCode and versionName.'
-  lane :inc_ver do
-    increment_version_code(
-      gradle_file_path: "./android/app/build.gradle",
-    )
-
-    increment_version_name(
-      gradle_file_path: "./android/app/build.gradle",
-    )
-  end
-
-  # To prepare the original icon set, see:
-  # https://developer.android.com/studio/write/image-asset-studio
-  desc 'Overwrite the current icon set with a badged version.'
-  lane :make_badge do
-    add_badge(
-      shield: "BETA-0.0.1-orange", 
-      no_badge: true,
-      dark: true,
-      shield_scale: "0.55",
-      shield_gravity: "Center",
-      shield_geometry: "+0+30%",
-      glob: "/android/app/src/main/res/mipmap-*/ic_launcher*.png",
-    )
-  end
-
 end
 
-
+# -------------iOS Sign, Build & Deploy-------------#
 platform :ios do
+  # You need to configure singing for iOS
+  # https://github.com/osamaq/reactnative-fastlane-appcenter#signing
+  desc 'Fetch certificates and provisioning profiles.'
+  lane :certificates do
+    match(app_identifier: 'com.app.bundle')
+  end
+  
+  desc 'Build the iOS application.'
+  lane :build do
+    gym(
+      scheme: ENV['APP_NAME'], 
+      project: './ios/' + ENV['APP_NAME'] + '.xcodeproj', 
+      export_method: 'development'
+    )
+  end
+
   desc 'Upload the release IPA to App Center.'
-  lane :upload do |options|
+  private_lane :upload do |options|
     release_notes = options[:notes]
     appcenter_upload(
         api_token: ENV["APPCENTER_API_TOKEN"],
@@ -73,52 +64,72 @@ platform :ios do
         )
   end
 
-  platform :ios do    
-    # You need to configure singing for iOS
-    # https://github.com/osamaq/reactnative-fastlane-appcenter#signing
-    desc 'Fetch certificates and provisioning profiles'
-    lane :certificates do
-      match(app_identifier: 'com.app.bundle')
-    end
-  end
-  
-  desc 'Fetch certificates. Build the iOS application.'
-  lane :build do
+  desc 'Fetch certificats then build the release IPA and upload to App Center.'
+  lane :deploy do
     certificates
-    gym(
-      scheme: ENV['APP_NAME'], 
-      project: './ios/' + ENV['APP_NAME'] + '.xcodeproj', 
-      export_method: 'development'
+    build
+    upload
+  end
+end
+
+
+# -------------Icons & Versioning-------------#
+  desc 'Android: Increment versionCode and set versionName to package.json version.'
+  package = load_json(json_path: "./package.json")
+  private_lane :inc_ver_and do
+    increment_version_code(
+      gradle_file_path: "./android/app/build.gradle",
+    )
+
+    increment_version_name(
+      gradle_file_path: "./android/app/build.gradle",
+      version_name: package['version']
     )
   end
 
 
-  desc 'Increment build and version.'
-  lane :inc_ver do
+  desc 'iOS: Increment build number and set the version to package.json version.'
+  private_lane :inc_ver_ios do
     increment_build_number(
-      # use build_number to specify specific build number
       xcodeproj: './ios/' + ENV['APP_NAME'] + '.xcodeproj'
     )
-    
-    version = get_version_number(
+    increment_version_number(
       xcodeproj: './ios/' + ENV['APP_NAME'] + '.xcodeproj',
-      target: ENV['APP_NAME']
+      version_number: package['version']
     )
-    increment_version_number(
-      xcodeproj: './ios/' + ENV['APP_NAME'] + '.xcodeproj',  
-      version_number: version
-    )
-    increment_version_number(
-      xcodeproj: './ios/' + ENV['APP_NAME'] + '.xcodeproj'
+  end
+
+
+  desc 'Bump build numbers, and set the display version to match the pacakage.json version.'
+  lane :bump do
+    inc_ver_ios
+    inc_ver_and
+  end
+
+
+    # To prepare the original icon set, see:
+  # https://developer.android.com/studio/write/image-asset-studio
+  desc 'Android: Overwrite the current icon set with a badged version.'
+  private_lane :make_badge_and do
+    package = load_json(json_path: "./package.json")
+    add_badge(
+      shield: "BETA-" + package['version'] + "-orange", 
+      no_badge: true,
+      dark: true,
+      shield_scale: "0.55",
+      shield_gravity: "Center",
+      shield_geometry: "+0+30%",
+      glob: "/android/app/src/main/res/mipmap-*/ic_launcher*.png",
     )
   end
 
   # To prepare the original icon set, you can use:
   # https://appicon.co/
-  desc 'Overwrite the current icon set with a badged version.'
-  lane :make_badge do
+  desc 'iOS: Overwrite the current icon set with a badged version.'
+  private_lane :make_badge_ios do
+    package = load_json(json_path: "./package.json")
     add_badge(
-      shield: "BETA-0.0.1-orange", 
+      shield: "BETA-" + package['version'] + "-orange", 
       no_badge: true,
       dark: true,
       shield_scale: "0.85",
@@ -127,4 +138,9 @@ platform :ios do
       glob: "/ios/" + ENV['APP_NAME'] + "/Images.xcassets/AppIcon.appiconset/*.png",
     )
   end
-end
+
+  desc 'Make new versioned icon badges.'
+  lane :make_badge do
+    make_badge_ios
+    make_badge_and
+  end

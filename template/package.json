@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "android-release": "react-native run-android --variant=release",
+    "android:release": "react-native run-android --variant=release",
     "ios": "react-native run-ios",
-    "ios-release": "react-native run-ios --configuration Release",
+    "ios:release": "react-native run-ios --configuration Release",
     "start": "react-native start",
     "detox:b:android": "detox build -c android.emu.debug",
     "detox:t:android": "detox test -c android.emu.debug",
@@ -15,8 +15,9 @@
     "detox:t:ios": "detox test -c ios.sim.debug",
     "detox:t:ios:reuse": "detox test -c ios.sim.debug --reuse",
     "test": "jest",
-    "deploy:ios": "fastlane ios beta",
-    "deploy:android": "fastlane android beta",
+    "bump:patch": "npm version patch && fastlane bump",
+    "bump:minor": "npm version minor && fastlane bump",
+    "bump:major": "npm version major && fastlane bump",
     "validate-typescript": "tsc --noEmit"
   },
   "dependencies": {
