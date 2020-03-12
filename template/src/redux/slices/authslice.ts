@@ -4,7 +4,7 @@ import { ofType } from "redux-observable"
 import { Observable, of } from "rxjs"
 import { catchError, map, switchMap } from "rxjs/operators"
 import NavigationService from "../../services/navigation/NavigationService"
-import { api } from "../../services/network/ApiService"
+import { api } from "../../services/network"
 
 type AuthReducer = {
   authenticated: boolean

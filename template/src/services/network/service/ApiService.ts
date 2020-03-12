@@ -1,13 +1,11 @@
 import { from } from "rxjs"
-import NetworkHelper from "../../common/helpers/NetworkHelper"
-import HttpException from "./exceptions/HttpException"
-import OfflineException from "./exceptions/OfflineException"
-import GenericResponse from "./models/GenericResponse"
-import RestApi, { ApiEndpoints } from "./RestApi"
-import { mock } from "../../../package.json"
-import MockApiService from "./mock/MockApiService"
+import NetworkHelper from "../../../common/helpers/NetworkHelper"
+import RestApi, { ApiEndpoints } from "../RestApi"
+import GenericResponse from "../models/GenericResponse"
+import HttpException from "../exceptions/HttpException"
+import OfflineException from "../exceptions/OfflineException"
 
-export class ApiService implements ApiEndpoints {
+export default class ApiService implements ApiEndpoints {
   private defaultTimeout = 30
   private BASE_URL = "https://httpstat.us/"
   private ERR_NO_INTERNET = "Internet not reachable"
@@ -98,5 +96,3 @@ export class ApiService implements ApiEndpoints {
 
   public logout = () => this.api<GenericResponse>({ url: RestApi.logout() })
 }
-
-export const api = !mock ? new ApiService() : new MockApiService()

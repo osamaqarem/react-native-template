@@ -60,3 +60,4 @@ $ npx sentry-wizard -i reactNative -p android
 - [ ] Add CodePush/OTA
 - [ ] i18n
 - [ ] Unit testing examples
+- [ ] CI job to run detox test
