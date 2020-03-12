@@ -9,12 +9,16 @@
     "ios": "react-native run-ios",
     "ios:release": "react-native run-ios --configuration Release",
     "start": "react-native start",
-    "detox:b:android": "detox build -c android.emu.debug",
-    "detox:t:android": "detox test -c android.emu.debug",
-    "detox:t:android:reuse": "detox test -c android.emu.debug --reuse",
-    "detox:b:ios": "detox build -c ios.sim.debug",
-    "detox:t:ios": "detox test -c ios.sim.debug",
-    "detox:t:ios:reuse": "detox test -c ios.sim.debug --reuse",
+    "detox:b:android:d": "detox build -c android.emu.debug",
+    "detox:t:android:d": "detox test -c android.emu.debug",
+    "detox:t:android:d:reuse": "detox test -c android.emu.debug --reuse",
+    "detox:b:android:r": "detox build -c android.emu.release",
+    "detox:t:android:r": "detox test -c android.emu.release",
+    "detox:b:ios:d": "detox build -c ios.sim.debug",
+    "detox:t:ios:d": "detox test -c ios.sim.debug",
+    "detox:t:ios:d:reuse": "detox test -c ios.sim.debug --reuse",
+    "detox:b:ios:r": "detox build -c ios.sim.release",
+    "detox:t:ios:r": "detox test -c ios.sim.release",
     "test": "jest",
     "bump:patch": "npm version patch && fastlane bump",
     "bump:minor": "npm version minor && fastlane bump",
@@ -85,9 +89,25 @@
           "avdName": "Nexus_5X_API_29_x86"
         }
       },
+      "android.emu.release": {
+        "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
+        "build": "cd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && cd ..",
+        "type": "android.emulator",
+        "device": {
+          "avdName": "Nexus_5X_API_29_x86"
+        }
+      },
       "ios.sim.debug": {
         "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/HelloWorld.app",
         "build": "xcodebuild -workspace ios/HelloWorld.xcworkspace -scheme HelloWorld -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "device": {
+          "type": "iPhone 11"
+        }
+      },
+      "ios.sim.release": {
+        "binaryPath": "ios/build/Build/Products/Release-iphonesimulator/HelloWorld.app",
+        "build": "xcodebuild -workspace ios/HelloWorld.xcworkspace -scheme HelloWorld -configuration Release -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 11"

@@ -23,24 +23,28 @@ matrix:
       install:
         - nvm install 12.14.0
         - npm i
-        - npx sentry-wizard -i reactNative -p android --uninstall
-        - gem install bundler
-        - bundle install
+      before_script:
+        - cd android
       script:
-        - fastlane android build
+        - ./gradlew assembleRelease
+
     - language: objective-c
       os: osx
       osx_image: xcode11.3
+      podfile: template/ios/Podfile
+      cache: cocoapods
       before_install:
         - cd template
       install:
-        - nvm install 12.14.0
+        - brew tap wix/brew
+        - brew install applesimutils
         - gem install cocoapods
-        - npm uninstall detox
+        - nvm install 12.14.0
         - npm i
-        - npx sentry-wizard -i reactNative -p ios --uninstall
       before_script:
         - cd ios
         - pod install
+        - cd ..
       script:
-        - xcodebuild -workspace HelloWorld.xcworkspace -scheme HelloWorld -sdk iphonesimulator -configuration Release | xcpretty && exit ${PIPESTATUS[0]}
+        - npm run detox:b:ios:r | xcpretty
+        - npm run detox:t:ios:r --cleanup
