@@ -1,5 +1,8 @@
 # react-native-template 🌠
 
+[![Build Status](https://travis-ci.com/osamaq/react-native-template.svg?branch=master)](https://travis-ci.com/osamaq/react-native-template)
+[![npm dt](https://img.shields.io/npm/dt/@osamaq/react-native-template.svg)](https://www.npmjs.com/package/@osamaq/react-native-template)
+
 <div align="center">
     <img src="icon.png" alt="Logo" width="24%">
 </div>
@@ -55,3 +58,5 @@ $ npx sentry-wizard -i reactNative -p android
 ## TODO
 
 - [ ] Add CodePush/OTA
+- [ ] i18n
+- [ ] Unit testing examples

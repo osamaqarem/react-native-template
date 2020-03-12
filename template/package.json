@@ -1,6 +1,7 @@
 {
   "name": "HelloWorld",
   "version": "0.0.1",
+  "mock": false,
   "private": true,
   "scripts": {
     "android": "react-native run-android",

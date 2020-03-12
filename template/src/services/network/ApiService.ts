@@ -4,8 +4,10 @@ import HttpException from "./exceptions/HttpException"
 import OfflineException from "./exceptions/OfflineException"
 import GenericResponse from "./models/GenericResponse"
 import RestApi, { ApiEndpoints } from "./RestApi"
+import { mock } from "../../../package.json"
+import MockApiService from "./mock/MockApiService"
 
-class ApiService implements ApiEndpoints {
+export class ApiService implements ApiEndpoints {
   private defaultTimeout = 30
   private BASE_URL = "https://httpstat.us/"
   private ERR_NO_INTERNET = "Internet not reachable"
@@ -97,4 +99,4 @@ class ApiService implements ApiEndpoints {
   public logout = () => this.api<GenericResponse>({ url: RestApi.logout() })
 }
 
-export default new ApiService()
+export const api = !mock ? new ApiService() : new MockApiService()

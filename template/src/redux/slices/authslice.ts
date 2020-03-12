@@ -4,7 +4,7 @@ import { ofType } from "redux-observable"
 import { Observable, of } from "rxjs"
 import { catchError, map, switchMap } from "rxjs/operators"
 import NavigationService from "../../services/navigation/NavigationService"
-import ApiService from "../../services/network/ApiService"
+import { api } from "../../services/network/ApiService"
 
 type AuthReducer = {
   authenticated: boolean
@@ -36,14 +36,14 @@ export const loginEpic = (action$: Observable<any>) =>
     ofType(doAuth.type),
     switchMap(() => {
       NavigationService.navigateAndReset("Home")
-      return ApiService.login()
+      return api.login()
     }),
     map(res => ({
       type: authSuccess.type,
       payload: res.description === "OK" ? true : false
     })),
     catchError(err => {
-      if (ApiService.sessionIsExpired(err)) {
+      if (api.sessionIsExpired(err)) {
         return logout()
       }
       console.warn(err)
@@ -56,7 +56,7 @@ export const logout = () => async (dispatch: Dispatch<any>) => {
   try {
     dispatch(loading(true))
     NavigationService.navigateAndReset("Login")
-    const result = await ApiService.logout()
+    const result = await api.logout()
     dispatch({
       type: authSuccess.type,
       payload: result.description === "OK" ? false : true
