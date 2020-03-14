@@ -19,13 +19,16 @@ A minimal template with good architecture and common packages to let you focus o
 - [Reactotron](https://github.com/infinitered/reactotron)
 - [Sentry](https://docs.sentry.io/platforms/react-native/) with redux action logging middleware
 - [react-native-splash-screen](https://github.com/crazycodeboy/react-native-splash-screen)
+- [react-native-svg](https://github.com/react-native-community/react-native-svg)
 - [Reanimated](https://software-mansion.github.io/react-native-reanimated/)
+- [Redash](https://wcandillon.github.io/react-native-redash/)
 - [AsyncStorage](https://github.com/react-native-community/async-storage)
 - [NetInfo](https://github.com/react-native-community/react-native-netinfo)
 - [FastImage](https://github.com/DylanVann/react-native-fast-image)
 - [Detox](https://github.com/wix/Detox)
 - [Fastlane](http://fastlane.tools/)
-- Good practice/convenience — error boundary, architecture, services & utils...
+- Other — [error boundary](https://reactjs.org/docs/error-boundaries.html), architecture, services & utils.
+- Automation: npm/fastlane scripts for testing, importing fonts and images, handling versioning across iOS and Android and more.
 
 ## Getting Started
 

@@ -13,6 +13,7 @@ import ErrorBoundary from "./src/features/errorboundary/ErrorBoundary"
 import Navigator from "./src/features/navigation/Navigator"
 import store from "./src/redux/store"
 import NetworkHelper from "./src/common/helpers/NetworkHelper"
+import reactotron from "./reactotron"
 
 function setup() {
   // React Navigation, optimize memory usage.
@@ -55,4 +56,6 @@ const App = () => {
   )
 }
 
-export default App
+const AppWithOverlay = __DEV__ ? reactotron.overlay(App) : App
+
+export default AppWithOverlay

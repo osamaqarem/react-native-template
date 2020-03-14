@@ -28,6 +28,23 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+
+  // Uncomment if you would like to customize the status bar color
+  // UIColor *statusBarColor = [UIColor colorWithRed:0.84 green:0.13 blue:0.19 alpha:1.0];
+  // if (@available(iOS 13.0, *)) {
+    
+  //   UIView *statusBar = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.windowScene.statusBarManager.statusBarFrame];
+    
+  //   statusBar.backgroundColor = statusBarColor;
+    
+  //   [[UIApplication sharedApplication].keyWindow addSubview:statusBar];
+  // }else{
+  //   UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+
+  //   if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+  //     statusBar.backgroundColor = statusBarColor;
+  //   }
+  // }
   
   [RNSplashScreen show];
   

@@ -36,7 +36,7 @@ export default class ErrorBoundary extends Component {
           }
         },
         {
-          text: "Copy & Report On GitHub",
+          text: "Copy & Open Issue Form",
           onPress: () => {
             const stackTrace = this.state.error?.stack || ErrorBoundary.NO_STACK
 

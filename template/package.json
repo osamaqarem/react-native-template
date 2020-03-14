@@ -23,6 +23,7 @@
     "bump:patch": "npm version patch && fastlane bump",
     "bump:minor": "npm version minor && fastlane bump",
     "bump:major": "npm version major && fastlane bump",
+    "generateImageImports": "node scripts/images.js",
     "validate-typescript": "tsc --noEmit"
   },
   "dependencies": {
@@ -38,9 +39,11 @@
     "react-native-fast-image": "^7.0.2",
     "react-native-gesture-handler": "^1.6.0",
     "react-native-reanimated": "^1.7.0",
+    "react-native-redash": "^10.0.1",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.2.0",
     "react-native-splash-screen": "^3.2.0",
+    "react-native-svg": "^12.0.3",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-observable": "^1.2.0"
