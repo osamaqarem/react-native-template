@@ -9,9 +9,10 @@ import React from "react"
 import { Platform, UIManager } from "react-native"
 import { enableScreens } from "react-native-screens"
 import { Provider } from "react-redux"
+import { store, persistor } from "./src/redux/store"
+import { PersistGate } from "redux-persist/integration/react"
 import ErrorBoundary from "./src/features/errorboundary/ErrorBoundary"
 import Navigator from "./src/features/navigation/Navigator"
-import store from "./src/redux/store"
 import NetworkHelper from "./src/common/helpers/NetworkHelper"
 import reactotron from "./reactotron"
 
@@ -34,7 +35,10 @@ function setup() {
 
   // Reactotron
   __DEV__ &&
-    import("./reactotron").then(() => console.log("Reactotron Configured"))
+    import("./reactotron").then(() => {
+      console.log("Reactotron Configured")
+      console.rtron.clear()
+    })
 
   // Layout animation
   if (Platform.OS === "android") {
@@ -50,7 +54,9 @@ const App = () => {
   return (
     <ErrorBoundary>
       <Provider store={store}>
-        <Navigator />
+        <PersistGate loading={null} persistor={persistor}>
+          <Navigator />
+        </PersistGate>
       </Provider>
     </ErrorBoundary>
   )

@@ -8,6 +8,7 @@ class RestApi implements ApiEndpoints {
 
   public login = () => "200?sleep=1000"
   public logout = () => "200?sleep=1000"
+  public submit = () => "200?sleep=1000"
 }
 
 export default new RestApi()

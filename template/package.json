@@ -6,6 +6,8 @@
   "scripts": {
     "android": "react-native run-android",
     "android:release": "react-native run-android --variant=release",
+    "android:release:apk": "cd android && ./gradlew assembleRelease",
+    "android:uninstall": "adb uninstall com.helloworld",
     "ios": "react-native run-ios",
     "ios:release": "react-native run-ios --configuration Release",
     "start": "react-native start",
@@ -24,7 +26,8 @@
     "bump:minor": "npm version minor && fastlane bump",
     "bump:major": "npm version major && fastlane bump",
     "generateImageImports": "node scripts/images.js",
-    "validate-typescript": "tsc --noEmit"
+    "validate-typescript": "tsc --noEmit",
+    "nexus5x": "emulator @Nexus_5X_API_29_x86"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.8.1",
@@ -47,6 +50,7 @@
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-observable": "^1.2.0",
+    "redux-persist": "^6.0.0",
     "rxjs": "^6.5.4"
   },
   "devDependencies": {

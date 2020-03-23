@@ -18,7 +18,7 @@ import {
   ReloadInstructions
 } from "react-native/Libraries/NewAppScreen"
 import { useDispatch, useSelector } from "react-redux"
-import { doAuth } from "../../redux/slices/authslice"
+import { DO_AUTH } from "../../redux/slices/authslice"
 import { RootStackParamsList } from "../navigation/Navigator"
 import { RootStoreType } from "../../redux/rootReducer"
 
@@ -32,7 +32,7 @@ const Login = ({ navigation }: Props) => {
   const dispatch = useDispatch()
   const loading = useSelector((state: RootStoreType) => state.auth.loading)
 
-  const signin = () => dispatch(doAuth())
+  const signin = () => dispatch(DO_AUTH())
 
   return (
     <View>

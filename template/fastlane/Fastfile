@@ -113,7 +113,7 @@ end
   private_lane :make_badge_and do
     package = load_json(json_path: "./package.json")
     add_badge(
-      shield: "BETA-" + package['version'] + "-orange", 
+      shield: "DEV-" + package['version'] + "-orange", 
       no_badge: true,
       dark: true,
       shield_scale: "0.55",
@@ -129,7 +129,7 @@ end
   private_lane :make_badge_ios do
     package = load_json(json_path: "./package.json")
     add_badge(
-      shield: "BETA-" + package['version'] + "-orange", 
+      shield: "DEV-" + package['version'] + "-orange", 
       no_badge: true,
       dark: true,
       shield_scale: "0.85",

@@ -16,7 +16,7 @@ const {
   stopClock
 } = Animated
 
-const { height, width } = Dimensions.get("window")
+export const { height, width } = Dimensions.get("window")
 
 class UIHelper {
   public btnScaleAnim = {

@@ -9,11 +9,16 @@ export default class ApiService implements ApiEndpoints {
   private defaultTimeout = 30
   private BASE_URL = "https://httpstat.us/"
   private ERR_NO_INTERNET = "Internet not reachable"
-  private defaultConfig = {
+  private httpGetConfig = {
+    method: "get",
     headers: {
-      Accept: "application/json"
+      accept: "application/json"
     }
   }
+
+  /**
+   * Only return the request if its JSON, otherwise throws.
+   */
 
   private responseOkOrThrow = async <T>(res: Response) => {
     const isJSON = res.headers
@@ -39,6 +44,10 @@ export default class ApiService implements ApiEndpoints {
     }
   }
 
+  /**
+   * API Client
+   */
+
   private api = async <T>({
     url,
     config,
@@ -50,7 +59,7 @@ export default class ApiService implements ApiEndpoints {
   }) => {
     if (NetworkHelper.isInternetReachable) {
       const fullURL = this.BASE_URL + url
-      const reqConfig = config || this.defaultConfig
+      const reqConfig = config || this.httpGetConfig
       const reqTimeout = timeoutInSeconds || this.defaultTimeout
 
       const contoller = new AbortController()
@@ -73,7 +82,11 @@ export default class ApiService implements ApiEndpoints {
     }
   }
 
-  public requestTimedOut = (err: any) => {
+  /**
+   * Set up common error handling logic
+   */
+
+  requestTimedOut = (err: any) => {
     if ("message" in err && err.message === "Aborted") {
       return true
     } else {
@@ -81,7 +94,7 @@ export default class ApiService implements ApiEndpoints {
     }
   }
 
-  public sessionIsExpired = (err: any) => {
+  sessionIsExpired = (err: any) => {
     if (err instanceof HttpException && err.status == 401) {
       return true
     } else {
@@ -89,10 +102,43 @@ export default class ApiService implements ApiEndpoints {
     }
   }
 
-  public login = () =>
+  isTokenValid(exp: number) {
+    if (Date.now() > exp) {
+      return false
+    }
+    return true
+  }
+
+  /**
+   * Set up common request configrations
+   */
+
+  getHttpPostConfig = (body: object, token: string) => ({
+    method: "post",
+    body: JSON.stringify(body),
+    headers: {
+      accept: "application/json",
+      authorization: `Bearer ${token}`,
+      "content-type": "application/json"
+    }
+  })
+
+  /**
+   * Set up API endpoints
+   */
+
+  login = () =>
     from(
       this.api<GenericResponse>({ url: RestApi.login(), timeoutInSeconds: 10 })
     )
 
-  public logout = () => this.api<GenericResponse>({ url: RestApi.logout() })
+  logout = () => this.api<GenericResponse>({ url: RestApi.logout() })
+
+  submit = (body: {}, token: string) =>
+    from(
+      this.api<GenericResponse>({
+        url: RestApi.submit(),
+        config: this.getHttpPostConfig(body, token)
+      })
+    )
 }

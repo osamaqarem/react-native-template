@@ -1,5 +1,14 @@
 import { combineReducers } from "redux"
+import { persistReducer } from "redux-persist"
 import authReducer from "./slices/authslice"
+import AsyncStorage from "@react-native-community/async-storage"
+
+// Redux persist
+const rootPersistConfig = {
+  key: "root",
+  storage: AsyncStorage,
+  whitelist: []
+}
 
 const rootReducer = combineReducers({
   auth: authReducer
@@ -7,4 +16,4 @@ const rootReducer = combineReducers({
 
 export type RootStoreType = ReturnType<typeof rootReducer>
 
-export default rootReducer
+export default persistReducer(rootPersistConfig, rootReducer)

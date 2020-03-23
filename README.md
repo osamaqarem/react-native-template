@@ -4,7 +4,7 @@
 [![npm dt](https://img.shields.io/npm/dt/@osamaq/react-native-template.svg)](https://www.npmjs.com/package/@osamaq/react-native-template)
 
 <div align="center">
-    <img src="icon.png" alt="Logo" width="24%">
+    <img src="docs/assets/icon.png" alt="Logo" width="24%">
 </div>
 <br/>
 
@@ -40,23 +40,33 @@ Create a new project using the template.
 $ npx react-native init MyApp --template @osamaq/react-native-template
 ```
 
-### MacOS
+That's it. You're ready to go.
 
-Configure Sentry SDK for iOS and Android and connect your account.
+### Optional Steps
+
+#### Configure Sentry
+
+This template comes with Sentry preinstalled and configured for use with a [custom middleware](https://github.com/osamaq/react-native-template/blob/master/template/src/redux/middleware/sentryMiddleware.ts) for Redux. What this middleware does is log your redux actions as breadcrumbs to Sentry's crash logs for easier debugging. It does not log the dispatched data by default, which you might wish do if your app's networking activity is lightweight.
+
+If you do not wish to use it, simply uninstall the `@sentry/react-native` package.
+
+<div align="center">
+    <img src="docs/assets/breadcrumbs.png" alt="Logo" width="100%">
+</div>
+
+To configrure Sentry SDK and connect your account:
 
 ```bash
 $ cd MyApp/
+
+# For MacOS
 $ npx sentry-wizard -i reactNative -p ios android
-```
 
-### Other Platforms
-
-Configure Sentry SDK for Android and connect your account.
-
-```bash
-$ cd MyApp/
+# Other Platforms
 $ npx sentry-wizard -i reactNative -p android
 ```
+
+Insert your DSN in [App.tsx](<(https://github.com/osamaq/react-native-template/blob/0c1d30722b8364013f712b18fd6abc6fed30edfa/template/App.tsx#L23)>) and you're all done.
 
 ## TODO
 

@@ -13,11 +13,7 @@ const imageFileNames = () => {
 
 const generate = () => {
   let properties = imageFileNames()
-    .map(name => {
-      const actualName = name.toLowerCase().replace("_", "")
-
-      return `${actualName}: require('./${name}.png')`
-    })
+    .map(name => `${name}: require('./${name}.png')`)
     .join(",\n  ")
 
   const string = `export default {
