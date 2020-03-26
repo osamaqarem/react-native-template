@@ -1,11 +1,9 @@
-import { from } from "rxjs"
 import NetworkHelper from "../../../common/helpers/NetworkHelper"
-import RestApi, { ApiEndpoints } from "../RestApi"
-import GenericResponse from "../models/GenericResponse"
 import HttpException from "../exceptions/HttpException"
 import OfflineException from "../exceptions/OfflineException"
+import GenericResponse from "../models/GenericResponse"
 
-export default class ApiService implements ApiEndpoints {
+export default class BaseApiService {
   private defaultTimeout = 30
   private BASE_URL = "https://httpstat.us/"
   private ERR_NO_INTERNET = "Internet not reachable"
@@ -48,7 +46,7 @@ export default class ApiService implements ApiEndpoints {
    * API Client
    */
 
-  private api = async <T>({
+  api = async <T>({
     url,
     config,
     timeoutInSeconds
@@ -93,52 +91,4 @@ export default class ApiService implements ApiEndpoints {
       return false
     }
   }
-
-  sessionIsExpired = (err: any) => {
-    if (err instanceof HttpException && err.status == 401) {
-      return true
-    } else {
-      return false
-    }
-  }
-
-  isTokenValid(exp: number) {
-    if (Date.now() > exp) {
-      return false
-    }
-    return true
-  }
-
-  /**
-   * Set up common request configrations
-   */
-
-  getHttpPostConfig = (body: object, token: string) => ({
-    method: "post",
-    body: JSON.stringify(body),
-    headers: {
-      accept: "application/json",
-      authorization: `Bearer ${token}`,
-      "content-type": "application/json"
-    }
-  })
-
-  /**
-   * Set up API endpoints
-   */
-
-  login = () =>
-    from(
-      this.api<GenericResponse>({ url: RestApi.login(), timeoutInSeconds: 10 })
-    )
-
-  logout = () => this.api<GenericResponse>({ url: RestApi.logout() })
-
-  submit = (body: {}, token: string) =>
-    from(
-      this.api<GenericResponse>({
-        url: RestApi.submit(),
-        config: this.getHttpPostConfig(body, token)
-      })
-    )
 }

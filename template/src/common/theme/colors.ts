@@ -1,12 +1,11 @@
 export const colors = {
-  tabBar: "#222326",
-  itemInactive: "#ADAEB3",
-  background: "#121212",
+  red: "#D52031",
+  lightBlue: "#15AAE1",
+  darkBlue: "#10529F",
+  green: "#01CE7F",
+  black: "#000000",
+  darkGrey: "#999999",
+  lightGrey: "#E2E2E2",
   white: "#FFFFFF",
-  darkWhite: "#FDFDFD",
-  green: "#1DB954",
-  lightGrey: "#CBCBCC",
-  grey: "#B9B9B9",
-  darkGrey: "#A8A8A9",
-  darkerGrey: "#505153"
+  darkWhite: "#F3F4F9"
 }

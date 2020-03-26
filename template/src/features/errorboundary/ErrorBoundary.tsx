@@ -88,7 +88,6 @@ export default class ErrorBoundary extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.background,
     flex: 1,
     justifyContent: "flex-start"
   },
@@ -103,7 +102,6 @@ const styles = StyleSheet.create({
   },
   bigBoldText: {
     fontSize: 18,
-    color: colors.white,
     letterSpacing: 0.8,
     fontWeight: "bold",
     marginBottom: 100
@@ -113,7 +111,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
     lineHeight: 18,
     fontSize: 16,
-    color: colors.grey,
     letterSpacing: 0.4,
     textAlign: "center"
   },

@@ -1,8 +1,8 @@
-import ApiService from "../ApiService"
-import GenericResponse from "../../models/GenericResponse"
+import ExampleApiService from "../ExampleApiService"
+import GenericResponse from "../../../models/GenericResponse"
 import { from } from "rxjs"
 
-export default class MockApiService extends ApiService {
+export default class MockApiService extends ExampleApiService {
   login = () => {
     return from(
       new Promise<GenericResponse>((res, _) => {

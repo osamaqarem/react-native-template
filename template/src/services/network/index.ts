@@ -1,5 +1,5 @@
 import { mock } from "../../../package.json"
-import ApiService from "./service/ApiService"
-import MockApiService from "./service/mock/MockApiService"
+import ExampleApiService from "./service/example/ExampleApiService"
+import MockApiService from "./service/example/mock/ExampleMockApiService"
 
-export const api = !mock ? new ApiService() : new MockApiService()
+export const api = !mock ? new ExampleApiService() : new MockApiService()
