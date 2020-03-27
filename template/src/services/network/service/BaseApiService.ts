@@ -5,7 +5,6 @@ import GenericResponse from "../models/GenericResponse"
 
 export default class BaseApiService {
   private defaultTimeout = 30
-  private BASE_URL = "https://httpstat.us/"
   private ERR_NO_INTERNET = "Internet not reachable"
   private httpGetConfig = {
     method: "get",
@@ -56,7 +55,6 @@ export default class BaseApiService {
     timeoutInSeconds?: number
   }) => {
     if (NetworkHelper.isInternetReachable) {
-      const fullURL = this.BASE_URL + url
       const reqConfig = config || this.httpGetConfig
       const reqTimeout = timeoutInSeconds || this.defaultTimeout
 
@@ -67,7 +65,7 @@ export default class BaseApiService {
         contoller.abort()
       }, reqTimeout * 1000)
 
-      const result = await fetch(fullURL, finalConfig)
+      const result = await fetch(url, finalConfig)
       clearTimeout(abort)
 
       return this.responseOkOrThrow<T>(result)

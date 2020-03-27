@@ -29,6 +29,11 @@
       "type": "npm",
       "script": "make-icons",
       "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "generate-env-types",
+      "problemMatcher": []
     }
   ]
 }

@@ -1,11 +1,14 @@
+import Config from "react-native-config"
 import { from } from "rxjs"
 import HttpException from "../../exceptions/HttpException"
 import GenericResponse from "../../models/GenericResponse"
-import RestApi, { ApiEndpoints } from "./RestApi"
+import ExampleRestApi, { ApiEndpoints } from "./ExampleRestApi"
 import BaseApiService from "../BaseApiService"
 
 export default class ExampleApiService extends BaseApiService
   implements ApiEndpoints {
+  private BASE_URL = Config.EXAMPLE_API_BASE_URL
+
   sessionIsExpired = (err: any) => {
     if (err instanceof HttpException && err.status == 401) {
       return true
@@ -41,15 +44,19 @@ export default class ExampleApiService extends BaseApiService
 
   login = () =>
     from(
-      this.api<GenericResponse>({ url: RestApi.login(), timeoutInSeconds: 10 })
+      super.api<GenericResponse>({
+        url: this.BASE_URL + ExampleRestApi.login(),
+        timeoutInSeconds: 10
+      })
     )
 
-  logout = () => this.api<GenericResponse>({ url: RestApi.logout() })
+  logout = () =>
+    this.api<GenericResponse>({ url: this.BASE_URL + ExampleRestApi.logout() })
 
   submit = (body: {}, token: string) =>
     from(
-      this.api<GenericResponse>({
-        url: RestApi.submit(),
+      super.api<GenericResponse>({
+        url: this.BASE_URL + ExampleRestApi.submit(),
         config: this.getHttpPostConfig(body, token)
       })
     )

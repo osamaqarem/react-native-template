@@ -3,7 +3,7 @@ export interface ApiEndpoints {
   logout: () => {}
 }
 
-class RestApi implements ApiEndpoints {
+class ExampleRestApi implements ApiEndpoints {
   private VERSION = "v1"
 
   public login = () => "200?sleep=1000"
@@ -11,4 +11,4 @@ class RestApi implements ApiEndpoints {
   public submit = () => "200?sleep=1000"
 }
 
-export default new RestApi()
+export default new ExampleRestApi()

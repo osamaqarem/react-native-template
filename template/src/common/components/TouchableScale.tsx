@@ -13,8 +13,10 @@ interface Props {
 }
 
 /**
- *
  * Performs a scale transition when pressed.
+ *
+ * Currently the gesture handler does not respond inside react-native's <Modal/>. Use a <View/> instead.
+ * https://github.com/software-mansion/react-native-gesture-handler/issues/139
  */
 const TouchableScale = ({ children, containerStyle, config }: Props) => {
   const animConfig: ScaleTransitionProps = {

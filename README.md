@@ -20,6 +20,7 @@ A minimal template with good architecture and common packages to let you focus o
 - [Sentry](https://docs.sentry.io/platforms/react-native/) with redux action logging middleware
 - [react-native-splash-screen](https://github.com/crazycodeboy/react-native-splash-screen)
 - [react-native-svg](https://github.com/react-native-community/react-native-svg)
+- [react-native-config](https://github.com/luggit/react-native-config)
 - [Reanimated](https://software-mansion.github.io/react-native-reanimated/)
 - [Redash](https://wcandillon.github.io/react-native-redash/)
 - [AsyncStorage](https://github.com/react-native-community/async-storage)
@@ -28,7 +29,7 @@ A minimal template with good architecture and common packages to let you focus o
 - [Detox](https://github.com/wix/Detox)
 - [Fastlane](http://fastlane.tools/)
 - Other — [error boundary](https://reactjs.org/docs/error-boundaries.html), architecture, services & utils.
-- Automation: npm/fastlane scripts for testing, importing fonts and images, handling versioning across iOS and Android and more.
+- npm/fastlane automation scripts.
 
 ## Getting Started
 
@@ -40,7 +41,7 @@ Create a new project using the template.
 $ npx react-native init MyApp --template @osamaq/react-native-template
 ```
 
-### Optional Steps
+## Optional Steps
 
 #### Connect To Sentry
 

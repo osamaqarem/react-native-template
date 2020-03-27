@@ -49,5 +49,5 @@ matrix:
         - pod install
         - cd ..
       script:
-        - npm run detox:b:ios:r | xcpretty
-        - npm run detox:t:ios:r --cleanup
+        - npm run detox:build:ios:release | xcpretty
+        - npm run detox:test:ios:release --cleanup
