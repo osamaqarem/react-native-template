@@ -87,8 +87,7 @@ const generate = () => {
 
   //  Example table shape:
   // [
-  //   ['BUILD_VARIANT', ['DEBUG','RELEASE', 'RELEASE]],
-  //   ['MOCK_API', ['YES', 'NO', 'NO']],
+  //   ['MOCK_API', ['YES', 'NO']],
   //   ['EXAMPLE_API_BASE_URL', ['"https://httpstat.us/"']]
   // ]
 
