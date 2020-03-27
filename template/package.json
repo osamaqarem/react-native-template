@@ -8,6 +8,7 @@
     "android:run:release": "react-native run-android --variant=release",
     "android:make:release-apk": "cd android && ./gradlew assembleRelease",
     "android:uninstall": "adb uninstall com.helloworld",
+    "android:clear:storage": "adb shell pm clear com.helloworld",
     "ios": "react-native run-ios",
     "ios:run:release": "react-native run-ios --configuration Release",
     "test": "jest",
@@ -16,7 +17,7 @@
     "generate-env-types": "node scripts/config.js",
     "link-font-assets": "react-native link",
     "validate-typescript": "tsc --noEmit",
-    "nexus5x": "emulator @Nexus_5X_API_29_x86",
+    "pixel3a": "emulator @Pixel_3a_XL_API_29",
     "bump:patch": "npm version patch --no-git-tag-version && bundle exec fastlane bump",
     "bump:minor": "npm version minor --no-git-tag-version && bundle exec fastlane bump",
     "bump:major": "npm version major --no-git-tag-version && bundle exec fastlane bump",
@@ -97,7 +98,7 @@
         "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
         "type": "android.emulator",
         "device": {
-          "avdName": "Nexus_5X_API_29_x86"
+          "avdName": "Pixel_3a_XL_API_29"
         }
       },
       "android.emu.release": {
@@ -105,7 +106,7 @@
         "build": "cd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && cd ..",
         "type": "android.emulator",
         "device": {
-          "avdName": "Nexus_5X_API_29_x86"
+          "avdName": "Pixel_3a_XL_API_29"
         }
       },
       "ios.sim.debug": {

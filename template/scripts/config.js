@@ -1,68 +1,95 @@
+// Generate possible env variable types from all .env files.
+
 const fs = require("fs")
 
 const contents = () => {
-  const data = fs.readFileSync(".env", { encoding: "ASCII" })
+  const env = fs.readFileSync(".env", { encoding: "ASCII" })
+  const envStaging = fs.readFileSync(".env.staging", { encoding: "ASCII" })
+  const envProd = fs.readFileSync(".env.prod", { encoding: "ASCII" })
 
-  const lines = data.split("\n")
+  const envLines = env.split("\n")
+  const envStagingLines = envStaging.split("\n")
+  const envProdLines = envProd.split("\n")
 
-  let filtered = []
+  let filteredEnv = []
 
-  for (const line of lines) {
+  for (const line of envLines) {
     if (line.includes("=")) {
       if (line.includes("#")) {
-        filtered.push(line.split("#")[1].trim())
+        filteredEnv.push(line.split("#")[1].trim())
       } else {
-        filtered.push(line.trim())
+        filteredEnv.push(line.trim())
       }
     }
   }
 
-  return filtered
+  let filteredEnvStaging = []
+
+  for (const line of envStagingLines) {
+    if (line.includes("=")) {
+      if (line.includes("#")) {
+        filteredEnvStaging.push(line.split("#")[1].trim())
+      } else {
+        filteredEnvStaging.push(line.trim())
+      }
+    }
+  }
+
+  let filteredEnvProd = []
+
+  for (const line of envProdLines) {
+    if (line.includes("=")) {
+      if (line.includes("#")) {
+        filteredEnvProd.push(line.split("#")[1].trim())
+      } else {
+        filteredEnvProd.push(line.trim())
+      }
+    }
+  }
+
+  return [filteredEnv, filteredEnvProd, filteredEnvStaging]
 }
 
 const generate = () => {
-  const lines = contents()
+  const [filteredEnv, filteredEnvProd, filteredEnvStaging] = contents()
   let envVariableNamesArray = []
   let envVariableValuesArray = []
 
-  for (const line of lines) {
-    const pair = line.split("=")
-    envVariableNamesArray.push(pair[0])
-    envVariableValuesArray.push(pair[1])
+  for (let i = 0; i < filteredEnv.length; i++) {
+    const envPair = filteredEnv[i].split("=")
+    const envStagingValue = filteredEnvStaging[i].split("=")[1]
+    const envProdValue = filteredEnvProd[i].split("=")[1]
+
+    envVariableNamesArray.push(envPair[0])
+
+    envVariableValuesArray.push(envPair[1], envStagingValue, envProdValue)
   }
 
-  const envVariableNamesArraySet = [...new Set(envVariableNamesArray)]
-
+  // Assumption: for every name/key there are 3 values (env, env.staging, env.prod)
   let table = []
-  let envVariableNamesArrayClone = [...envVariableNamesArray]
+  let valuesCursor = 0
 
-  envVariableNamesArraySet.forEach((name, currentNameIndex) => {
-    // insert name into table
-    table[currentNameIndex] = [name, []]
+  for (let i = 0; i < envVariableNamesArray.length; i++) {
+    table[i] = [envVariableNamesArray[i], []]
 
-    let foundIndex = -10 // anything besides -1
-    while (foundIndex !== -1) {
-      foundIndex = envVariableNamesArrayClone.indexOf(name)
+    const totalPushCount = 3
+    let current = 0
+    while (current !== totalPushCount) {
+      const valueToPush = envVariableValuesArray[valuesCursor]
 
-      if (foundIndex === -1) break
-      // change the value so we dont find it again – keep it in array to retain correct mapping
-      envVariableNamesArrayClone[foundIndex] = null
-
-      const valueToInsert = envVariableValuesArray[foundIndex]
-
-      // insert value for name into table
-      table[currentNameIndex][1] = [
-        ...table[currentNameIndex][1],
-        valueToInsert
-      ]
+      if (!table[i][1].includes(valueToPush)) {
+        table[i][1].push(valueToPush)
+      }
+      valuesCursor++
+      current++
     }
-  })
+  }
 
-  //  Example table shape: [ [ name, ["possible_value_1", "possible_value_2" ] ] ]
+  //  Example table shape:
   // [
-  //   [ 'BUILD_VARIANT', [ 'DEBUG', 'RELEASE' ] ],
-  //   [ 'MOCK_API', [ 'TRUE' ] ],
-  //   [ 'EXAMPLE_API_BASE_URL', [ '"https://httpstat.us/"' ] ]
+  //   ['BUILD_VARIANT', ['DEBUG','RELEASE', 'RELEASE]],
+  //   ['MOCK_API', ['YES', 'NO', 'NO']],
+  //   ['EXAMPLE_API_BASE_URL', ['"https://httpstat.us/"']]
   // ]
 
   const stringArrayMap = table.map(nameValueArray => {
@@ -83,13 +110,13 @@ const generate = () => {
   })
 
   const string = `declare module "react-native-config" {
-    interface Config {
-      ${stringArrayMap.join("\n      ")}
-    }
+      interface Env {
+        ${stringArrayMap.join("\n      ")}
+      }
 
-    const config: Config
+      const Config: Env
 
-    export default config
+      export default Config
   }`
 
   fs.writeFileSync("env.d.ts", string, "utf8")
