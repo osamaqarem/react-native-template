@@ -10,7 +10,7 @@ class NavigationService {
   private static ERROR_NOT_INIT =
     "Navigation Service: attempting to navigate with an unintialized ref."
 
-  public static navigate(name: keyof RootStackParamsList, params: any) {
+  static navigate(name: keyof RootStackParamsList, params: any) {
     if (isMountedRef.current && navigationRef.current) {
       // Perform navigation if the app has mounted
       navigationRef.current.navigate(name, params)
@@ -19,10 +19,7 @@ class NavigationService {
     }
   }
 
-  public static navigateAndReset(
-    name: keyof RootStackParamsList,
-    params?: any
-  ) {
+  static navigateAndReset(name: keyof RootStackParamsList, params?: any) {
     if (isMountedRef.current && navigationRef.current) {
       // Perform navigation if the app has mounted
       navigationRef.current.dispatch(
@@ -30,6 +27,14 @@ class NavigationService {
           routes: [{ name, params }]
         })
       )
+    } else {
+      throw new Error(this.ERROR_NOT_INIT)
+    }
+  }
+
+  static goBack() {
+    if (isMountedRef.current && navigationRef.current) {
+      navigationRef.current.goBack()
     } else {
       throw new Error(this.ERROR_NOT_INIT)
     }

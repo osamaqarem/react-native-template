@@ -1,4 +1,5 @@
 // Generate possible env variable types from all .env files.
+// Only works if all environment files have the same variables
 
 const fs = require("fs")
 
@@ -12,37 +13,36 @@ const contents = () => {
   const envProdLines = envProd.split("\n")
 
   let filteredEnv = []
-
-  for (const line of envLines) {
-    if (line.includes("=")) {
-      if (line.includes("#")) {
-        filteredEnv.push(line.split("#")[1].trim())
-      } else {
-        filteredEnv.push(line.trim())
-      }
-    }
-  }
-
   let filteredEnvStaging = []
-
-  for (const line of envStagingLines) {
-    if (line.includes("=")) {
-      if (line.includes("#")) {
-        filteredEnvStaging.push(line.split("#")[1].trim())
-      } else {
-        filteredEnvStaging.push(line.trim())
-      }
-    }
-  }
-
   let filteredEnvProd = []
 
-  for (const line of envProdLines) {
-    if (line.includes("=")) {
-      if (line.includes("#")) {
-        filteredEnvProd.push(line.split("#")[1].trim())
+  // Assumption: all files have the same number of lines
+  for (let index = 0; index < envLines.length; index++) {
+    const envLine = envLines[index]
+    const envStagingLine = envStagingLines[index]
+    const envProdLine = envProdLines[index]
+
+    if (envLine.includes("=")) {
+      if (envLine.includes("#")) {
+        filteredEnv.push(envLine.split("#")[1].trim())
       } else {
-        filteredEnvProd.push(line.trim())
+        filteredEnv.push(envLine.trim())
+      }
+    }
+
+    if (envStagingLine.includes("=")) {
+      if (envStagingLine.includes("#")) {
+        filteredEnvStaging.push(envStagingLine.split("#")[1].trim())
+      } else {
+        filteredEnvStaging.push(envStagingLine.trim())
+      }
+    }
+
+    if (envProdLine.includes("=")) {
+      if (envProdLine.includes("#")) {
+        filteredEnvProd.push(envProdLine.split("#")[1].trim())
+      } else {
+        filteredEnvProd.push(envProdLine.trim())
       }
     }
   }
@@ -56,6 +56,7 @@ const generate = () => {
   let envVariableValuesArray = []
 
   for (let i = 0; i < filteredEnv.length; i++) {
+    // Assumption: the files we read are not just comments
     const envPair = filteredEnv[i].split("=")
     const envStagingValue = filteredEnvStaging[i].split("=")[1]
     const envProdValue = filteredEnvProd[i].split("=")[1]
@@ -85,7 +86,7 @@ const generate = () => {
     }
   }
 
-  //  Example table shape:
+  //  table desired shape:
   // [
   //   ['MOCK_API', ['YES', 'NO']],
   //   ['EXAMPLE_API_BASE_URL', ['"https://httpstat.us/"']]
@@ -109,14 +110,14 @@ const generate = () => {
   })
 
   const string = `declare module "react-native-config" {
-      interface Env {
-        ${stringArrayMap.join("\n      ")}
-      }
+  interface Env {
+    ${stringArrayMap.join("\n    ")}
+  }
 
-      const Config: Env
+  const Config: Env
 
-      export default Config
-  }`
+  export default Config
+}`
 
   fs.writeFileSync("env.d.ts", string, "utf8")
 }

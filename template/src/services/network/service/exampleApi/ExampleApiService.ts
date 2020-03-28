@@ -44,7 +44,7 @@ export default class ExampleApiService extends BaseApiService
 
   login = () =>
     from(
-      super.api<GenericResponse>({
+      this.api<GenericResponse>({
         url: this.BASE_URL + ExampleRestApi.login(),
         timeoutInSeconds: 10
       })
@@ -55,7 +55,7 @@ export default class ExampleApiService extends BaseApiService
 
   submit = (body: {}, token: string) =>
     from(
-      super.api<GenericResponse>({
+      this.api<GenericResponse>({
         url: this.BASE_URL + ExampleRestApi.submit(),
         config: this.getHttpPostConfig(body, token)
       })

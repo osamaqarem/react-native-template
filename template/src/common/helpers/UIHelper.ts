@@ -19,7 +19,7 @@ const {
 export const { height, width } = Dimensions.get("window")
 
 class UIHelper {
-  public btnScaleAnim = {
+  btnScaleAnim = {
     in: { toValue: 0.98, duration: 50, easing: Easing.inOut(Easing.ease) },
     out: {
       toValue: 1,
@@ -31,7 +31,7 @@ class UIHelper {
   // Forked from: react-native-iphone-x-helper
   // https://github.com/ptelad/react-native-iphone-x-helper
   // TODO: better approach?
-  public isIphoneX = () => {
+  isIphoneX = () => {
     return (
       Platform.OS === "ios" &&
       !Platform.isPad &&
@@ -40,7 +40,7 @@ class UIHelper {
     )
   }
 
-  public onScroll = (contentOffset: {
+  onScroll = (contentOffset: {
     x?: Animated.Node<number>
     y?: Animated.Node<number>
   }) =>
@@ -54,7 +54,7 @@ class UIHelper {
 
   // Forked from react-navigation-transitions
   // https://github.com/plmok61/react-navigation-transitions
-  public fadeIn = (duration = 300) => {
+  fadeIn = (duration = 300) => {
     return {
       transitionSpec: {
         duration,
@@ -75,7 +75,7 @@ class UIHelper {
     }
   }
 
-  public runTiming = (
+  runTiming = (
     clock: Animated.Clock,
     start: number,
     end: number,

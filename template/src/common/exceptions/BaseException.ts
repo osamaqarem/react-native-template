@@ -3,15 +3,15 @@ export default class BaseException extends Error {
   private _message: string
   private _url: string
 
-  public get status(): number | string {
+  get status(): number | string {
     return this._status
   }
 
-  public get message(): string {
+  get message(): string {
     return this._message
   }
 
-  public get url(): string {
+  get url(): string {
     return this._url
   }
 

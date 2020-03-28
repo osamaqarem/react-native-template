@@ -39,7 +39,10 @@
     "validateTypeScript": "tsc --noEmit",
     "uninstallAndroid": "adb uninstall com.helloworld",
     "clearAndroid": "adb shell pm clear com.helloworld",
-    "pixel3a": "emulator @Pixel_3a_XL_API_29"
+    "uninstalliOS": "xcrun simctl uninstall booted org.reactjs.native.example.HelloWorld",
+    "pixel3a": "emulator @Pixel_3a_XL_API_29",
+    "adb-metro": "adb reverse tcp:8081 tcp:8081",
+    "adb-reactotron": "adb reverse tcp:9090 tcp:9090"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.8.1",

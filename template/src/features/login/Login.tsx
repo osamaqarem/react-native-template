@@ -24,7 +24,7 @@ import { RootStoreType } from "../../redux/rootReducer"
 
 declare let global: { HermesInternal: null | {} }
 
-type Props = {
+interface Props {
   navigation: StackNavigationProp<RootStackParamsList, "Login">
 }
 

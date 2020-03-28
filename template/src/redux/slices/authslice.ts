@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { Dispatch } from "react"
 import { ofType } from "redux-observable"
-import { Observable, of } from "rxjs"
+import { of } from "rxjs"
 import { catchError, map, switchMap } from "rxjs/operators"
 import NavigationService from "../../services/navigation/NavigationService"
 import { exampleApi } from "../../services/network/service/exampleApi"
@@ -69,6 +69,6 @@ export const logout = () => async (dispatch: Dispatch<any>) => {
 }
 
 export const { DO_AUTH, AUTH_SUCCESS, AUTH_ERROR, LOADING } = authSlice.actions
+export const authEpics = [loginEpic]
 
 export default authSlice.reducer
-export const authEpics = [loginEpic]

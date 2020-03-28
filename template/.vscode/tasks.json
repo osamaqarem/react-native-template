@@ -10,23 +10,6 @@
     },
     {
       "type": "npm",
-      "script": "detox:b:ios:r",
-      "problemMatcher": []
-    },
-    {
-      "type": "npm",
-      "script": "detox:t:ios:r",
-      "problemMatcher": []
-    },
-    {
-      "type": "npm",
-      "script": "validate-typescript",
-      "problemMatcher": [
-        "$tsc"
-      ]
-    },
-    {
-      "type": "npm",
       "script": "make-icons",
       "problemMatcher": []
     },
@@ -34,6 +17,13 @@
       "type": "npm",
       "script": "generate-env-types",
       "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "validateTypeScript",
+      "problemMatcher": [
+        "$tsc"
+      ]
     }
   ]
 }

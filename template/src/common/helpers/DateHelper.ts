@@ -3,7 +3,7 @@ class DateHelper {
    * takes in unix time (number) and returns date
    * e.g. yyyy/mm/dd
    */
-  public static getDateFromEpochMillis = (time: number) => {
+  static getDateFromEpochMillis = (time: number) => {
     const date = new Date(time)
 
     const year = date.getFullYear() + ""
@@ -33,7 +33,7 @@ class DateHelper {
    * takes in unix time (number) and returns local time
    * e.g. 1568193605000 -> "17:20:01"
    */
-  public static getTimeFromEpochMillis = (time: number) => {
+  static getTimeFromEpochMillis = (time: number) => {
     const date = new Date(time)
 
     const hours = date.getHours()

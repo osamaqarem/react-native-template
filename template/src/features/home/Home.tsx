@@ -11,7 +11,7 @@ import { logout } from "../../redux/slices/authslice"
 import { RootStackParamsList } from "../navigation/Navigator"
 import { RootStoreType } from "../../redux/rootReducer"
 
-type Props = {
+interface Props {
   navigation: StackNavigationProp<RootStackParamsList, "Home">
 }
 
