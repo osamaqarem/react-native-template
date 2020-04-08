@@ -36,16 +36,16 @@ const loginEpic: MyEpic = (action$) =>
     switchMap(() => {
       const request$ = ExampleApiService.login().pipe(
         map((res) => {
-          NavigationService.navigateAndReset("Home")
-
           if (res.description === "OK") {
             const outcome: AuthReducer["authState"] = "SIGNED_IN"
 
+            NavigationService.navigateAndReset("Home")
             return {
               type: AUTH_DONE.type,
               payload: outcome,
             }
           } else {
+            console.warn("AUTH_ERROR")
             return AUTH_ERROR()
           }
         }),
@@ -54,7 +54,6 @@ const loginEpic: MyEpic = (action$) =>
             return logout()
           }
           console.warn(err)
-          __DEV__ && console.tron(err.stack)
           return of(AUTH_ERROR())
         })
       )
@@ -70,15 +69,14 @@ export const logout = () => async (dispatch: AppDispatch) => {
     const res = await ExampleApiService.logout()
 
     if (res.description === "OK") {
-      dispatch(AUTH_DONE("SIGNED_IN"))
-    } else {
       dispatch(AUTH_DONE("SIGNED_OUT"))
+      NavigationService.navigateAndReset("Login")
+    } else {
+      console.warn("AUTH_ERROR")
+      dispatch(AUTH_ERROR())
     }
-
-    NavigationService.navigateAndReset("Login")
   } catch (err) {
     console.warn(err)
-    __DEV__ && console.tron(err.stack)
   }
 }
 

@@ -15,8 +15,10 @@ import ErrorBoundary from "./src/features/errorboundary/ErrorBoundary"
 import Navigator from "./src/features/navigation/Navigator"
 import NetworkHelper from "./src/common/helpers/NetworkHelper"
 import reactotron from "./reactotron"
+import BuildConfig from "react-native-config"
+import { makeMirage } from "./src/services/network/service/mirage"
 
-function setup() {
+;(function setup() {
   // React Navigation, optimize memory usage.
   enableScreens()
 
@@ -48,9 +50,13 @@ function setup() {
       UIManager.setLayoutAnimationEnabledExperimental(true)
     }
   }
-}
 
-setup()
+  // Mirage – API Mocking
+  if (BuildConfig.MOCK_EXAMPLE_API === "YES") {
+    makeMirage()
+    __DEV__ && console.log("Mirage Configured")
+  }
+})()
 
 const App = () => {
   return (

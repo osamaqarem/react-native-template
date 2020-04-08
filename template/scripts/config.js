@@ -1,6 +1,7 @@
 // Generate possible env variable types from all .env files.
 // Only works if all environment files have the same variables
 
+// eslint-disable-next-line
 const fs = require("fs")
 
 const contents = () => {
@@ -12,9 +13,9 @@ const contents = () => {
   const envStagingLines = envStaging.split("\n")
   const envProdLines = envProd.split("\n")
 
-  let filteredEnv = []
-  let filteredEnvStaging = []
-  let filteredEnvProd = []
+  const filteredEnv = []
+  const filteredEnvStaging = []
+  const filteredEnvProd = []
 
   // Assumption: all files have the same number of lines
   for (let index = 0; index < envLines.length; index++) {
@@ -52,7 +53,9 @@ const contents = () => {
 
 const generate = () => {
   const [filteredEnv, filteredEnvProd, filteredEnvStaging] = contents()
+  // eslint-disable-next-line
   let envVariableNamesArray = []
+  // eslint-disable-next-line
   let envVariableValuesArray = []
 
   for (let i = 0; i < filteredEnv.length; i++) {
@@ -67,6 +70,7 @@ const generate = () => {
   }
 
   // Assumption: for every name/key there are 3 values (env, env.staging, env.prod)
+  // eslint-disable-next-line
   let table = []
   let valuesCursor = 0
 
@@ -92,7 +96,7 @@ const generate = () => {
   //   ['EXAMPLE_API_BASE_URL', ['"https://httpstat.us/"']]
   // ]
 
-  const stringArrayMap = table.map(nameValueArray => {
+  const stringArrayMap = table.map((nameValueArray) => {
     const name = nameValueArray[0]
     const valuesArray = nameValueArray[1]
 
