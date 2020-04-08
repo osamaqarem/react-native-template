@@ -1,74 +1,88 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { Dispatch } from "react"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { ofType } from "redux-observable"
-import { of } from "rxjs"
+import { concat, of } from "rxjs"
 import { catchError, map, switchMap } from "rxjs/operators"
 import NavigationService from "../../services/navigation/NavigationService"
-import { exampleApi } from "../../services/network/service/exampleApi"
-import { MyEpic } from "../store"
+import { ExampleApiService } from "../../services/network/service/exampleApi/ExampleApiService"
+import { AppDispatch, MyEpic } from "../store"
 
 type AuthReducer = {
-  authenticated: boolean
+  authState: "SIGNED_IN" | "SIGNED_OUT"
   loading: boolean
 }
 
 const initialState: AuthReducer = {
-  authenticated: false,
-  loading: false
+  authState: "SIGNED_OUT",
+  loading: false,
 }
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    DO_AUTH: state => ({ ...state, loading: true }),
-    AUTH_SUCCESS: (state, action) => ({
-      ...state,
-      authenticated: action.payload,
-      loading: false
+    LOGIN: () => {},
+    AUTH_DONE: (_, action: PayloadAction<AuthReducer["authState"]>) => ({
+      authState: action.payload,
+      loading: false,
     }),
+    AUTH_LOADING: (state) => ({ ...state, loading: true }),
     AUTH_ERROR: () => initialState,
-    LOADING: (state, action) => ({ ...state, loading: action.payload })
-  }
+  },
 })
 
-const loginEpic: MyEpic = action$ =>
+const loginEpic: MyEpic = (action$) =>
   action$.pipe(
-    ofType(DO_AUTH.type),
+    ofType(LOGIN.type),
     switchMap(() => {
-      NavigationService.navigateAndReset("Home")
-      return exampleApi.login()
-    }),
-    map(res => ({
-      type: AUTH_SUCCESS.type,
-      payload: res.description === "OK" ? true : false
-    })),
-    catchError(err => {
-      if (exampleApi.sessionIsExpired(err)) {
-        return logout()
-      }
-      console.warn(err)
-      __DEV__ && console.tron(err.stack)
-      return of(AUTH_ERROR())
+      const request$ = ExampleApiService.login().pipe(
+        map((res) => {
+          NavigationService.navigateAndReset("Home")
+
+          if (res.description === "OK") {
+            const outcome: AuthReducer["authState"] = "SIGNED_IN"
+
+            return {
+              type: AUTH_DONE.type,
+              payload: outcome,
+            }
+          } else {
+            return AUTH_ERROR()
+          }
+        }),
+        catchError((err) => {
+          if (ExampleApiService.sessionIsExpired(err)) {
+            return logout()
+          }
+          console.warn(err)
+          __DEV__ && console.tron(err.stack)
+          return of(AUTH_ERROR())
+        })
+      )
+
+      return concat(of(AUTH_LOADING()), request$)
     })
   )
 
-export const logout = () => async (dispatch: Dispatch<any>) => {
+export const logout = () => async (dispatch: AppDispatch) => {
   try {
-    dispatch(LOADING(true))
+    dispatch(AUTH_LOADING())
+
+    const res = await ExampleApiService.logout()
+
+    if (res.description === "OK") {
+      dispatch(AUTH_DONE("SIGNED_IN"))
+    } else {
+      dispatch(AUTH_DONE("SIGNED_OUT"))
+    }
+
     NavigationService.navigateAndReset("Login")
-    const result = await exampleApi.logout()
-    dispatch({
-      type: AUTH_SUCCESS.type,
-      payload: result.description === "OK" ? false : true
-    })
   } catch (err) {
     console.warn(err)
     __DEV__ && console.tron(err.stack)
   }
 }
 
-export const { DO_AUTH, AUTH_SUCCESS, AUTH_ERROR, LOADING } = authSlice.actions
+export const { LOGIN, AUTH_DONE, AUTH_ERROR, AUTH_LOADING } = authSlice.actions
 export const authEpics = [loginEpic]
 
 export default authSlice.reducer

@@ -8,17 +8,17 @@ import {
   StyleSheet,
   Text,
   View,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native"
 import {
   Colors,
   DebugInstructions,
   Header,
   LearnMoreLinks,
-  ReloadInstructions
+  ReloadInstructions,
 } from "react-native/Libraries/NewAppScreen"
 import { useDispatch, useSelector } from "react-redux"
-import { DO_AUTH } from "../../redux/slices/authslice"
+import { LOGIN } from "../../redux/slices/authslice"
 import { RootStackParamsList } from "../navigation/Navigator"
 import { RootStoreType } from "../../redux/rootReducer"
 
@@ -32,7 +32,7 @@ const Login = ({ navigation }: Props) => {
   const dispatch = useDispatch()
   const loading = useSelector((state: RootStoreType) => state.auth.loading)
 
-  const signin = () => dispatch(DO_AUTH())
+  const signin = () => dispatch(LOGIN())
 
   return (
     <View>
@@ -92,32 +92,32 @@ const Login = ({ navigation }: Props) => {
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: Colors.lighter
+    backgroundColor: Colors.lighter,
   },
   engine: {
     position: "absolute",
-    right: 0
+    right: 0,
   },
   body: {
-    backgroundColor: Colors.white
+    backgroundColor: Colors.white,
   },
   sectionContainer: {
     marginTop: 32,
-    paddingHorizontal: 24
+    paddingHorizontal: 24,
   },
   sectionTitle: {
     fontSize: 24,
     fontWeight: "600",
-    color: Colors.black
+    color: Colors.black,
   },
   sectionDescription: {
     marginTop: 8,
     fontSize: 18,
     fontWeight: "400",
-    color: Colors.dark
+    color: Colors.dark,
   },
   highlight: {
-    fontWeight: "700"
+    fontWeight: "700",
   },
   footer: {
     color: Colors.dark,
@@ -125,21 +125,21 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     padding: 4,
     paddingRight: 12,
-    textAlign: "right"
+    textAlign: "right",
   },
   templateTitle: {
     fontSize: 20,
     fontWeight: "600",
     color: Colors.black,
     textAlign: "center",
-    bottom: 10
+    bottom: 10,
   },
   signinBtn: {
     position: "absolute",
     minWidth: 100,
     right: 10,
-    top: 10
-  }
+    top: 10,
+  },
 })
 
 export default Login

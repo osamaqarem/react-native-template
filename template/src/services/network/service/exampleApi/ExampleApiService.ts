@@ -1,63 +1,64 @@
-import Config from "react-native-config"
+import BuildConfig from "react-native-config"
 import { from } from "rxjs"
 import HttpException from "../../exceptions/HttpException"
-import GenericResponse from "../../models/GenericResponse"
-import ExampleRestApi, { ApiEndpoints } from "./ExampleRestApi"
-import BaseApiService from "../BaseApiService"
+import { BaseApiService } from "../BaseApiService"
+import { ExampleApiEndpoints, ExampleRestApi } from "./ExampleRestApi"
 
-export default class ExampleApiService extends BaseApiService
-  implements ApiEndpoints {
-  private BASE_URL = Config.EXAMPLE_API_BASE_URL
+const BASE_URL = BuildConfig.EXAMPLE_API_BASE_URL
 
-  sessionIsExpired = (err: any) => {
-    if (err instanceof HttpException && err.status == 401) {
-      return true
-    } else {
-      return false
-    }
-  }
+const ExampleApiImplementation: ExampleApiEndpoints = {
+  login: () =>
+    from(
+      BaseApiService.client({
+        url: BASE_URL + ExampleRestApi.login(),
+        timeoutInSeconds: 10,
+      }),
+    ),
+  logout: () =>
+    BaseApiService.client({
+      url: BASE_URL + ExampleRestApi.logout(),
+    }),
+  submit: (body: object, token: string) =>
+    from(
+      BaseApiService.client({
+        url: BASE_URL + ExampleRestApi.submit(),
+        body,
+        token,
+      }),
+    ),
+}
 
-  isTokenValid(exp: number) {
+export const ExampleApiService = {
+  ...ExampleApiImplementation,
+  isTokenValid: (exp: number) => {
     if (Date.now() > exp) {
       return false
     }
     return true
-  }
-
-  /**
-   * Set up common request configrations
-   */
-
-  getHttpPostConfig = (body: object, token: string) => ({
-    method: "post",
-    body: JSON.stringify(body),
-    headers: {
-      accept: "application/json",
-      authorization: `Bearer ${token}`,
-      "content-type": "application/json"
+  },
+  timedOut: (err: any) => {
+    if (
+      typeof err === "object" &&
+      "message" in err &&
+      err.message === "Aborted"
+    ) {
+      return true
+    } else {
+      return false
     }
-  })
-
-  /**
-   * Set up API endpoints
-   */
-
-  login = () =>
-    from(
-      this.api<GenericResponse>({
-        url: this.BASE_URL + ExampleRestApi.login(),
-        timeoutInSeconds: 10
-      })
-    )
-
-  logout = () =>
-    this.api<GenericResponse>({ url: this.BASE_URL + ExampleRestApi.logout() })
-
-  submit = (body: {}, token: string) =>
-    from(
-      this.api<GenericResponse>({
-        url: this.BASE_URL + ExampleRestApi.submit(),
-        config: this.getHttpPostConfig(body, token)
-      })
-    )
+  },
+  sessionIsExpired: (err: any) => {
+    if (
+      typeof err === "object" &&
+      err instanceof HttpException &&
+      err.status == 401
+    ) {
+      if (
+        err.message === "Invalid access token" ||
+        err.message.includes("expired")
+      ) {
+        return true
+      }
+    }
+  },
 }

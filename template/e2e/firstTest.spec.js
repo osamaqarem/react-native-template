@@ -3,7 +3,7 @@ describe("Example", () => {
     await device.reloadReactNative()
   })
 
-  it("should have welcome screen", async () => {
+  it("should have a welcome screen", async () => {
     await expect(element(by.text("Welcome to React"))).toBeVisible()
   })
 

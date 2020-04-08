@@ -22,7 +22,9 @@ function setup() {
 
   // Initialize sentry SDK. Insert your DSN string.
   const DSN = null
-  DSN &&
+
+  !__DEV__ &&
+    DSN &&
     Sentry.init({
       dsn: DSN,
       beforeBreadcrumb(breadcrumb, _) {
@@ -30,7 +32,7 @@ function setup() {
           return null
         }
         return breadcrumb
-      }
+      },
     })
 
   // Reactotron

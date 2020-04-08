@@ -3,60 +3,89 @@ import HttpException from "../exceptions/HttpException"
 import OfflineException from "../exceptions/OfflineException"
 import GenericResponse from "../models/GenericResponse"
 
-export default class BaseApiService {
-  private defaultTimeout = 30
-  private ERR_NO_INTERNET = "Internet not reachable"
-  private httpGetConfig = {
-    method: "get",
+type ContentType = "JSON" | "Text" | "Unsupported"
+interface ApiConfig {
+  url: RequestInfo
+  verb?: "GET" | "PUT" | "POST" | "DELETE"
+  timeoutInSeconds?: number
+  token?: string
+  body?: object
+}
+
+const defaultTimeout = 30
+
+const getContentType = (res: Response): ContentType => {
+  const isJSON =
+    res.headers.get("Content-Type")?.startsWith("application/json") || false
+  if (isJSON) return "JSON"
+  const isText = res.headers.get("Content-Type")?.startsWith("text") || false
+  if (isText) return "Text"
+
+  return "Unsupported"
+}
+
+const getHttpConfig = (
+  verb: ApiConfig["verb"] = "GET",
+  token?: string,
+  body?: object,
+): RequestInit => {
+  const base = {
+    method: verb,
     headers: {
-      accept: "application/json"
-    }
+      accept: "application/json",
+    },
   }
 
-  /**
-   * Only return the request if its JSON, otherwise throws.
-   */
+  const withBody = body ? { ...base, body: JSON.stringify(body) } : base
 
-  private responseOkOrThrow = async <T>(res: Response) => {
-    const isJSON = res.headers
-      .get("Content-Type")
-      ?.startsWith("application/json")
-
-    const isText = res.headers.get("Content-Type")?.startsWith("text")
-
-    if (res.ok && isJSON) {
-      // HTTP 2XX
-      return (await res.json()) as Promise<T>
-    } else {
-      // Not 2XX
-      if (isJSON) {
-        const error: GenericResponse = await res.json()
-        throw new HttpException(error.code, error.description, res.url)
-      } else if (isText) {
-        const errorText = await res.text()
-        throw new HttpException(res.status, errorText, res.url)
+  const withToken = token
+    ? {
+        ...withBody,
+        headers: {
+          ...base.headers,
+          authorization: `Bearer ${token}`,
+        },
       }
-      // Not 2XX, not JSON and not text.
-      throw new HttpException(res.status, "Unsupported content type", res.url)
+    : withBody
+
+  return withToken
+}
+
+const doThrow = async (res: Response, contentType: ContentType) => {
+  // Not 2XX
+  if (contentType === "JSON") {
+    const error: GenericResponse = await res.json()
+    throw new HttpException(error.code, error.description, res.url)
+  } else if (contentType === "Text") {
+    const errorText = await res.text()
+    throw new HttpException(res.status, errorText, res.url)
+  }
+
+  // Not 2XX, not JSON and not text.
+  throw new HttpException(res.status, "Unsupported content type", res.url)
+}
+
+const processResponse = async (res: Response) => {
+  const contentType = getContentType(res)
+
+  // HTTP 2XX
+  if (res.ok) {
+    if (contentType === "JSON") {
+      return await res.json()
+    } else {
+      return res
     }
   }
 
-  /**
-   * API Client
-   */
+  return doThrow(res, contentType)
+}
 
-  api = async <T>({
-    url,
-    config,
-    timeoutInSeconds
-  }: {
-    url: RequestInfo
-    config?: RequestInit
-    timeoutInSeconds?: number
-  }) => {
+export const BaseApiService = {
+  client: async ({ url, verb, timeoutInSeconds, token, body }: ApiConfig) => {
     if (NetworkHelper.isInternetReachable) {
-      const reqConfig = config || this.httpGetConfig
-      const reqTimeout = timeoutInSeconds || this.defaultTimeout
+      const reqConfig = getHttpConfig(verb, token, body)
+
+      const reqTimeout = timeoutInSeconds || defaultTimeout
 
       const contoller = new AbortController()
       const finalConfig = { signal: contoller.signal, ...reqConfig }
@@ -65,28 +94,17 @@ export default class BaseApiService {
         contoller.abort()
       }, reqTimeout * 1000)
 
-      const result = await fetch(url, finalConfig)
+      const res = await fetch(url, finalConfig)
+
       clearTimeout(abort)
 
-      return this.responseOkOrThrow<T>(result)
+      return processResponse(res)
     } else {
       throw new OfflineException(
         "Offline",
-        this.ERR_NO_INTERNET,
-        url.toString()
+        "Internet not reachable",
+        url.toString(),
       )
     }
-  }
-
-  /**
-   * Set up common error handling logic
-   */
-
-  requestTimedOut = (err: any) => {
-    if ("message" in err && err.message === "Aborted") {
-      return true
-    } else {
-      return false
-    }
-  }
+  },
 }

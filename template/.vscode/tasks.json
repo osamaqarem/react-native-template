@@ -5,25 +5,8 @@
   "tasks": [
     {
       "type": "npm",
-      "script": "start",
-      "problemMatcher": []
-    },
-    {
-      "type": "npm",
-      "script": "make-icons",
-      "problemMatcher": []
-    },
-    {
-      "type": "npm",
-      "script": "generate-env-types",
-      "problemMatcher": []
-    },
-    {
-      "type": "npm",
-      "script": "validateTypeScript",
-      "problemMatcher": [
-        "$tsc"
-      ]
+      "script": "validate-typescript",
+      "problemMatcher": ["$tsc"]
     }
   ]
 }

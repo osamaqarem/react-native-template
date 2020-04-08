@@ -45,7 +45,7 @@ platform :ios do
   lane :build do
     gym(
       scheme: ENV['APP_NAME'], 
-      project: './ios/' + ENV['APP_NAME'] + '.xcodeproj', 
+      workspace: './ios/' + ENV['APP_NAME'] + '.xcworkspace', 
       export_method: 'development'
     )
   end
@@ -57,7 +57,7 @@ platform :ios do
         api_token: ENV["APPCENTER_API_TOKEN"],
         owner_name: ENV["APPCENTER_OWNER_NAME"],
         app_name: ENV["APPCENTER_APP_NAME"],
-        ipa: "./" + ENV['APP_NAME'] + ".ipa",
+        ipa: "./" + "Hello App Display Name" + ".ipa",
         notify_testers: ENV["NOTIFY_TESTERS"],
         destinations: ENV["DESTINATIONS"],
         release_notes: release_notes
