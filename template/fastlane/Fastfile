@@ -1,4 +1,4 @@
-# For fastlane basics with react-native, see
+# For basics, see
 # https://github.com/osamaq/reactnative-fastlane-appcenter
 
 # -------------Android Build & Deploy-------------#
@@ -6,9 +6,14 @@ platform :android do
   # For android, you should setup signing for release builds.
   # Currently, the default debug keystore is used. 
   desc 'Build the release APK.'
-  lane :build do
+  private_lane :build_staging do
     gradle(task: 'clean', project_dir: 'android/')
-    gradle(task: 'assemble', build_type: 'release', project_dir: 'android/')
+    sh("npm", "run", "make-apk:stagingRelease")
+  end
+
+  private_lane :build_production do
+    gradle(task: 'clean', project_dir: 'android/')
+    sh("npm", "run", "make-apk:productionRelease")
   end
 
   desc 'Upload the release APK to App Center.'
@@ -25,9 +30,15 @@ platform :android do
         )
   end
 
-  desc 'Build the release APK, then upload to App Center.'
-  lane :deploy do
-    build
+  desc 'Build the staging release APK, then upload to App Center.'
+  lane :deploy_staging do
+    build_staging
+    upload
+  end
+
+  desc 'Build the production release APK, then upload to App Center.'
+  lane :deploy_production do
+    build_production
     upload
   end
 end
@@ -38,17 +49,35 @@ platform :ios do
   # https://github.com/osamaq/reactnative-fastlane-appcenter#signing
   desc 'Fetch certificates and provisioning profiles.'
   lane :certificates do
-    match(app_identifier: 'com.app.bundle')
+    register_devices(
+      devices: {
+        }
+    )
+    match(
+      app_identifier: 'com.app.bundle',
+      readonly: true, 
+      force_for_new_devices: true, 
+      )
   end
-  
-  desc 'Build the iOS application.'
-  lane :build do
+
+  desc 'Build the staging release iOS application.'
+  private_lane :build_staging do
     gym(
-      scheme: ENV['APP_NAME'], 
+      scheme: "STAGING",
       workspace: './ios/' + ENV['APP_NAME'] + '.xcworkspace', 
-      export_method: 'development'
+      export_method: 'ad-hoc'
     )
   end
+  
+  desc 'Build the production release iOS application.'
+  private_lane :build_production do
+    gym(
+      scheme: "PRODUCTION",
+      workspace: './ios/' + ENV['APP_NAME'] + '.xcworkspace', 
+      export_method: 'ad-hoc'
+    )
+  end
+  
 
   desc 'Upload the release IPA to App Center.'
   private_lane :upload do |options|
@@ -64,12 +93,20 @@ platform :ios do
         )
   end
 
-  desc 'Fetch certificats then build the release IPA and upload to App Center.'
+  desc 'Sign, build staging release then deploy to appcenter.'
   lane :deploy do
     certificates
-    build
+    build_staging
     upload
   end
+
+  desc 'Sign, build production release then deploy to appcenter.'
+  lane :deploy do
+    certificates
+    build_production
+    upload
+  end
+
 end
 
 
@@ -101,7 +138,7 @@ end
 
 
   desc 'Bump build numbers, and set the display version to match the pacakage.json version.'
-  lane :bump do
+  private_lane :bump do
     inc_ver_ios
     inc_ver_and
   end
@@ -140,7 +177,13 @@ end
   end
 
   desc 'Make new versioned icon badges.'
-  lane :make_badge do
+  private_lane :make_badge do
     make_badge_ios
     make_badge_and
+  end
+
+  desc 'Bump and badge.'
+  lane :bump_badge do
+    bump
+    make_badge
   end

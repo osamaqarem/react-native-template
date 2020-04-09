@@ -13,9 +13,12 @@ const contents = () => {
   const envStagingLines = envStaging.split("\n")
   const envProdLines = envProd.split("\n")
 
-  const filteredEnv = []
-  const filteredEnvStaging = []
-  const filteredEnvProd = []
+  // eslint-disable-next-line
+  let filteredEnv = []
+  // eslint-disable-next-line
+  let filteredEnvStaging = []
+  // eslint-disable-next-line
+  let filteredEnvProd = []
 
   // Assumption: all files have the same number of lines
   for (let index = 0; index < envLines.length; index++) {

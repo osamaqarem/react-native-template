@@ -33,13 +33,12 @@ matrix:
       os: osx
       osx_image: xcode11.3
       podfile: template/ios/Podfile
-      cache:
-        - cocoapods
-        - npm
+      # cache:
+      #   - cocoapods
+      #   - npm
       before_install:
         - cd template
       install:
-        - brew update
         - brew tap wix/brew
         - brew install applesimutils
         - gem install cocoapods

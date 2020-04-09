@@ -15,16 +15,11 @@ Install _fastlane_ using
 or alternatively using `brew cask install fastlane`
 
 # Available Actions
-### bump
+### bump_badge
 ```
-fastlane bump
+fastlane bump_badge
 ```
-Bump build numbers, and set the display version to match the pacakage.json version.
-### make_badge
-```
-fastlane make_badge
-```
-Make new versioned icon badges.
+Bump and badge.
 
 ----
 
@@ -48,11 +43,6 @@ Build the release APK, then upload to App Center.
 fastlane ios certificates
 ```
 Fetch certificates and provisioning profiles.
-### ios build
-```
-fastlane ios build
-```
-Build the iOS application.
 ### ios deploy
 ```
 fastlane ios deploy
