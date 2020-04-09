@@ -17,7 +17,6 @@ import NetworkHelper from "./src/common/helpers/NetworkHelper"
 import reactotron from "./reactotron"
 import BuildConfig from "react-native-config"
 import { makeMirage } from "./src/services/network/service/mirage"
-
 ;(function setup() {
   // React Navigation, optimize memory usage.
   enableScreens()
@@ -52,6 +51,7 @@ import { makeMirage } from "./src/services/network/service/mirage"
   }
 
   // Mirage – API Mocking
+  __DEV__ && console.tron(BuildConfig.ENV)
   if (BuildConfig.MOCK_EXAMPLE_API === "YES") {
     makeMirage()
     __DEV__ && console.log("Mirage Configured")

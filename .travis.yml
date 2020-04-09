@@ -33,9 +33,9 @@ matrix:
       os: osx
       osx_image: xcode11.3
       podfile: template/ios/Podfile
-      # cache:
-      #   - cocoapods
-      #   - npm
+      cache:
+        - cocoapods
+        - npm
       before_install:
         - cd template
       install:
@@ -49,5 +49,4 @@ matrix:
         - pod install
         - cd ..
       script:
-        - npm run detox-build:iosRelease | xcpretty
-        - npm run detox-test:iosRelease --cleanup
+        - npm run run-ios:debugRelease

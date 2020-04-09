@@ -28,6 +28,7 @@ A minimal template with good architecture and common packages to let you focus o
 - [FastImage](https://github.com/DylanVann/react-native-fast-image)
 - [Detox](https://github.com/wix/Detox)
 - [Fastlane](http://fastlane.tools/)
+- [Mirage JS](https://github.com/miragejs/miragejs)
 - Other — [error boundary](https://reactjs.org/docs/error-boundaries.html), architecture, services & utils.
 - npm/fastlane automation scripts.
 

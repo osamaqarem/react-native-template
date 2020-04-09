@@ -5,12 +5,13 @@
 platform :android do
   # For android, you should setup signing for release builds.
   # Currently, the default debug keystore is used. 
-  desc 'Build the release APK.'
+  desc 'Build the staging release APK.'
   private_lane :build_staging do
     gradle(task: 'clean', project_dir: 'android/')
     sh("npm", "run", "make-apk:stagingRelease")
   end
 
+  desc 'Build the production release APK.'
   private_lane :build_production do
     gradle(task: 'clean', project_dir: 'android/')
     sh("npm", "run", "make-apk:productionRelease")
@@ -94,14 +95,14 @@ platform :ios do
   end
 
   desc 'Sign, build staging release then deploy to appcenter.'
-  lane :deploy do
+  lane :deploy_staging do
     certificates
     build_staging
     upload
   end
 
   desc 'Sign, build production release then deploy to appcenter.'
-  lane :deploy do
+  lane :deploy_production do
     certificates
     build_production
     upload
