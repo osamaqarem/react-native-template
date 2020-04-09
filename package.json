@@ -1,6 +1,6 @@
 {
   "name": "@osamaq/react-native-template",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "[ TypeScript, Reactotron, Redux Toolkit, Redux Observable, React Navigation, Reanimated, AsyncStorage, NetInfo, FastImage ]",
   "scripts": {},
   "files": [
