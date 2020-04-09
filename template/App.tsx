@@ -41,6 +41,7 @@ import { makeMirage } from "./src/services/network/service/mirage"
     import("./reactotron").then(() => {
       console.log("Reactotron Configured")
       console.rtron.clear()
+      console.tron("Environement: ", BuildConfig.ENV)
     })
 
   // Layout animation
@@ -51,7 +52,6 @@ import { makeMirage } from "./src/services/network/service/mirage"
   }
 
   // Mirage – API Mocking
-  __DEV__ && console.tron(BuildConfig.ENV)
   if (BuildConfig.MOCK_EXAMPLE_API === "YES") {
     makeMirage()
     __DEV__ && console.log("Mirage Configured")
