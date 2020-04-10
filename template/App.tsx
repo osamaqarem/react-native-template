@@ -16,7 +16,7 @@ import Navigator from "./src/features/navigation/Navigator"
 import reactotron from "./reactotron"
 import BuildConfig from "react-native-config"
 import { makeMirage } from "./src/services/network/service/mirage"
-import { NetworkHelper } from "./src/common/helpers/NetworkHelper"
+import NetworkHelper from "./src/common/helpers/NetworkHelper"
 ;(function setup() {
   // React Navigation, optimize memory usage.
   enableScreens()

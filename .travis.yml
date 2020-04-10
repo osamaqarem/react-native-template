@@ -49,4 +49,5 @@ matrix:
         - pod install
         - cd ..
       script:
-        - npm run run-ios:debugRelease
+        - npm run detox-build:iosDebug
+        - npm run detox test -c ios.sim.debug

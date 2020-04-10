@@ -17,7 +17,7 @@ A minimal template with good architecture and common packages to let you focus o
 - [Redux](https://redux.js.org/) with [Redux Toolkit](https://redux-toolkit.js.org/)
 - [Redux Observable](https://redux-observable.js.org/)
 - [React Navigation](https://reactnavigation.org/) (**v5**)
-- [Reactotron](https://github.com/infinitered/reactotron)
+- [Reactotron](https://github.com/infinitered/reactotron) (and [Flipper](https://fbflipper.com/))
 - [Sentry](https://docs.sentry.io/platforms/react-native/) with redux action logging middleware
 - [react-native-splash-screen](https://github.com/crazycodeboy/react-native-splash-screen)
 - [react-native-svg](https://github.com/react-native-community/react-native-svg)
@@ -38,6 +38,8 @@ A minimal template with good architecture and common packages to let you focus o
 Create a new project using the template.
 
 - **Note:** the command will fail if you have the global legacy react-native-cli installed. Make sure you uninstall it first. More info at [react-native-community/cli](https://github.com/react-native-community/cli#about).
+
+### RN v0.62.2
 
 ```bash
 $ npx react-native init MyApp --template @osamaq/react-native-template

@@ -1,4 +1,4 @@
-import { NetworkHelper } from "../../../common/helpers/NetworkHelper"
+import NetworkHelper from "../../../common/helpers/NetworkHelper"
 import HttpException from "../exceptions/HttpException"
 import OfflineException from "../exceptions/OfflineException"
 import GenericResponse from "../models/GenericResponse"
