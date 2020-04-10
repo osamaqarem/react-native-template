@@ -16,6 +16,13 @@
       "problemMatcher": [],
       "label": "npm: fastlane",
       "detail": "bundle exec fastlane"
+    },
+    {
+      "type": "npm",
+      "script": "pixel3a",
+      "problemMatcher": [],
+      "label": "npm: pixel3a",
+      "detail": "emulator @Pixel_3a_XL_API_29"
     }
   ]
 }
