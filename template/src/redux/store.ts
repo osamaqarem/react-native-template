@@ -17,7 +17,7 @@ const store = configureStore({
   middleware: [epicMiddleware, sentryMiddleware, thunk],
   // Only create reactotron enhancer in DEV
   enhancers: (__DEV__ && [reactotron.createEnhancer()]) || undefined,
-  devTools: false,
+  devTools: true,
 })
 
 export type AppDispatch = typeof store.dispatch
