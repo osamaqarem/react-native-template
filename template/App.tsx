@@ -13,10 +13,10 @@ import { store, persistor } from "./src/redux/store"
 import { PersistGate } from "redux-persist/integration/react"
 import ErrorBoundary from "./src/features/errorboundary/ErrorBoundary"
 import Navigator from "./src/features/navigation/Navigator"
-import NetworkHelper from "./src/common/helpers/NetworkHelper"
 import reactotron from "./reactotron"
 import BuildConfig from "react-native-config"
 import { makeMirage } from "./src/services/network/service/mirage"
+import { NetworkHelper } from "./src/common/helpers/NetworkHelper"
 ;(function setup() {
   // React Navigation, optimize memory usage.
   enableScreens()

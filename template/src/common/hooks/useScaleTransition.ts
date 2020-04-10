@@ -7,10 +7,13 @@ import {
   or,
   set,
   useCode,
-  Value
+  Value,
 } from "react-native-reanimated"
 import { onGestureEvent, withTimingTransition } from "react-native-redash"
 
+/**
+ * Helper for gesture-based scale transitions using Reanimated.
+ */
 export interface ScaleTransitionProps {
   scaleWhenPressed: number
   regularScale: number
@@ -23,14 +26,14 @@ const useScaleTransition = ({
   scaleWhenPressed,
   regularScale,
   easing,
-  onPress
+  onPress,
 }: ScaleTransitionProps) => {
   const state = useRef(new Value(State.UNDETERMINED)).current
   const pressed = useRef(new Value(regularScale)).current
   const scale = useRef(
     withTimingTransition(pressed, {
       easing,
-      duration
+      duration,
     })
   ).current
 
@@ -44,9 +47,9 @@ const useScaleTransition = ({
           cond(
             eq(state, State.END),
             call([], () => onPress && onPress())
-          )
+          ),
         ])
-      )
+      ),
     ],
     [duration, scaleWhenPressed, regularScale, easing, onPress]
   )

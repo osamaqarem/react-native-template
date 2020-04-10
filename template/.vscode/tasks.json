@@ -6,7 +6,16 @@
     {
       "type": "npm",
       "script": "validate-typescript",
-      "problemMatcher": ["$tsc"]
+      "problemMatcher": [
+        "$tsc"
+      ]
+    },
+    {
+      "type": "npm",
+      "script": "fastlane",
+      "problemMatcher": [],
+      "label": "npm: fastlane",
+      "detail": "bundle exec fastlane"
     }
   ]
 }

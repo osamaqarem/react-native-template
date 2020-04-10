@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { ofType } from "redux-observable"
 import { concat, of } from "rxjs"
 import { catchError, map, switchMap } from "rxjs/operators"
-import NavigationService from "../../services/navigation/NavigationService"
+import { NavigationService } from "../../services/navigation/NavigationService"
 import { ExampleApiService } from "../../services/network/service/exampleApi/ExampleApiService"
 import { AppDispatch, MyEpic } from "../store"
 

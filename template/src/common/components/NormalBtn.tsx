@@ -11,6 +11,9 @@ interface Props {
   color?: keyof typeof colors
 }
 
+/**
+ * A button with a simple scale animation.
+ */
 const NormalBtn = React.memo(
   ({ name = "", loading = false, color = "red", onPress }: Props) => {
     const btnContent = !loading ? (
@@ -25,14 +28,14 @@ const NormalBtn = React.memo(
           onPress,
           duration: 50,
           scaleWhenPressed: 0.98,
-          regularScale: 1
+          regularScale: 1,
         }}
         containerStyle={[
           styles.button,
           {
             backgroundColor: colors[color],
-            opacity: !loading ? 1 : 0.8
-          }
+            opacity: !loading ? 1 : 0.8,
+          },
         ]}
       >
         {btnContent}
@@ -40,6 +43,8 @@ const NormalBtn = React.memo(
     )
   }
 )
+
+NormalBtn.displayName = "NormalBtn"
 
 const styles = StyleSheet.create({
   button: {
@@ -54,17 +59,17 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.1,
     shadowRadius: 5.0,
-    elevation: 5
+    elevation: 5,
   },
   text: {
     color: colors.white,
-    fontSize: typography.fontSize.p,
-    letterSpacing: typography.letterSpacing.button
-  }
+    fontSize: typography.fontSize.m,
+    letterSpacing: typography.letterSpacing.xl,
+  },
 })
 
 export default NormalBtn

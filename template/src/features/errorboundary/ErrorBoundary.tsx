@@ -7,17 +7,19 @@ import {
   StatusBar,
   StyleSheet,
   Text,
-  View
+  View,
 } from "react-native"
-import { colors } from "../../common/theme"
 
+/**
+ * Displays a friendly UI to the user in the case of an error.
+ */
 export default class ErrorBoundary extends Component {
   private static NO_STACK = "No stack trace."
   private static ISSUE_REPORTING_URL = "https://reactnative.dev"
 
   state: { hasError: boolean; error: Error | null } = {
     hasError: false,
-    error: null
+    error: null,
   }
 
   static getDerivedStateFromError(error: Error) {
@@ -33,7 +35,7 @@ export default class ErrorBoundary extends Component {
           text: "Cancel",
           onPress: () => {
             return
-          }
+          },
         },
         {
           text: "Copy & Open Issue Form",
@@ -43,11 +45,11 @@ export default class ErrorBoundary extends Component {
             Clipboard.setString(stackTrace)
 
             Linking.openURL(ErrorBoundary.ISSUE_REPORTING_URL)
-          }
-        }
+          },
+        },
       ],
       {
-        cancelable: false
+        cancelable: false,
       }
     )
   }
@@ -89,22 +91,22 @@ export default class ErrorBoundary extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start"
+    justifyContent: "flex-start",
   },
   subContainer: {
     flex: 1,
     marginTop: "50%",
     marginHorizontal: 30,
-    alignItems: "center"
+    alignItems: "center",
   },
   icon: {
-    marginBottom: 18
+    marginBottom: 18,
   },
   bigBoldText: {
     fontSize: 18,
     letterSpacing: 0.8,
     fontWeight: "bold",
-    marginBottom: 100
+    marginBottom: 100,
   },
   text: {
     marginTop: 30,
@@ -112,9 +114,9 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     fontSize: 16,
     letterSpacing: 0.4,
-    textAlign: "center"
+    textAlign: "center",
   },
   bold: {
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 })

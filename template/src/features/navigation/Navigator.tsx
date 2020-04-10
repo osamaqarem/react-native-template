@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack"
 import React, { useEffect } from "react"
 import {
   isMountedRef,
-  navigationRef
+  navigationRef,
 } from "../../services/navigation/NavigationService"
 import Home from "../home/Home"
 import Login from "../login/Login"
@@ -17,6 +17,10 @@ export type RootStackParamsList = {
 const Stack = createStackNavigator<RootStackParamsList>()
 
 function Navigator() {
+  /**
+   * Hide the splash screen on mount
+   * Keep track of nav container mounts for usage of {@link NavigationService}
+   */
   useEffect(() => {
     isMountedRef.current = true
     SplashScreen.hide()

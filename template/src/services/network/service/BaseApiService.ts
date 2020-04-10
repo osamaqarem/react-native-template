@@ -1,4 +1,4 @@
-import NetworkHelper from "../../../common/helpers/NetworkHelper"
+import { NetworkHelper } from "../../../common/helpers/NetworkHelper"
 import HttpException from "../exceptions/HttpException"
 import OfflineException from "../exceptions/OfflineException"
 import GenericResponse from "../models/GenericResponse"
@@ -27,7 +27,7 @@ const getContentType = (res: Response): ContentType => {
 const getHttpConfig = (
   verb: ApiConfig["verb"] = "GET",
   token?: string,
-  body?: object,
+  body?: object
 ): RequestInit => {
   const base = {
     method: verb,
@@ -80,31 +80,39 @@ const processResponse = async (res: Response) => {
   return doThrow(res, contentType)
 }
 
+const client = async ({
+  url,
+  verb,
+  timeoutInSeconds,
+  token,
+  body,
+}: ApiConfig) => {
+  if (NetworkHelper.isInternetReachable) {
+    const reqConfig = getHttpConfig(verb, token, body)
+
+    const reqTimeout = timeoutInSeconds || defaultTimeout
+
+    const contoller = new AbortController()
+    const finalConfig = { signal: contoller.signal, ...reqConfig }
+
+    const abort = setTimeout(() => {
+      contoller.abort()
+    }, reqTimeout * 1000)
+
+    const res = await fetch(url, finalConfig)
+
+    clearTimeout(abort)
+
+    return processResponse(res)
+  } else {
+    throw new OfflineException(
+      "Offline",
+      "Internet not reachable",
+      url.toString()
+    )
+  }
+}
+
 export const BaseApiService = {
-  client: async ({ url, verb, timeoutInSeconds, token, body }: ApiConfig) => {
-    if (NetworkHelper.isInternetReachable) {
-      const reqConfig = getHttpConfig(verb, token, body)
-
-      const reqTimeout = timeoutInSeconds || defaultTimeout
-
-      const contoller = new AbortController()
-      const finalConfig = { signal: contoller.signal, ...reqConfig }
-
-      const abort = setTimeout(() => {
-        contoller.abort()
-      }, reqTimeout * 1000)
-
-      const res = await fetch(url, finalConfig)
-
-      clearTimeout(abort)
-
-      return processResponse(res)
-    } else {
-      throw new OfflineException(
-        "Offline",
-        "Internet not reachable",
-        url.toString(),
-      )
-    }
-  },
+  client,
 }

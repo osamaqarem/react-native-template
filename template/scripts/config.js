@@ -1,5 +1,5 @@
 // Generate possible env variable types from all .env files.
-// Only works if all environment files have the same variables
+// Requirement: all environment files must have the same variables.
 
 // eslint-disable-next-line
 const fs = require("fs")

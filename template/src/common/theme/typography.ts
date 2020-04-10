@@ -3,21 +3,24 @@ export const typography = {
     normal: "Roboto-Regular",
     medium: "Roboto-Medium",
     bold: "Roboto-Bold",
-    superBold: "Roboto-Black"
+    superBold: "Roboto-Black",
+    helvetica: "HelveticaTextbookLT-Roman",
   },
   fontSize: {
-    h1: 32,
-    h2: 16,
-    p: 14,
-    input: 13,
-    span: 9
+    xl: 32,
+    l: 16,
+    m: 14,
+    s: 13,
+    xs: 9,
   },
   letterSpacing: {
-    h1: 1,
-    h2: 0.2,
-    button: 1
+    xl: 1,
+    l: 0.6,
+    m: 0.4,
+    s: 0.2,
+    xs: 0.1,
   },
   lineHeight: {
-    p: 20
-  }
+    m: 20,
+  },
 }

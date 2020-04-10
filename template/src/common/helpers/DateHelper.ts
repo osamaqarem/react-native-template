@@ -1,74 +1,70 @@
-class DateHelper {
-  /**
-   * takes in unix time (number) and returns date
-   * e.g. yyyy/mm/dd
-   */
-  static getDateFromEpochMillis = (time: number) => {
-    const date = new Date(time)
+/**
+ * takes in unix time (number) and returns date
+ * e.g. yyyy/mm/dd
+ */
+const getDateFromEpochMillis = (time: number) => {
+  const date = new Date(time)
 
-    const year = date.getFullYear() + ""
-    const month = date.getMonth() + 1
-    const day = date.getDate()
+  const year = date.getFullYear() + ""
+  const month = date.getMonth() + 1
+  const day = date.getDate()
 
-    let monthWithLeadingZero
+  let monthWithLeadingZero
 
-    if (month < 10) {
-      monthWithLeadingZero = "0" + month
-    } else {
-      monthWithLeadingZero = month + ""
-    }
-
-    let dayWithLeadingZero
-
-    if (day < 10) {
-      dayWithLeadingZero = "0" + day
-    } else {
-      dayWithLeadingZero = day + ""
-    }
-
-    return year + "-" + monthWithLeadingZero + "-" + dayWithLeadingZero
+  if (month < 10) {
+    monthWithLeadingZero = "0" + month
+  } else {
+    monthWithLeadingZero = month + ""
   }
 
-  /**
-   * takes in unix time (number) and returns local time
-   * e.g. 1568193605000 -> "17:20:01"
-   */
-  static getTimeFromEpochMillis = (time: number) => {
-    const date = new Date(time)
+  let dayWithLeadingZero
 
-    const hours = date.getHours()
-    const minutes = date.getMinutes()
-    const seconds = date.getSeconds()
+  if (day < 10) {
+    dayWithLeadingZero = "0" + day
+  } else {
+    dayWithLeadingZero = day + ""
+  }
 
-    let hoursWithLeadingZero
+  return year + "-" + monthWithLeadingZero + "-" + dayWithLeadingZero
+}
 
-    if (hours < 10) {
-      hoursWithLeadingZero = "0" + hours
-    } else {
-      hoursWithLeadingZero = hours
-    }
+/**
+ * takes in unix time (number) and returns local time
+ * e.g. 1568193605000 -> "17:20:01"
+ */
+const getTimeFromEpochMillis = (time: number) => {
+  const date = new Date(time)
 
-    let secondsWithLeadingZero
+  const hours = date.getHours()
+  const minutes = date.getMinutes()
+  const seconds = date.getSeconds()
 
-    if (seconds < 10) {
-      secondsWithLeadingZero = "0" + seconds
-    } else {
-      secondsWithLeadingZero = seconds
-    }
+  let hoursWithLeadingZero
 
-    if (minutes < 10) {
-      return (
-        hoursWithLeadingZero +
-        ":" +
-        "0" +
-        minutes +
-        ":" +
-        secondsWithLeadingZero
-      )
-    } else {
-      return hoursWithLeadingZero + ":" + minutes + ":" + secondsWithLeadingZero
-    }
+  if (hours < 10) {
+    hoursWithLeadingZero = "0" + hours
+  } else {
+    hoursWithLeadingZero = hours
+  }
+
+  let secondsWithLeadingZero
+
+  if (seconds < 10) {
+    secondsWithLeadingZero = "0" + seconds
+  } else {
+    secondsWithLeadingZero = seconds
+  }
+
+  if (minutes < 10) {
+    return (
+      hoursWithLeadingZero + ":" + "0" + minutes + ":" + secondsWithLeadingZero
+    )
+  } else {
+    return hoursWithLeadingZero + ":" + minutes + ":" + secondsWithLeadingZero
   }
 }
 
-export default DateHelper
+export const DateHelper = {
+  getDateFromEpochMillis,
+  getTimeFromEpochMillis,
+}

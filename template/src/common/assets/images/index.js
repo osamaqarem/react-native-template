@@ -1,3 +1,3 @@
-export default {
-  reactIcon: require('./reactIcon.png')
+export const images = {
+  reactIcon: require("./reactIcon.png"),
 }

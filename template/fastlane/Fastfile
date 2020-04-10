@@ -31,16 +31,28 @@ platform :android do
         )
   end
 
-  desc 'Build the staging release APK, then upload to App Center.'
+  desc 'Build, deploy staging Android.'
   lane :deploy_staging do
     build_staging
     upload
   end
 
-  desc 'Build the production release APK, then upload to App Center.'
+  desc 'Build, deploy production Android.'
   lane :deploy_production do
     build_production
     upload
+  end
+
+  desc 'Bump, badge, deploy staging Android.'
+  lane :bump_badge_deploy_staging do
+    bump_badge
+    deploy_staging
+  end
+  
+  desc 'Bump, badge, deploy production Android.'
+  lane :bump_badge_deploy_prod do
+    bump_badge
+    deploy_production
   end
 end
 
@@ -48,7 +60,7 @@ end
 platform :ios do
   # You need to configure singing for iOS
   # https://github.com/osamaq/reactnative-fastlane-appcenter#signing
-  desc 'Fetch certificates and provisioning profiles.'
+  desc 'Set up certs and profiles for iOS.'
   lane :certificates do
     register_devices(
       devices: {
@@ -94,20 +106,31 @@ platform :ios do
         )
   end
 
-  desc 'Sign, build staging release then deploy to appcenter.'
+  desc 'Sign, build, deploy staging iOS.'
   lane :deploy_staging do
     certificates
     build_staging
     upload
   end
 
-  desc 'Sign, build production release then deploy to appcenter.'
+  desc 'Sign, build, deploy production iOS.'
   lane :deploy_production do
     certificates
     build_production
     upload
   end
 
+  desc 'Bump, badge, sign, build, deploy staging iOS.'
+  lane :bump_badge_deploy_staging do
+    bump_badge
+    deploy_staging
+  end
+  
+  desc 'Bump, badge, sign, build, deploy production iOS.'
+  lane :bump_badge_deploy_prod do
+    bump_badge
+    deploy_production
+  end
 end
 
 
@@ -183,7 +206,7 @@ end
     make_badge_and
   end
 
-  desc 'Bump and badge.'
+  desc 'Bump and badge iOS and Android.'
   lane :bump_badge do
     bump
     make_badge

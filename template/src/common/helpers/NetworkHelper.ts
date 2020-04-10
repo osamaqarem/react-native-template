@@ -1,23 +1,30 @@
 import NetInfo from "@react-native-community/netinfo"
 
-class NetworkHelper {
-  pingingUrl = "https://clients3.google.com/generate_204"
-  isInternetReachable = false
+// This url is pinged to check network connectivity
+const pingingUrl = "https://clients3.google.com/generate_204"
+// Keeps track of connectivity state
+let isInternetReachable = false
 
-  unsubscribe = NetInfo.addEventListener(state => {
-    this.isInternetReachable = state.isInternetReachable ?? false
-  })
+// A subscription that pings pingingUrl and updates isInternetReachable.
+const unsubscribe = NetInfo.addEventListener((state) => {
+  isInternetReachable = state.isInternetReachable ?? false
+})
 
-  getFormUrlEncoded = (jsonBody: any) => {
-    const formBody: any = []
+// Useful for multi-part form submissions.
+const getFormUrlEncoded = (jsonBody: any) => {
+  const formBody: any = []
 
-    for (let key in jsonBody) {
-      const encodedKey = encodeURIComponent(key)
-      const encodedValue = encodeURIComponent(jsonBody[key])
-      formBody.push(encodedKey + "=" + encodedValue)
-    }
-    return formBody.join("&")
+  for (const key in jsonBody) {
+    const encodedKey = encodeURIComponent(key)
+    const encodedValue = encodeURIComponent(jsonBody[key])
+    formBody.push(encodedKey + "=" + encodedValue)
   }
+  return formBody.join("&")
 }
 
-export default new NetworkHelper()
+export const NetworkHelper = {
+  pingingUrl,
+  isInternetReachable,
+  unsubscribe,
+  getFormUrlEncoded,
+}

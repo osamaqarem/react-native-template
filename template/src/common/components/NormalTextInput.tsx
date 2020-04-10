@@ -2,7 +2,7 @@ import React, { memo, useState } from "react"
 import { StyleSheet, Text, View } from "react-native"
 import {
   TextInput,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
 } from "react-native-gesture-handler"
 import { colors, typography } from "../theme"
 
@@ -16,20 +16,23 @@ interface Props {
 
 export const INPUT_WIDTH = 298
 
+/**
+ * A text input with dynamic asterisk placement when @param required is true.
+ */
 const NormalTextInput = memo(
   ({
     value = "",
     placeholder = "",
     required = false,
     secureEntry = false,
-    onChangeText
+    onChangeText,
   }: Props) => {
     const [showPassword, setShowPassword] = useState(true)
     const [inputWidth, setInputWidth] = useState(0)
     const hasInput = value?.length > 0
 
     const togglePasswordVisibility = () =>
-      setShowPassword(prevState => !prevState)
+      setShowPassword((prevState) => !prevState)
     return (
       <View style={styles.box}>
         {!hasInput && (
@@ -41,10 +44,10 @@ const NormalTextInput = memo(
                 style={[
                   styles.inputText,
                   {
-                    position: "absolute"
-                  }
+                    position: "absolute",
+                  },
                 ]}
-                onLayout={e => setInputWidth(e.nativeEvent.layout.width + 6)}
+                onLayout={(e) => setInputWidth(e.nativeEvent.layout.width + 6)}
               />
               {!hasInput && required && (
                 <Text style={[styles.asterisk, { left: inputWidth }]}>*</Text>
@@ -65,6 +68,8 @@ const NormalTextInput = memo(
     )
   }
 )
+
+NormalTextInput.displayName = "NormalTextInput"
 
 interface ToggleSecureEntryIconProps {
   onPress: () => void
@@ -92,40 +97,40 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.1,
     shadowRadius: 5.0,
-    elevation: 10
+    elevation: 10,
   },
   innerContainer: {
-    justifyContent: "center"
+    justifyContent: "center",
   },
   inputText: {
     fontFamily: typography.fontFamily.normal,
-    fontSize: typography.fontSize.input,
-    marginLeft: 28
+    fontSize: typography.fontSize.s,
+    marginLeft: 28,
   },
   eyeContainer: {
     position: "absolute",
     right: 0,
     height: "100%",
     justifyContent: "center",
-    padding: 10
+    padding: 10,
   },
   eye: {
     backgroundColor: colors.darkGrey,
     height: 20,
     width: 20,
-    borderRadius: 10
+    borderRadius: 10,
   },
   asterisk: {
     color: colors.red,
     fontFamily: typography.fontFamily.normal,
     position: "absolute",
     marginLeft: 28,
-    top: 14
-  }
+    top: 14,
+  },
 })
 
 export default NormalTextInput

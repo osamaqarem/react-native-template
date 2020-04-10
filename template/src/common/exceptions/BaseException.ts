@@ -1,3 +1,6 @@
+/**
+ * All custom exceptions should extend this class.
+ */
 export default class BaseException extends Error {
   private _status: number | string
   private _message: string
