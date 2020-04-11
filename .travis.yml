@@ -24,10 +24,8 @@ matrix:
       install:
         - nvm install 12.14.0
         - npm i
-      before_script:
-        - cd android
       script:
-        - ./gradlew assembleRelease
+        - npm run run-android:debugRelease
 
     - language: objective-c
       os: osx
@@ -49,5 +47,4 @@ matrix:
         - pod install
         - cd ..
       script:
-        - npm run detox-build:iosDebug
-        - npm run detox test -c ios.sim.debug
+        - npm run run-ios:debugRelease

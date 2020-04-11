@@ -4,9 +4,10 @@
  * <p>This source code is licensed under the MIT license found in the LICENSE file in the root
  * directory of this source tree.
  */
-package com.rndiffapp;
+package com.helloworld;
 
 import android.content.Context;
+
 import com.facebook.flipper.android.AndroidFlipperClient;
 import com.facebook.flipper.android.utils.FlipperUtils;
 import com.facebook.flipper.core.FlipperClient;
@@ -22,6 +23,7 @@ import com.facebook.flipper.plugins.sharedpreferences.SharedPreferencesFlipperPl
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.modules.network.NetworkingModule;
+
 import okhttp3.OkHttpClient;
 
 public class ReactNativeFlipper {

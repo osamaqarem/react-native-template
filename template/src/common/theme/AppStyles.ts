@@ -1,12 +1,13 @@
 import { colors } from "./colors"
+import { StyleSheet } from "react-native"
 
 // Some common styling boilerplate.
-export const AppStyles = {
+export const AppStyles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: colors.white },
   safeAreaScroll: { flexGrow: 1, backgroundColor: colors.white },
   centerContent: {
-    justifyContent: "center" as const,
-    alignItems: "center" as const,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  touchableActiveOpacity: 0.84,
-}
+  touchableActiveOpacity: { opacity: 0.84 },
+})

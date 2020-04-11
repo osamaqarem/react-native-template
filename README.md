@@ -1,11 +1,11 @@
-# react-native-template 🌠
+# react-native-template <img src="docs/assets/icon.png" alt="Logo" width="4%">
 
 [![Build Status](https://travis-ci.com/osamaq/react-native-template.svg?branch=master)](https://travis-ci.com/osamaq/react-native-template)
 [![npm downloads](https://img.shields.io/npm/dt/@osamaq/react-native-template.svg)](https://www.npmjs.com/package/@osamaq/react-native-template)
 [![npm version](https://img.shields.io/npm/v/@osamaq/react-native-template?color=44BC1C)](https://www.npmjs.com/package/@osamaq/react-native-template)
 
 <div align="center">
-    <img src="docs/assets/icon.png" alt="Logo" width="24%">
+    <img src="docs/assets/tools.png" alt="Preview" width="100%">
 </div>
 <br/>
 
@@ -27,7 +27,7 @@ A minimal template with good architecture and common packages to let you focus o
 - [AsyncStorage](https://github.com/react-native-community/async-storage)
 - [NetInfo](https://github.com/react-native-community/react-native-netinfo)
 - [FastImage](https://github.com/DylanVann/react-native-fast-image)
-- [Detox](https://github.com/wix/Detox)
+- [<s>Detox</s>](https://github.com/wix/Detox) (WIP – when it supports RN 0.62.x)
 - [Fastlane](http://fastlane.tools/)
 - [Mirage JS](https://github.com/miragejs/miragejs)
 - Other — [error boundary](https://reactjs.org/docs/error-boundaries.html), architecture, services & utils.
@@ -39,7 +39,7 @@ Create a new project using the template.
 
 - **Note:** the command will fail if you have the global legacy react-native-cli installed. Make sure you uninstall it first. More info at [react-native-community/cli](https://github.com/react-native-community/cli#about).
 
-### RN v0.62.2
+### RN 0.62.2
 
 ```bash
 $ npx react-native init MyApp --template @osamaq/react-native-template
