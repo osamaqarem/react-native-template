@@ -54,6 +54,9 @@ export default class ErrorBoundary extends Component {
     )
   }
 
+  /**
+   * TODO: Restart app instead of reload.
+   */
   reloadApp = () => {
     NativeModules.DevSettings.reload()
   }

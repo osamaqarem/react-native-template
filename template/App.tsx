@@ -13,10 +13,12 @@ import { store, persistor } from "./src/redux/store"
 import { PersistGate } from "redux-persist/integration/react"
 import ErrorBoundary from "./src/features/errorboundary/ErrorBoundary"
 import Navigator from "./src/features/navigation/Navigator"
+import { ThemeProvider } from "styled-components/native"
 import reactotron from "./reactotron"
 import BuildConfig from "react-native-config"
 import { makeMirage } from "./src/services/network/service/mirage"
 import NetworkHelper from "./src/common/helpers/NetworkHelper"
+import { theme } from "./src/common/theme"
 ;(function setup() {
   // React Navigation, optimize memory usage.
   enableScreens()
@@ -63,7 +65,9 @@ const App = () => {
     <ErrorBoundary>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Navigator />
+          <ThemeProvider theme={theme}>
+            <Navigator />
+          </ThemeProvider>
         </PersistGate>
       </Provider>
     </ErrorBoundary>

@@ -80,7 +80,7 @@ const processResponse = async (res: Response) => {
   return doThrow(res, contentType)
 }
 
-const client = async ({
+const makeRequest = async ({
   url,
   verb,
   timeoutInSeconds,
@@ -113,6 +113,13 @@ const client = async ({
   }
 }
 
-export const BaseApiService = {
-  client,
+export const ApiClient = {
+  get: ({ token, body, url, timeoutInSeconds }: Omit<ApiConfig, "verb">) =>
+    makeRequest({ token, body, url, timeoutInSeconds, verb: "GET" }),
+  post: ({ token, body, url, timeoutInSeconds }: Omit<ApiConfig, "verb">) =>
+    makeRequest({ token, body, url, timeoutInSeconds, verb: "POST" }),
+  put: ({ token, body, url, timeoutInSeconds }: Omit<ApiConfig, "verb">) =>
+    makeRequest({ token, body, url, timeoutInSeconds, verb: "PUT" }),
+  delete: ({ token, body, url, timeoutInSeconds }: Omit<ApiConfig, "verb">) =>
+    makeRequest({ token, body, url, timeoutInSeconds, verb: "DELETE" }),
 }

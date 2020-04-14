@@ -1,7 +1,7 @@
 import BuildConfig from "react-native-config"
 import { from } from "rxjs"
 import HttpException from "../../exceptions/HttpException"
-import { BaseApiService } from "../BaseApiService"
+import { ApiClient } from "../ApiClient"
 import { ExampleApiEndpoints, ExampleRestApi } from "./ExampleRestApi"
 
 const BASE_URL = BuildConfig.EXAMPLE_API_BASE_URL
@@ -17,18 +17,18 @@ const BASE_URL = BuildConfig.EXAMPLE_API_BASE_URL
 const ExampleApiImplementation: ExampleApiEndpoints = {
   login: () =>
     from(
-      BaseApiService.client({
+      ApiClient.get({
         url: BASE_URL + ExampleRestApi.login(),
         timeoutInSeconds: 10,
       })
     ),
   logout: () =>
-    BaseApiService.client({
+    ApiClient.get({
       url: BASE_URL + ExampleRestApi.logout(),
     }),
   submit: (body: object, token: string) =>
     from(
-      BaseApiService.client({
+      ApiClient.get({
         url: BASE_URL + ExampleRestApi.submit(),
         body,
         token,

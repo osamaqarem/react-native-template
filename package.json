@@ -1,7 +1,7 @@
 {
   "name": "@osamaq/react-native-template",
   "version": "0.0.21",
-  "description": "[ TypeScript, Reactotron, Redux Toolkit, Redux Observable, React Navigation, Reanimated, AsyncStorage, NetInfo, FastImage ]",
+  "description": "A minimal template with good architecture and common packages to let you focus on writing features right away.",
   "scripts": {},
   "files": [
     "template",
@@ -12,13 +12,12 @@
     "url": "git+https://github.com/osamaq/react-native-template.git"
   },
   "keywords": [
-    "react-native",
+    "react",
+    "native",
     "template",
     "boilerplate",
     "starter",
-    "typescript",
-    "redux",
-    "navigation"
+    "typescript"
   ],
   "author": "Osama Qarem <osamaqarem@gmail.com>",
   "license": "MIT",

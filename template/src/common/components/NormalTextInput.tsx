@@ -4,7 +4,8 @@ import {
   TextInput,
   TouchableWithoutFeedback,
 } from "react-native-gesture-handler"
-import { colors, typography } from "../theme"
+import Svg, { Path } from "react-native-svg"
+import { theme } from "../theme"
 
 interface Props {
   value?: string
@@ -12,12 +13,26 @@ interface Props {
   placeholder?: string
   required?: boolean
   secureEntry?: boolean
+  editIcon?: boolean
+  multiline?: boolean
 }
 
 export const INPUT_WIDTH = 298
 
 /**
- * A text input with dynamic asterisk placement when @param required is true.
+ * This component is made up of two TextInputs. One is fake.
+ *
+ * Reasoning: if we had a single TextInput that took on the full width of
+ * the container, then it works perfectly. However, we cant dynamically
+ * place the asterisk based on the width of the placeholder text, since
+ * that placeholder text width would become equal to the continer width.
+ *
+ * With two inputs, we absolutely position the first one and use it to
+ * display the placeholder text. Now the width of the placeholder text is
+ * useful for calculating the placement of the asterisk. This fake
+ * input is removed from the view once the text value of the real
+ * text input is more than 0 characters.
+ *
  */
 const NormalTextInput = memo(
   ({
@@ -26,6 +41,8 @@ const NormalTextInput = memo(
     required = false,
     secureEntry = false,
     onChangeText,
+    editIcon = false,
+    multiline = false,
   }: Props) => {
     const [showPassword, setShowPassword] = useState(true)
     const [inputWidth, setInputWidth] = useState(0)
@@ -34,13 +51,23 @@ const NormalTextInput = memo(
     const togglePasswordVisibility = () =>
       setShowPassword((prevState) => !prevState)
     return (
-      <View style={styles.box}>
+      <View
+        style={[
+          styles.box,
+          {
+            paddingVertical: multiline ? 10 : 0,
+          },
+        ]}
+      >
         {!hasInput && (
           <>
-            <View style={[styles.innerContainer, { flex: hasInput ? 1 : 0 }]}>
+            <View
+              pointerEvents="none"
+              style={[styles.innerContainer, { flex: hasInput ? 1 : 0 }]}
+            >
               <TextInput
                 placeholder={placeholder}
-                placeholderTextColor={colors.darkGrey}
+                placeholderTextColor={theme.colors.grey}
                 style={[
                   styles.inputText,
                   {
@@ -56,20 +83,26 @@ const NormalTextInput = memo(
           </>
         )}
         <TextInput
-          value={value}
+          multiline={multiline}
           secureTextEntry={secureEntry ? showPassword : false}
           onChangeText={onChangeText}
-          style={[styles.inputText, { width: INPUT_WIDTH * 0.76 }]}
+          style={[
+            styles.inputText,
+            {
+              width: INPUT_WIDTH * 0.76,
+              minHeight: multiline ? 104 : 52,
+              textAlignVertical: multiline ? "top" : "center",
+            },
+          ]}
         />
         {secureEntry && (
           <ToggleSecureEntryIcon onPress={togglePasswordVisibility} />
         )}
+        {editIcon && <EditIcon />}
       </View>
     )
   }
 )
-
-NormalTextInput.displayName = "NormalTextInput"
 
 interface ToggleSecureEntryIconProps {
   onPress: () => void
@@ -85,15 +118,41 @@ const ToggleSecureEntryIcon = ({ onPress }: ToggleSecureEntryIconProps) => {
   )
 }
 
+interface TextInputIconProps {
+  onPress?: () => void
+}
+const EditIcon = ({ onPress }: TextInputIconProps) => {
+  return (
+    <TouchableWithoutFeedback
+      onPress={onPress}
+      containerStyle={[
+        styles.eyeContainer,
+        { justifyContent: "flex-start", top: 6 },
+      ]}
+    >
+      <TextInputIconSvg />
+    </TouchableWithoutFeedback>
+  )
+}
+
+function TextInputIconSvg() {
+  return (
+    <Svg width={18} height={18} viewBox="0 0 474 475" fill="none">
+      <Path
+        d="M269.16 86.865l118.495 118.5-257.307 257.317L24.7 474.346a22.213 22.213 0 01-18.154-6.38 22.212 22.212 0 01-6.365-18.159l11.755-105.726L269.16 86.865zm191.782-17.643l-55.638-55.64a44.451 44.451 0 00-62.857 0l-52.341 52.345 118.495 118.5 52.341-52.345a44.457 44.457 0 000-62.86z"
+        fill="#999"
+      />
+    </Svg>
+  )
+}
+
 const styles = StyleSheet.create({
   box: {
     alignSelf: "center",
     flexDirection: "row",
-    marginVertical: 8,
     width: INPUT_WIDTH,
-    height: 52,
     borderRadius: 5,
-    backgroundColor: colors.white,
+    backgroundColor: theme.colors.white,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -107,8 +166,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   inputText: {
-    fontFamily: typography.fontFamily.normal,
-    fontSize: typography.fontSize.s,
+    fontFamily: theme.fonts["400"],
+    fontSize: theme.fontSizes[2],
     marginLeft: 28,
   },
   eyeContainer: {
@@ -119,18 +178,19 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   eye: {
-    backgroundColor: colors.darkGrey,
-    height: 20,
-    width: 20,
-    borderRadius: 10,
+    height: 22,
+    width: 22,
   },
+  icon: { height: 18, width: 18 },
   asterisk: {
-    color: colors.red,
-    fontFamily: typography.fontFamily.normal,
+    color: theme.colors.red,
+    fontFamily: theme.fonts[400],
     position: "absolute",
     marginLeft: 28,
     top: 14,
   },
 })
+
+NormalTextInput.displayName = "NormalTextInput"
 
 export default NormalTextInput

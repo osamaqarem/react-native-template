@@ -44,22 +44,40 @@ static void InitializeFlipper(UIApplication *application) {
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
 
-  // Uncomment if you would like to customize the status bar color
-  // UIColor *statusBarColor = [UIColor colorWithRed:0.84 green:0.13 blue:0.19 alpha:1.0];
-  // if (@available(iOS 13.0, *)) {
-    
-  //   UIView *statusBar = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.windowScene.statusBarManager.statusBarFrame];
-    
-  //   statusBar.backgroundColor = statusBarColor;
-    
-  //   [[UIApplication sharedApplication].keyWindow addSubview:statusBar];
-  // }else{
-  //   UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+  
+/**
+Use the following block of code to log available fonts
+*/
+//  for (NSString* family in [UIFont familyNames])
+//  {
+//    NSLog(@"%@", family);
+//    for (NSString* name in [UIFont fontNamesForFamilyName: family])
+//    {
+//      NSLog(@" %@", name);
+//    }
+//  }
+  
+  
+/**
+Use the following block of code to set the status bar color on iOS
+*/
+//   UIColor *statusBarColor = [UIColor colorWithRed:0.84 green:0.13 blue:0.19 alpha:1.0];
+//
+//   if (@available(iOS 13.0, *)) {
+//
+//     UIView *statusBar = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.windowScene.statusBarManager.statusBarFrame];
+//
+//     statusBar.backgroundColor = statusBarColor;
+//
+//     [[UIApplication sharedApplication].keyWindow addSubview:statusBar];
+//   }else{
+//     UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+//
+//     if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+//       statusBar.backgroundColor = statusBarColor;
+//     }
+//   }
 
-  //   if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
-  //     statusBar.backgroundColor = statusBarColor;
-  //   }
-  // }
   
   [RNSplashScreen show];
   
