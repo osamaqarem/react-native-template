@@ -167,7 +167,6 @@ const styles = StyleSheet.create({
   },
   inputText: {
     fontFamily: theme.fonts["400"],
-    fontSize: theme.fontSizes[2],
     marginLeft: 28,
   },
   eyeContainer: {

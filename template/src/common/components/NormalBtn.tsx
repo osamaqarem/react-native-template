@@ -71,8 +71,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: theme.colors.white,
-    fontSize: theme.fontSizes[2],
-    letterSpacing: theme.letterSpacings[5],
+    letterSpacing: theme.letterSpacings.wider,
   },
 })
 

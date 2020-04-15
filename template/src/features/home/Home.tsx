@@ -1,22 +1,22 @@
 import { StackNavigationProp } from "@react-navigation/stack"
 import React from "react"
 import {
+  ActivityIndicator,
   Button,
   SafeAreaView,
   StyleSheet,
-  ActivityIndicator,
 } from "react-native"
 import { useDispatch, useSelector } from "react-redux"
+import { RootStoreType } from "../../redux/rootReducer"
 import { logout } from "../../redux/slices/authslice"
 import { RootStackParamsList } from "../navigation/Navigator"
-import { RootStoreType } from "../../redux/rootReducer"
-import { P, Box } from "../../common/components/abstract/Layout"
+import Box from "../../common/components/abstract/Box"
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamsList, "Home">
 }
 
-const Home = ({ navigation }: Props) => {
+const Home = ({}: Props) => {
   const dispatch = useDispatch()
   const loading = useSelector((state: RootStoreType) => state.auth.loading)
 
@@ -29,11 +29,6 @@ const Home = ({ navigation }: Props) => {
           testID="signOutBtn"
         />
       )}
-      <Box mt={5} bg="grey" alignSelf="flex-start">
-        <P color="black" fontFamily="400" fontSize="xl3">
-          Testing Styled System
-        </P>
-      </Box>
     </SafeAreaView>
   )
 }
