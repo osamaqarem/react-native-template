@@ -17,7 +17,7 @@ A minimal template with good architecture and common packages to let you focus o
 - [Redux](https://redux.js.org/) with [Redux Toolkit](https://redux-toolkit.js.org/)
 - [Redux Observable](https://redux-observable.js.org/)
 - [React Navigation](https://reactnavigation.org/) (**v5**)
-- [Reactotron](https://github.com/infinitered/reactotron) (and [Flipper](https://fbflipper.com/))
+- [Reactotron](https://github.com/infinitered/reactotron) [<i>in</i>](https://shift.infinite.red/better-react-native-debugging-with-reactotron-in-flipper-6b823af29220) [Flipper](https://fbflipper.com/)
 - [Sentry](https://docs.sentry.io/platforms/react-native/) with redux action logging middleware
 - [react-native-splash-screen](https://github.com/crazycodeboy/react-native-splash-screen)
 - [react-native-svg](https://github.com/react-native-community/react-native-svg)
