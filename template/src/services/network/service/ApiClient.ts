@@ -1,6 +1,6 @@
 import NetworkHelper from "../../../common/helpers/NetworkHelper"
-import HttpException from "../exceptions/HttpException"
-import OfflineException from "../exceptions/OfflineException"
+import HttpException from "../../../common/exceptions/HttpException"
+import OfflineException from "../../../common/exceptions/OfflineException"
 import GenericResponse from "../models/GenericResponse"
 
 type ContentType = "JSON" | "Text" | "Unsupported"

@@ -13,11 +13,14 @@ import { Provider } from "react-redux"
 import { PersistGate } from "redux-persist/integration/react"
 import reactotron from "./reactotron"
 import NetworkHelper from "./src/common/helpers/NetworkHelper"
-import ErrorBoundary from "./src/features/errorboundary/ErrorBoundary"
+import ErrorBoundary from "./src/features/error-boundary/ErrorBoundary"
 import Navigator from "./src/features/navigation/Navigator"
 import { persistor, store } from "./src/redux/store"
-import { makeMirage } from "./src/services/network/service/mirage"
+import { makeMirage } from "./src/services/network/service/mock/mirage"
 ;(function setup() {
+  // Log environement variables
+  console.tron(BuildConfig)
+
   // React Navigation, optimize memory usage.
   enableScreens()
 
@@ -34,14 +37,6 @@ import { makeMirage } from "./src/services/network/service/mirage"
         }
         return breadcrumb
       },
-    })
-
-  // Reactotron
-  __DEV__ &&
-    import("./reactotron").then(() => {
-      console.log("Reactotron Configured")
-      console.rtron.clear()
-      console.tron("Environement: ", BuildConfig.ENV)
     })
 
   // Layout animation

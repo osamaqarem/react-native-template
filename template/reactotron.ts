@@ -1,4 +1,6 @@
 import Reactotron from "reactotron-react-native"
+// @ts-ignore
+import ReactotronFlipper from "reactotron-react-native/dist/flipper"
 import AsyncStorage from "@react-native-community/async-storage"
 import { reactotronRedux } from "reactotron-redux"
 import NetworkHelper from "./src/common/helpers/NetworkHelper"
@@ -10,11 +12,14 @@ declare global {
   }
 }
 
-let reactotron
+let reactotron: any
 
 if (__DEV__) {
   reactotron = Reactotron.setAsyncStorageHandler!(AsyncStorage) // AsyncStorage would either come from `react-native` or `@react-native-community/async-storage` depending on where you get it from
-    .configure() // controls connection & communication settings
+    .configure({
+      name: "HelloWorld",
+      createSocket: (path) => new ReactotronFlipper(path),
+    }) // controls connection & communication settings
     .use(reactotronRedux())
     .useReactNative({
       networking: {
@@ -25,7 +30,13 @@ if (__DEV__) {
   reactotron.connect()
 
   console.rtron = reactotron as Required<typeof Reactotron>
-  console.tron = reactotron.logImportant!
+  console.tron = (...args) => {
+    console.log(...args)
+    // @ts-ignore
+    reactotron.logImportant(...args)
+  }
+
+  console.tron("Reactotron Configured")
 }
 
 export default reactotron as Required<typeof Reactotron>

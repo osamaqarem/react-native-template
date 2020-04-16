@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootStoreType } from "../../redux/rootReducer"
 import { logout } from "../../redux/slices/authslice"
 import { RootStackParamsList } from "../navigation/Navigator"
-import Box from "../../common/components/abstract/Box"
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamsList, "Home">

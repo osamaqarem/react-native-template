@@ -77,6 +77,7 @@ export const logout = () => async (dispatch: AppDispatch) => {
     }
   } catch (err) {
     console.warn(err)
+    dispatch(AUTH_ERROR())
   }
 }
 

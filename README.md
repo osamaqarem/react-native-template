@@ -24,6 +24,7 @@ A minimal template with good architecture and common packages to let you focus o
 - [react-native-config](https://github.com/luggit/react-native-config)
 - [Reanimated](https://software-mansion.github.io/react-native-reanimated/)
 - [Redash](https://wcandillon.github.io/react-native-redash/)
+- [use-memo-one](https://github.com/alexreardon/use-memo-one)
 - [AsyncStorage](https://github.com/react-native-community/async-storage)
 - [NetInfo](https://github.com/react-native-community/react-native-netinfo)
 - [FastImage](https://github.com/DylanVann/react-native-fast-image)

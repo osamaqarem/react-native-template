@@ -38,7 +38,7 @@ const get = async (key: string) => {
   }
 }
 
-export const AsyncStorageService = {
+export const CacheService = {
   putToken,
   getToken,
   put,
