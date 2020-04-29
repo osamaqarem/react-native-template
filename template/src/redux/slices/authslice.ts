@@ -3,7 +3,7 @@ import { ofType } from "redux-observable"
 import { concat, of } from "rxjs"
 import { catchError, map, switchMap } from "rxjs/operators"
 import { NavigationService } from "../../services/navigation/NavigationService"
-import { ExampleApiService } from "../../services/network/service/exampleApi/ExampleApiService"
+import { ExampleApiService } from "../../services/network/exampleApi/ExampleApiService"
 import { AppDispatch, MyEpic } from "../store"
 
 type AuthReducer = {
@@ -20,7 +20,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    LOGIN: () => {},
+    LOGIN: () => { },
     AUTH_DONE: (_, action: PayloadAction<AuthReducer["authState"]>) => ({
       authState: action.payload,
       loading: false,

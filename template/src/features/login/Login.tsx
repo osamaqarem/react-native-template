@@ -18,7 +18,7 @@ import {
   ReloadInstructions,
 } from "react-native/Libraries/NewAppScreen"
 import { useDispatch, useSelector } from "react-redux"
-import { LOGIN } from "../../redux/slices/authslice"
+import { LOGIN } from "../../redux/slices/authSlice"
 import { RootStackParamsList } from "../navigation/Navigator"
 import { RootStoreType } from "../../redux/rootReducer"
 

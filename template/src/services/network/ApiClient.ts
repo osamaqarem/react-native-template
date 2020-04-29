@@ -1,7 +1,7 @@
-import NetworkHelper from "../../../common/helpers/NetworkHelper"
-import HttpException from "../../../common/exceptions/HttpException"
-import OfflineException from "../../../common/exceptions/OfflineException"
-import GenericResponse from "../models/GenericResponse"
+import NetworkHelper from "../../common/helpers/NetworkHelper"
+import HttpException from "../../common/exceptions/HttpException"
+import OfflineException from "../../common/exceptions/OfflineException"
+import GenericResponse from "./exampleApi/models/GenericResponse"
 
 type ContentType = "JSON" | "Text" | "Unsupported"
 interface ApiConfig {
@@ -40,12 +40,12 @@ const getHttpConfig = (
 
   const withToken = token
     ? {
-        ...withBody,
-        headers: {
-          ...base.headers,
-          authorization: `Bearer ${token}`,
-        },
-      }
+      ...withBody,
+      headers: {
+        ...base.headers,
+        authorization: `Bearer ${token}`,
+      },
+    }
     : withBody
 
   return withToken

@@ -1,6 +1,6 @@
 import { Server } from "miragejs"
 import BuildConfig from "react-native-config"
-import GenericResponse from "../../models/GenericResponse"
+import GenericResponse from "../exampleApi/models/GenericResponse"
 
 /**
  * Use mirage to mock APIs.

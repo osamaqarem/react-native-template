@@ -8,7 +8,7 @@ import {
 } from "react-native"
 import { useDispatch, useSelector } from "react-redux"
 import { RootStoreType } from "../../redux/rootReducer"
-import { logout } from "../../redux/slices/authslice"
+import { logout } from "../../redux/slices/authSlice"
 import { RootStackParamsList } from "../navigation/Navigator"
 
 interface Props {

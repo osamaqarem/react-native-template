@@ -5,7 +5,7 @@ import thunk from "redux-thunk"
 import reactotron from "../../reactotron"
 import sentryMiddleware from "./middleware/sentryMiddleware"
 import persistedReducer, { RootStoreType } from "./rootReducer"
-import { authEpics } from "./slices/authslice"
+import { authEpics } from "./slices/authSlice"
 
 // Redux observable
 export type MyEpic = Epic<Action, Action, RootStoreType, any>

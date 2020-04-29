@@ -1,6 +1,6 @@
 import BuildConfig from "react-native-config"
 import { from } from "rxjs"
-import HttpException from "../../../../common/exceptions/HttpException"
+import HttpException from "../../../common/exceptions/HttpException"
 import { ApiClient } from "../ApiClient"
 import { ExampleApiEndpoints, ExampleApi } from "./ExampleApi"
 

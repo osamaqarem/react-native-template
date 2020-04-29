@@ -16,7 +16,7 @@ import NetworkHelper from "./src/common/helpers/NetworkHelper"
 import ErrorBoundary from "./src/features/error-boundary/ErrorBoundary"
 import Navigator from "./src/features/navigation/Navigator"
 import { persistor, store } from "./src/redux/store"
-import { makeMirage } from "./src/services/network/service/mock/mirage"
+import { makeMirage } from "./src/services/network/mock/mirage"
 ;(function setup() {
   // Log environement variables
   console.tron(BuildConfig)

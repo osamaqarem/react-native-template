@@ -1,4 +1,4 @@
-import GenericResponse from "../../models/GenericResponse"
+import GenericResponse from "./models/GenericResponse"
 import { Observable } from "rxjs"
 
 /**
