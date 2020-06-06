@@ -55,10 +55,12 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Roboto-Black.ttf</string>
-		<string>Roboto-Bold.ttf</string>
-		<string>Roboto-Medium.ttf</string>
-		<string>Roboto-Regular.ttf</string>
+		<string>firasans_bold.ttf</string>
+		<string>firasans_medium.ttf</string>
+		<string>firasans_regular.ttf</string>
+		<string>montserrat_bold.ttf</string>
+		<string>montserrat_medium.ttf</string>
+		<string>montserrat_regular.ttf</string>
 	</array>
 </dict>
 </plist>
