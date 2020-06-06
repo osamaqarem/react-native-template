@@ -13,7 +13,6 @@ const palette = {
   darkWhite: "#F3F4F9",
 }
 
-export type Theme = typeof theme
 
 export const theme = {
   primaryDark: palette.lightBlack,

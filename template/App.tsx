@@ -17,6 +17,7 @@ import RootErrorBoundary from "./src/features/error-boundary/RootErrorBoundary"
 import Navigator from "./src/features/navigation/Navigator"
 import { persistor, store } from "./src/redux/store"
 import { makeMirage } from "./src/services/network/mock/mirage"
+import { PortalProvider } from "./src/common/contexts/PortalContext"
 ;(function setup() {
   // Log environement variables
   console.tron(BuildConfig)
@@ -58,7 +59,9 @@ const App = () => {
     <RootErrorBoundary>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Navigator />
+          <PortalProvider>
+            <Navigator />
+          </PortalProvider>
         </PersistGate>
       </Provider>
     </RootErrorBoundary>

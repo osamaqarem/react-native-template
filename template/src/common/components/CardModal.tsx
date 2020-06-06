@@ -1,76 +1,73 @@
-import React, { memo, ReactNode, useState } from "react"
+import React, { memo, ReactNode } from "react"
 import Animated, {
-  and,
-  call,
   cond,
   multiply,
   not,
+  or,
   set,
   useCode,
   Value,
 } from "react-native-reanimated"
-import { bin, spring } from "react-native-redash"
-import { useMemoOne } from "use-memo-one"
+import { bin, spring, useValue } from "react-native-redash"
 import { UIHelper } from "../helpers/UIHelper"
 
 const HEIGHT_OFFSET = 0.7
+const TUCK_IN_HEIGHT = -0.05 * UIHelper.height
 
 interface Props {
   children: ReactNode
-  visible: boolean
+  tuckedIn: boolean
   cardHeight?: number
+  almostTuckedIn?: boolean
 }
 
 const CardModal = memo(
-  ({ children, visible, cardHeight = UIHelper.height }: Props) => {
-    const [mayAnimateExit, setMayAnimateExit] = useState(() =>
-      visible ? true : false
-    )
-    const animation = useMemoOne(() => new Value(0), [])
-    const isVisible = useMemoOne(() => bin(visible), [])
-    const heightValue = useMemoOne(() => multiply(-cardHeight, HEIGHT_OFFSET), [
-      cardHeight,
-    ])
+  ({
+    children,
+    tuckedIn,
+    cardHeight = UIHelper.height,
+    almostTuckedIn = false,
+  }: Props) => {
+    const animation = useValue(0)
+    const heightValue = multiply(-cardHeight, HEIGHT_OFFSET)
 
     useCode(
       () => [
         cond(
-          [and(not(isVisible), bin(mayAnimateExit))],
+          // down animation
+          or(not(bin(tuckedIn)), bin(almostTuckedIn)),
           set(
             animation,
             spring({
-              to: 0,
-              from: heightValue,
+              to: cond(bin(almostTuckedIn), TUCK_IN_HEIGHT, 0),
+              from: animation,
               config: {
                 damping: new Value(20),
               },
             })
           ),
-          cond(isVisible, [
+          cond(or(bin(tuckedIn), not(bin(almostTuckedIn))), [
+            // up animation
             set(
               animation,
               spring({
                 to: heightValue,
-                from: 0,
+                from: animation,
                 config: {
                   damping: new Value(20),
                 },
               })
             ),
-            cond(
-              not(bin(mayAnimateExit)),
-              call([], () => setMayAnimateExit(true))
-            ),
           ])
         ),
       ],
-      [isVisible, heightValue, mayAnimateExit]
+      [tuckedIn, heightValue, almostTuckedIn]
     )
 
     return (
       <Animated.View
         style={{
-          backgroundColor: "#FFFFFF",
+          backgroundColor: "#fff",
           borderRadius: 16,
           position: "absolute",
           flex: 1,
@@ -86,6 +83,7 @@ const CardModal = memo(
           shadowRadius: 6.65,
           elevation: 6,
           transform: [{ translateY: animation }],
+          zIndex: 10,
         }}
       >
         {children}

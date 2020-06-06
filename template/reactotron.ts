@@ -8,7 +8,6 @@ import NetworkHelper from "./src/common/helpers/NetworkHelper"
 declare global {
   interface Console {
     tron: typeof console.log
-    rtron: Required<typeof Reactotron>
   }
 }
 
@@ -29,14 +28,24 @@ if (__DEV__) {
 
   reactotron.connect()
 
-  console.rtron = reactotron as Required<typeof Reactotron>
-  console.tron = (...args) => {
+  // Attach reactotron.logImportant to global console object
+  console.tron = (...args: any) => {
+    // Log to console
     console.log(...args)
-    // @ts-ignore
+    // Log to reactotron
     reactotron.logImportant(...args)
   }
 
   console.tron("Reactotron Configured")
+} else {
+  /**
+   * Important: Surround all reactotron usage with __DEV__
+   * In case you have a console.tron call in release build,
+   * this should save your app from crashing.
+   */
+  console.tron = (...args: any) => {
+    console.log(...args)
+  }
 }
 
 export default reactotron as Required<typeof Reactotron>

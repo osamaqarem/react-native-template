@@ -1,14 +1,7 @@
 import React from "react"
 import { StyleSheet, Text, View } from "react-native"
-import Animated, {
-  cond,
-  neq,
-  set,
-  useCode,
-  Value,
-} from "react-native-reanimated"
-import { bin, timing } from "react-native-redash"
-import { useMemoOne } from "use-memo-one"
+import Animated, { cond, neq, set, useCode } from "react-native-reanimated"
+import { bin, timing, useValue } from "react-native-redash"
 
 const HEIGHT = 54
 
@@ -17,7 +10,7 @@ interface Props {
   message: string
 }
 const Snackbar = ({ visible, message }: Props) => {
-  const translateY = useMemoOne(() => new Value(HEIGHT), [])
+  const translateY = useValue(HEIGHT)
   useCode(
     () => [
       cond(

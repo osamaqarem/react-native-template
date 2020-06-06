@@ -1,4 +1,4 @@
-# react-native-template <img src="docs/assets/icon.png" alt="Logo" width="4%">
+# react-native-template
 
 [![Build Status](https://travis-ci.com/osamaq/react-native-template.svg?branch=master)](https://travis-ci.com/osamaq/react-native-template)
 [![npm downloads](https://img.shields.io/npm/dt/@osamaq/react-native-template.svg)](https://www.npmjs.com/package/@osamaq/react-native-template)
@@ -17,14 +17,13 @@ A minimal template with good architecture and common packages to let you focus o
 - [Redux](https://redux.js.org/) with [Redux Toolkit](https://redux-toolkit.js.org/)
 - [Redux Observable](https://redux-observable.js.org/)
 - [React Navigation](https://reactnavigation.org/) (**v5**)
-- [Reactotron](https://github.com/infinitered/reactotron) [<i>in</i>](https://shift.infinite.red/better-react-native-debugging-with-reactotron-in-flipper-6b823af29220) [Flipper](https://fbflipper.com/)
+- [Reactotron + Flipper](https://shift.infinite.red/better-react-native-debugging-with-reactotron-in-flipper-6b823af29220)
 - [Sentry](https://docs.sentry.io/platforms/react-native/) with redux action logging middleware
 - [react-native-splash-screen](https://github.com/crazycodeboy/react-native-splash-screen)
 - [react-native-svg](https://github.com/react-native-community/react-native-svg)
 - [react-native-config](https://github.com/luggit/react-native-config)
 - [Reanimated](https://software-mansion.github.io/react-native-reanimated/)
 - [Redash](https://wcandillon.github.io/react-native-redash/)
-- [use-memo-one](https://github.com/alexreardon/use-memo-one)
 - [AsyncStorage](https://github.com/react-native-community/async-storage)
 - [NetInfo](https://github.com/react-native-community/react-native-netinfo)
 - [FastImage](https://github.com/DylanVann/react-native-fast-image)
@@ -68,4 +67,4 @@ $ npx sentry-wizard -i reactNative -p ios android
 $ npx sentry-wizard -i reactNative -p android
 ```
 
-Insert your sentry DSN in each [.env](https://github.com/osamaq/react-native-template/blob/312f3f063d1507edb92e104429865c141168e4f4/template/.env.prod#L5) file (dev, staging and production) and you're all done.
+Insert your sentry DSN in each [.env](https://github.com/osamaq/react-native-template/blob/ed37c213eacf0681c4f50f959bad170d46be0ed7/template/.env.prod#L5) file (dev, staging and production) and you're all done.
