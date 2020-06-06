@@ -68,10 +68,4 @@ $ npx sentry-wizard -i reactNative -p ios android
 $ npx sentry-wizard -i reactNative -p android
 ```
 
-Insert your DSN in [App.tsx](https://github.com/osamaq/react-native-template/blob/0c1d30722b8364013f712b18fd6abc6fed30edfa/template/App.tsx#L23) and you're all done.
-
-## TODO
-
-- [ ] Add CodePush/OTA
-- [ ] i18n
-- [ ] Unit Testing Examples
+Insert your sentry DSN in each [.env](https://github.com/osamaq/react-native-template/blob/312f3f063d1507edb92e104429865c141168e4f4/template/.env.prod#L5) file (dev, staging and production) and you're all done.

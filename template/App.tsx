@@ -25,12 +25,11 @@ import { makeMirage } from "./src/services/network/mock/mirage"
   enableScreens()
 
   // Initialize sentry SDK. Insert your DSN string.
-  const DSN = null
+  const { SENTRY_DSN } = BuildConfig
 
-  !__DEV__ &&
-    DSN &&
+  if (typeof SENTRY_DSN === "string" && SENTRY_DSN.length > 0) {
     Sentry.init({
-      dsn: DSN,
+      dsn: SENTRY_DSN,
       beforeBreadcrumb(breadcrumb, _) {
         if (breadcrumb?.data?.url === NetworkHelper.pingingUrl) {
           return null
@@ -38,6 +37,7 @@ import { makeMirage } from "./src/services/network/mock/mirage"
         return breadcrumb
       },
     })
+  }
 
   // Layout animation
   if (Platform.OS === "android") {
