@@ -201,7 +201,7 @@ end
   end
 
   desc 'Make new versioned icon badges.'
-  private_lane :make_badge do
+  lane :make_badge do
     make_badge_ios
     make_badge_and
   end
