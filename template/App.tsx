@@ -13,7 +13,7 @@ import { Provider } from "react-redux"
 import { PersistGate } from "redux-persist/integration/react"
 import reactotron from "./reactotron"
 import NetworkHelper from "./src/common/helpers/NetworkHelper"
-import ErrorBoundary from "./src/features/error-boundary/ErrorBoundary"
+import RootErrorBoundary from "./src/features/error-boundary/RootErrorBoundary"
 import Navigator from "./src/features/navigation/Navigator"
 import { persistor, store } from "./src/redux/store"
 import { makeMirage } from "./src/services/network/mock/mirage"
@@ -55,13 +55,13 @@ import { makeMirage } from "./src/services/network/mock/mirage"
 
 const App = () => {
   return (
-    <ErrorBoundary>
+    <RootErrorBoundary>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Navigator />
         </PersistGate>
       </Provider>
-    </ErrorBoundary>
+    </RootErrorBoundary>
   )
 }
 

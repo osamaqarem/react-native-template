@@ -9,11 +9,12 @@ import {
   Text,
   View,
 } from "react-native"
+import SplashScreen from "react-native-splash-screen"
 
 /**
  * Displays a friendly UI to the user in the case of an error.
  */
-export default class ErrorBoundary extends Component {
+export default class RootErrorBoundary extends Component {
   private static NO_STACK = "No stack trace."
   private static ISSUE_REPORTING_URL = "https://reactnative.dev"
 
@@ -26,10 +27,14 @@ export default class ErrorBoundary extends Component {
     return { hasError: true, error }
   }
 
+  componentDidCatch() {
+    SplashScreen.hide()
+  }
+
   showError = () => {
     Alert.alert(
       this.state.error?.name || "Error",
-      this.state.error?.stack || ErrorBoundary.NO_STACK,
+      this.state.error?.stack || RootErrorBoundary.NO_STACK,
       [
         {
           text: "Cancel",
@@ -40,11 +45,12 @@ export default class ErrorBoundary extends Component {
         {
           text: "Copy & Open Issue Form",
           onPress: () => {
-            const stackTrace = this.state.error?.stack || ErrorBoundary.NO_STACK
+            const stackTrace =
+              this.state.error?.stack || RootErrorBoundary.NO_STACK
 
             Clipboard.setString(stackTrace)
 
-            Linking.openURL(ErrorBoundary.ISSUE_REPORTING_URL)
+            Linking.openURL(RootErrorBoundary.ISSUE_REPORTING_URL)
           },
         },
       ],
