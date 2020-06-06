@@ -20,7 +20,7 @@ const ERROR_NOT_INIT =
 /**
  * Go to a screen using .navigate()
  */
-const navigate = (name: keyof RootStackParamsList, params: any) => {
+const navigate = (name: keyof RootStackParamsList, params?: object) => {
   if (isMountedRef.current && navigationRef.current) {
     // Perform navigation if the app has mounted
     navigationRef.current.navigate(name, params)
@@ -32,7 +32,7 @@ const navigate = (name: keyof RootStackParamsList, params: any) => {
 /**
  * Go to a screen and remove all other screens in the current stack.
  */
-const navigateAndReset = (name: keyof RootStackParamsList, params?: any) => {
+const navigateAndReset = (name: keyof RootStackParamsList, params?: object) => {
   if (isMountedRef.current && navigationRef.current) {
     // Perform navigation if the app has mounted
     navigationRef.current.dispatch(
