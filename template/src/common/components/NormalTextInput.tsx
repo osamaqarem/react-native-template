@@ -5,7 +5,6 @@ import {
   TouchableWithoutFeedback,
 } from "react-native-gesture-handler"
 import Svg, { Path } from "react-native-svg"
-import { theme } from "../theme"
 
 interface Props {
   value?: string
@@ -152,7 +151,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: INPUT_WIDTH,
     borderRadius: 5,
-    backgroundColor: theme.colors.white,
+    backgroundColor: "#FFF",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -166,7 +165,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   inputText: {
-    fontFamily: theme.fonts["400"],
     marginLeft: 28,
   },
   eyeContainer: {
@@ -182,8 +180,7 @@ const styles = StyleSheet.create({
   },
   icon: { height: 18, width: 18 },
   asterisk: {
-    color: theme.colors.red,
-    fontFamily: theme.fonts[400],
+    color: "red",
     position: "absolute",
     marginLeft: 28,
     top: 14,

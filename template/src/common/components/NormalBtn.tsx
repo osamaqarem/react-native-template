@@ -1,6 +1,5 @@
 import React from "react"
-import { ActivityIndicator, Platform, StyleSheet, Text } from "react-native"
-import { theme } from "../theme"
+import { ActivityIndicator, StyleSheet, Text } from "react-native"
 import { INPUT_WIDTH } from "./NormalTextInput"
 import TouchableScale from "./TouchableScale"
 
@@ -8,7 +7,7 @@ interface Props {
   onPress?: () => void
   loading?: boolean
   name: string
-  color?: keyof typeof theme.colors
+  color?: string
 }
 
 /**
@@ -19,11 +18,7 @@ const NormalBtn = React.memo(
     const btnContent = !loading ? (
       <Text style={styles.text}>{name}</Text>
     ) : (
-      <ActivityIndicator
-        color={theme.colors.white}
-        size={28}
-        animating={loading}
-      />
+      <ActivityIndicator color="#FFFFFF" size={28} animating={loading} />
     )
 
     return (
@@ -37,7 +32,7 @@ const NormalBtn = React.memo(
         containerStyle={[
           styles.button,
           {
-            backgroundColor: theme.colors[color],
+            backgroundColor: color ?? "crimson",
             opacity: !loading ? 1 : 0.8,
           },
         ]}
@@ -70,8 +65,8 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   text: {
-    color: theme.colors.white,
-    letterSpacing: theme.letterSpacings.wider,
+    color: "#ffffff",
+    letterSpacing: 0.4,
   },
 })
 

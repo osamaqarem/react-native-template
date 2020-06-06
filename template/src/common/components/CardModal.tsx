@@ -12,7 +12,6 @@ import Animated, {
 import { bin, spring } from "react-native-redash"
 import { useMemoOne } from "use-memo-one"
 import { UIHelper } from "../helpers/UIHelper"
-import { theme } from "../theme"
 
 const HEIGHT_OFFSET = 0.7
 
@@ -71,7 +70,7 @@ const CardModal = memo(
     return (
       <Animated.View
         style={{
-          backgroundColor: theme.colors.white,
+          backgroundColor: "#FFFFFF",
           borderRadius: 16,
           position: "absolute",
           flex: 1,

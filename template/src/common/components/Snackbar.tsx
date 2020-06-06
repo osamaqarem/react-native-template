@@ -9,7 +9,6 @@ import Animated, {
 } from "react-native-reanimated"
 import { bin, timing } from "react-native-redash"
 import { useMemoOne } from "use-memo-one"
-import { theme } from "../theme"
 
 const HEIGHT = 54
 
@@ -63,8 +62,8 @@ const Snackbar = ({ visible, message }: Props) => {
 const styles = StyleSheet.create({
   text: {
     marginLeft: 38,
-    color: theme.colors.white,
-    fontFamily: theme.fonts[700],
+    color: "#fff",
+    fontWeight: "bold",
   },
   snackbar: {
     height: HEIGHT,
@@ -72,7 +71,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     justifyContent: "center",
-    backgroundColor: theme.colors.lightBlack,
+    backgroundColor: "grey",
   },
   container: {
     width: "100%",
