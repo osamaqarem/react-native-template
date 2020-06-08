@@ -4,9 +4,19 @@
 [![npm downloads](https://img.shields.io/npm/dt/@osamaq/react-native-template.svg)](https://www.npmjs.com/package/@osamaq/react-native-template)
 [![npm version](https://img.shields.io/npm/v/@osamaq/react-native-template?color=44BC1C)](https://www.npmjs.com/package/@osamaq/react-native-template)
 
-<div align="center">
-    <img src="docs/assets/tools.png" alt="Preview" width="100%">
-</div>
+<p align="center" >
+  <img
+    width="325px"
+    src="docs/assets/home.png"
+    alt="home"
+  />
+  <img
+    width="550px"
+    src="docs/assets/reactotron.png"
+    alt="reactotron"
+  />
+</p>
+
 <br/>
 
 A minimal template with architecture and boilerplate to let you focus on writing features right away.
