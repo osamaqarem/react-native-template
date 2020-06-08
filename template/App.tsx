@@ -39,10 +39,10 @@ import store from "./src/redux/store"
   }
 
   // Mirage – API Mocking
-  // if (BuildConfig.MOCK_EXAMPLE_API === "YES") {
-  //   makeMirage()
-  //   __DEV__ && console.log("Mirage Configured")
-  // }
+  if (BuildConfig.MOCK_EXAMPLE_API === "YES") {
+    makeMirage()
+    __DEV__ && console.tron("Mirage Configured")
+  }
 })()
 
 const App = () => {
