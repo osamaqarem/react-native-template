@@ -25,6 +25,19 @@ interface Props {
 }
 
 const Home = ({}: Props) => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.innerContainer}>
+        <Space.V s={8} />
+        <ReduxExample />
+        <Space.V s={8} />
+        <DataFetchingExample />
+      </View>
+    </SafeAreaView>
+  )
+}
+
+const ReduxExample = () => {
   /**
    * Redux hooks example
    */
@@ -42,14 +55,11 @@ const Home = ({}: Props) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Space.V s={8} />
+    <>
       <Text style={styles.header}>Redux Example</Text>
       <Space.V s={8} />
       <Button onPress={ping} title={`Dispatch ${globalValue}`} />
-      <Space.V s={8} />
-      <DataFetchingExample />
-    </SafeAreaView>
+    </>
   )
 }
 
@@ -66,22 +76,23 @@ const DataFetchingExample = () => {
   if (!result) return <ActivityIndicator color="blue" size={30} />
 
   return (
-    <View style={{ flex: 1 }}>
+    <>
       <Text style={styles.header}>Data Fetching Example</Text>
       <Space.V s={8} />
-      <ScrollView style={styles.block}>
+      <ScrollView style={styles.scrollView}>
         <Text>{base64Util.atob(result.data?.content.trim())}</Text>
       </ScrollView>
-    </View>
+    </>
   )
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: "center", backgroundColor: "white" },
-  block: {
+  innerContainer: { marginHorizontal: 12 },
+  scrollView: {
     flexGrow: 1,
-    marginHorizontal: 12,
     padding: 16,
+    marginBottom: 16,
     backgroundColor: "#e9e9e9",
   },
   pingPong: {
@@ -89,7 +100,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    marginLeft: 12,
     alignSelf: "flex-start",
     fontFamily: "montserrat_bold",
     fontSize: 20,

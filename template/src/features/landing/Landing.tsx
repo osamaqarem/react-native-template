@@ -49,7 +49,7 @@ const Landing = ({ navigation }: Props) => {
               title="NAVIGATE HOME"
               onPress={goHome}
               testID="goHomeBtn"
-              color="seagreen"
+              color="lightpink"
             />
           </View>
           <View style={styles.sectionContainer}>
