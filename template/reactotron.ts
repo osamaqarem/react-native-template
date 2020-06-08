@@ -1,9 +1,8 @@
-import Reactotron from "reactotron-react-native"
+import Reactotron, { networking } from "reactotron-react-native"
 // @ts-ignore
 import ReactotronFlipper from "reactotron-react-native/dist/flipper"
 import AsyncStorage from "@react-native-community/async-storage"
 import { reactotronRedux } from "reactotron-redux"
-import NetworkHelper from "./src/common/helpers/NetworkHelper"
 
 declare global {
   interface Console {
@@ -22,7 +21,7 @@ if (__DEV__) {
     .use(reactotronRedux())
     .useReactNative({
       networking: {
-        ignoreUrls: new RegExp(NetworkHelper.pingingUrl),
+        ignoreUrls: /\/(logs|symbolicate)$/,
       },
     }) // add all built-in react native plugins
 

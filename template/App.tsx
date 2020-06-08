@@ -3,21 +3,18 @@
  * https://github.com/osamaq/react-native-template-osamaq
  *
  */
-
 import * as Sentry from "@sentry/react-native"
 import React from "react"
 import { Platform, UIManager } from "react-native"
 import BuildConfig from "react-native-config"
 import { enableScreens } from "react-native-screens"
 import { Provider } from "react-redux"
-import { PersistGate } from "redux-persist/integration/react"
 import reactotron from "./reactotron"
-import NetworkHelper from "./src/common/helpers/NetworkHelper"
 import RootErrorBoundary from "./src/features/error-boundary/RootErrorBoundary"
 import Navigator from "./src/features/navigation/Navigator"
-import { persistor, store } from "./src/redux/store"
 import { makeMirage } from "./src/services/network/mock/mirage"
 import { PortalProvider } from "./src/common/contexts/PortalContext"
+import store from "./src/redux/store"
 ;(function setup() {
   // Log environement variables
   console.tron(BuildConfig)
@@ -31,12 +28,6 @@ import { PortalProvider } from "./src/common/contexts/PortalContext"
   if (typeof SENTRY_DSN === "string" && SENTRY_DSN.length > 0) {
     Sentry.init({
       dsn: SENTRY_DSN,
-      beforeBreadcrumb(breadcrumb, _) {
-        if (breadcrumb?.data?.url === NetworkHelper.pingingUrl) {
-          return null
-        }
-        return breadcrumb
-      },
     })
   }
 
@@ -48,21 +39,19 @@ import { PortalProvider } from "./src/common/contexts/PortalContext"
   }
 
   // Mirage – API Mocking
-  if (BuildConfig.MOCK_EXAMPLE_API === "YES") {
-    makeMirage()
-    __DEV__ && console.log("Mirage Configured")
-  }
+  // if (BuildConfig.MOCK_EXAMPLE_API === "YES") {
+  //   makeMirage()
+  //   __DEV__ && console.log("Mirage Configured")
+  // }
 })()
 
 const App = () => {
   return (
     <RootErrorBoundary>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <PortalProvider>
-            <Navigator />
-          </PortalProvider>
-        </PersistGate>
+        <PortalProvider>
+          <Navigator />
+        </PortalProvider>
       </Provider>
     </RootErrorBoundary>
   )

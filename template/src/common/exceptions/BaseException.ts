@@ -5,6 +5,8 @@ export default class BaseException extends Error {
   private _status: number | string
   private _message: string
   private _url: string
+  private _originalError: object
+  public _type: string = 'BaseException'
 
   get status(): number | string {
     return this._status
@@ -18,15 +20,16 @@ export default class BaseException extends Error {
     return this._url
   }
 
-  constructor(status: number | string, message: string, url: string) {
+  get originalError(): object {
+    return this._originalError
+  }
+
+  constructor(status: number | string, message: string, url: string, originalError: object) {
     super()
 
     this._status = status
     this._message = message
     this._url = url
-  }
-
-  getFormattedErrorString() {
-    return `Status: ${this._status}. Message: ${this._message}. URL: ${this._url}`
+    this._originalError = originalError
   }
 }

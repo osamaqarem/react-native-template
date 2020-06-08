@@ -12,7 +12,7 @@ const isIphoneX =
   (height === 812 || width === 812 || height === 896 || width === 896)
 
 
-export const UIHelper = {
+export const layoutUtil = {
   width,
   height,
   isIphoneX,

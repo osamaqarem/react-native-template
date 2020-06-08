@@ -1,9 +1,9 @@
 /**
  * takes in unix time (number) and returns date
- * e.g. yyyy/mm/dd
+ * e.g. 1568193605000 -> yyyy/mm/dd
  */
-const getDateFromEpochMillis = (time: number) => {
-  const date = new Date(time)
+const getDateFromEpochMillis = (unixTime: number) => {
+  const date = new Date(unixTime)
 
   const year = date.getFullYear() + ""
   const month = date.getMonth() + 1
@@ -32,8 +32,8 @@ const getDateFromEpochMillis = (time: number) => {
  * takes in unix time (number) and returns local time
  * e.g. 1568193605000 -> "17:20:01"
  */
-const getTimeFromEpochMillis = (time: number) => {
-  const date = new Date(time)
+const getTimeFromEpochMillis = (unixTime: number) => {
+  const date = new Date(unixTime)
 
   const hours = date.getHours()
   const minutes = date.getMinutes()
@@ -64,7 +64,7 @@ const getTimeFromEpochMillis = (time: number) => {
   }
 }
 
-export const DateHelper = {
+export const dateUtil = {
   getDateFromEpochMillis,
   getTimeFromEpochMillis,
 }

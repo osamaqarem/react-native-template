@@ -5,13 +5,13 @@ import React, { useEffect } from "react"
 import {
   isMountedRef,
   navigationRef,
-} from "../../services/navigation/NavigationService"
+} from "../../services/navigation/navigationService"
 import Home from "../home/Home"
-import Login from "../login/Login"
+import Landing from "../landing/Landing"
 
 export type RootStackParamsList = {
   Home: undefined
-  Login: undefined
+  Landing: undefined
 }
 
 const Stack = createStackNavigator<RootStackParamsList>()
@@ -30,8 +30,8 @@ function Navigator() {
   }, [])
   return (
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={Login} />
+      <Stack.Navigator initialRouteName="Landing">
+        <Stack.Screen name="Landing" component={Landing} />
         <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>

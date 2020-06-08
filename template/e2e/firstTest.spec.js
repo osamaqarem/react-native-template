@@ -8,8 +8,8 @@ describe("Example", () => {
   })
 
   it("Should be able to sign in", async () => {
-    await expect(element(by.id("signInBtn"))).toBeVisible()
-    await element(by.id("signInBtn")).tap()
+    await expect(element(by.id("goHomeBtn"))).toBeVisible()
+    await element(by.id("goHomeBtn")).tap()
     await expect(element(by.text("Home"))).toBeVisible()
   })
 

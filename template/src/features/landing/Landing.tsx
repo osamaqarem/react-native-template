@@ -8,7 +8,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ActivityIndicator,
 } from "react-native"
 import {
   Colors,
@@ -17,22 +16,16 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from "react-native/Libraries/NewAppScreen"
-import { useDispatch, useSelector } from "react-redux"
-import { LOGIN } from "../../redux/slices/authSlice"
 import { RootStackParamsList } from "../navigation/Navigator"
-import { RootStoreType } from "../../redux/rootReducer"
 
 declare let global: { HermesInternal: null | {} }
 
 interface Props {
-  navigation: StackNavigationProp<RootStackParamsList, "Login">
+  navigation: StackNavigationProp<RootStackParamsList, "Landing">
 }
 
-const Login = ({ navigation }: Props) => {
-  const dispatch = useDispatch()
-  const loading = useSelector((state: RootStoreType) => state.auth.loading)
-
-  const signin = () => dispatch(LOGIN())
+const Landing = ({ navigation }: Props) => {
+  const goHome = () => navigation.navigate("Home")
 
   return (
     <View>
@@ -52,11 +45,12 @@ const Login = ({ navigation }: Props) => {
         )}
         <View style={styles.body}>
           <View style={styles.signinBtn}>
-            {(loading && (
-              <ActivityIndicator color="" style={{ top: 10 }} />
-            )) || (
-              <Button title="SIGN IN" onPress={signin} testID="signInBtn" />
-            )}
+            <Button
+              title="NAVIGATE HOME"
+              onPress={goHome}
+              testID="goHomeBtn"
+              color="seagreen"
+            />
           </View>
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionTitle}>Step One</Text>
@@ -142,4 +136,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Login
+export default Landing

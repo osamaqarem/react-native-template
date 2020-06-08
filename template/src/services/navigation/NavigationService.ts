@@ -5,13 +5,11 @@ import { CommonActions } from "@react-navigation/native"
 /**
  * Used in {@link Navigator} to keep track of navigation container mounts.
  */
-
 export const isMountedRef: any = React.createRef()
 
 /**
  * Used for navigation by NavigationService
  */
-
 export const navigationRef: any = React.createRef()
 
 const ERROR_NOT_INIT =
@@ -56,7 +54,7 @@ const goBack = () => {
   }
 }
 
-export const NavigationService = {
+export const navigationService = {
   navigate,
   navigateAndReset,
   goBack,

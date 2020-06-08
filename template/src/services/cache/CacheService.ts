@@ -18,7 +18,7 @@ const get = async (key: string) => {
   }
 }
 
-export const CacheService = {
+export const cacheService = {
   put,
   get,
 }

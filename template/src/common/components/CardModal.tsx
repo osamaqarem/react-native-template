@@ -9,10 +9,10 @@ import Animated, {
   Value,
 } from "react-native-reanimated"
 import { bin, spring, useValue } from "react-native-redash"
-import { UIHelper } from "../helpers/UIHelper"
+import { layoutUtil } from "../helpers/layoutUtil"
 
 const HEIGHT_OFFSET = 0.7
-const TUCK_IN_HEIGHT = -0.05 * UIHelper.height
+const TUCK_IN_HEIGHT = -0.05 * layoutUtil.height
 
 interface Props {
   children: ReactNode
@@ -25,7 +25,7 @@ const CardModal = memo(
   ({
     children,
     tuckedIn,
-    cardHeight = UIHelper.height,
+    cardHeight = layoutUtil.height,
     almostTuckedIn = false,
   }: Props) => {
     const animation = useValue(0)

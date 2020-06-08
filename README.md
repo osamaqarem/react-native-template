@@ -9,29 +9,29 @@
 </div>
 <br/>
 
-A minimal template with good architecture and common packages to let you focus on writing features right away.
+A minimal template with architecture and boilerplate to let you focus on writing features right away.
 
 ## Preconfigured with
 
 - TypeScript
-- [Redux](https://redux.js.org/) with [Redux Toolkit](https://redux-toolkit.js.org/)
-- [Redux Observable](https://redux-observable.js.org/)
-- [React Navigation](https://reactnavigation.org/) (**v5**)
-- [Reactotron + Flipper](https://shift.infinite.red/better-react-native-debugging-with-reactotron-in-flipper-6b823af29220)
-- [Sentry](https://docs.sentry.io/platforms/react-native/) with redux action logging middleware
-- [react-native-splash-screen](https://github.com/crazycodeboy/react-native-splash-screen)
-- [react-native-svg](https://github.com/react-native-community/react-native-svg)
-- [react-native-config](https://github.com/luggit/react-native-config)
-- [Reanimated](https://software-mansion.github.io/react-native-reanimated/)
-- [Redash](https://wcandillon.github.io/react-native-redash/)
-- [AsyncStorage](https://github.com/react-native-community/async-storage)
-- [NetInfo](https://github.com/react-native-community/react-native-netinfo)
-- [FastImage](https://github.com/DylanVann/react-native-fast-image)
-- [<s>Detox</s>](https://github.com/wix/Detox) (WIP – when it supports RN 0.62.x)
-- [Fastlane](http://fastlane.tools/)
-- [Mirage JS](https://github.com/miragejs/miragejs)
-- Other — [error boundary](https://reactjs.org/docs/error-boundaries.html), architecture, services & utils.
-- npm/fastlane automation scripts.
+- [SWR](https://swr.now.sh/) for data fetching/caching.
+- [apisauce](https://github.com/infinitered/apisauce) as data fetcher.
+- [Redux Toolkit](https://redux-toolkit.js.org/) for global state.
+- [Redux Observable](https://redux-observable.js.org/) for complex background thread-like work.
+- [React Navigation](https://reactnavigation.org/) (**v5**) for navigation.
+- [Reactotron](https://github.com/infinitered/reactotron) for debugging.
+- [Sentry](https://docs.sentry.io/platforms/react-native/) for debugging in production.
+- [react-native-splash-screen](https://github.com/crazycodeboy/react-native-splash-screen) because splash screens are cool.
+- [react-native-svg](https://github.com/react-native-community/react-native-svg) because svg.
+- [react-native-config](https://github.com/luggit/react-native-config) to manage separate environments (dev, staging, production).
+- [Reanimated](https://software-mansion.github.io/react-native-reanimated/) for animations.
+- [Redash](https://wcandillon.github.io/react-native-redash/) its lodash for animations.
+- [AsyncStorage](https://github.com/react-native-community/async-storage) you're gonna install it anyway.
+- [FastImage](https://github.com/DylanVann/react-native-fast-image) its more performant
+- [Detox](https://github.com/wix/Detox) (wip) for e2e.
+- [Mirage JS](https://github.com/miragejs/miragejs) the easiest way to mock APIs.
+- [Fastlane](http://fastlane.tools/) for automation.
+- handy npm scripts.
 
 ## Getting Started
 
