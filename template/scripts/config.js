@@ -126,7 +126,7 @@ const generate = () => {
   export default Config
 }`
 
-  fs.writeFileSync("env.d.ts", string, "utf8")
+  fs.writeFileSync("src\\common\\types\\env.d.ts", string, "utf8")
 }
 
 generate()

@@ -15,6 +15,8 @@ export const navigationRef: any = React.createRef()
 const ERROR_NOT_INIT =
   "Navigation Service: attempting to navigate with an unintialized ref."
 
+export type GetRouteParams<T extends keyof RootStackParamsList> = Pick<RootStackParamsList, T>[T]
+
 /**
  * Go to a screen using .navigate()
  */
