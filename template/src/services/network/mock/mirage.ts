@@ -8,15 +8,17 @@ import { githubService } from "../github/githubService"
  */
 export const makeMirage = () =>
   new Server({
-    urlPrefix: BuildConfig.EXAMPLE_API_BASE_URL,
-    routes() {
+    urlPrefix: BuildConfig.GITHUB_API_BASE_URL,
+    routes: function () {
+      // Logging
       ; (this.pretender.handledRequest = function (verb, path, request) {
-        console.tron(`${verb}: ${path}`, request)
-      }),
-        this.get(
-          githubService.paths.getRepoReadme(),
-          (): RepoReadme => mockResponse
-        )
+        console.log(`${verb}: ${path}`, request)
+      })
+
+      this.get(
+        githubService.paths.getRepoReadme(),
+        (): RepoReadme => mockResponse
+      )
     },
   })
 
@@ -31,7 +33,7 @@ const mockResponse = {
   "git_url": "https://api.github.com/repos/osamaq/react-native-template/git/blobs/4ce7575b978282dbde768bd711e9e4166b244c7e",
   "download_url": "https://raw.githubusercontent.com/osamaq/react-native-template/master/README.md",
   "type": "file",
-  "content": "bW9jaw==",
+  "content": "TW9jayByZXNwb25zZS4gQ2hlY2sgbWlyYWdlLnRzIHRvIGVkaXQgdGhpcyE=",
   "encoding": "base64",
   "_links": {
     "self": "https://api.github.com/repos/osamaq/react-native-template/contents/README.md?ref=master",
