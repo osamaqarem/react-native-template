@@ -22,12 +22,10 @@ const exampleSlice = createSlice({
     },
 })
 
-export default exampleSlice.reducer
-export const exampleSliceActions = exampleSlice.actions
 
 const exampleEpic: MyEpic = (action$: Observable<PayloadAction<undefined>>, state$: Observable<RootStoreType>) =>
     action$.pipe(
-        ofType(exampleSliceActions.ping.type, exampleSliceActions.pong.type),
+        ofType(exampleActions.ping.type, exampleActions.pong.type),
         withLatestFrom(state$),
         map(([action, state]) => {
             console.log(`exampleEpic: I am reacting to ${state.example.globalValue}`)
@@ -37,5 +35,6 @@ const exampleEpic: MyEpic = (action$: Observable<PayloadAction<undefined>>, stat
         })
     )
 
-
+export const exampleReducer = exampleSlice.reducer
+export const exampleActions = exampleSlice.actions
 export const exampleEpics = [exampleEpic]

@@ -11,7 +11,7 @@ export const Portal = ({ children }: { children: React.ReactNode }) => {
   React.useEffect(() => {
     teleportComponent(children)
 
-    return () => resetComponent()
+    return resetComponent
   }, [resetComponent, teleportComponent, children])
 
   return null

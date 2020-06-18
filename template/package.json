@@ -36,7 +36,7 @@
     "bump-major": "npm version major --no-git-tag-version && bundle exec fastlane bump",
     "fastlane": "bundle exec fastlane",
     "generate-image-imports": "node scripts/images.js",
-    "generate-env-types": "node scripts/config.js",
+    "generate-build-config": "node scripts/buildConfig.js",
     "link-font-assets": "react-native link",
     "validate-typescript": "tsc --noEmit",
     "uninstall-android": "adb uninstall com.helloworld",

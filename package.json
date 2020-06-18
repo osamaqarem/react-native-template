@@ -21,5 +21,13 @@
   ],
   "author": "Osama Qarem <osamaqarem@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/osamaq/react-native-template"
+  "homepage": "https://github.com/osamaq/react-native-template",
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release v${version}"
+    },
+    "github": {
+      "release": true
+    }
+  }
 }
