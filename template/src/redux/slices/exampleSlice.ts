@@ -17,8 +17,8 @@ const exampleSlice = createSlice({
     name: "example",
     initialState,
     reducers: {
-        ping: (state) => ({ ...state, globalValue: 'PING' }),
-        pong: (state) => ({ ...state, globalValue: 'PONG' }),
+        ping: (state) => { state.globalValue = 'PING' },
+        pong: (state) => { state.globalValue = 'PONG' },
     },
 })
 
