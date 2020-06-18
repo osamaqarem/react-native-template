@@ -67,20 +67,20 @@ const DataFetchingExample = () => {
   /**
    * Data fetching example
    */
-  const { data: result, error } = useSwr<ApiResponse<RepoReadme>>(
+  const { data, error } = useSwr<RepoReadme>(
     githubService.paths.getRepoReadme(),
     githubService.client.get
   )
 
   if (error) return <Text>failed to load</Text>
-  if (!result) return <ActivityIndicator color="blue" size={30} />
+  if (!data) return <ActivityIndicator color="blue" size={30} />
 
   return (
     <>
       <Text style={styles.header}>Data Fetching Example</Text>
       <Space.V s={8} />
       <ScrollView style={styles.scrollView}>
-        <Text>{base64Util.atob(result.data?.content.trim())}</Text>
+        <Text>{base64Util.atob(data.content.trim())}</Text>
       </ScrollView>
     </>
   )
