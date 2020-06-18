@@ -27,15 +27,22 @@ if (__DEV__) {
 
   reactotron.connect()
 
+  // New console.log location
+  const consoleLog = console.log
+
   // Attach reactotron.logImportant to global console object
   console.tron = (...args: any) => {
     // Log to console
-    console.log(...args)
+    consoleLog(...args)
     // Log to reactotron
     reactotron.logImportant(...args)
   }
 
-  console.tron("Reactotron Configured")
+  // console.log now calls console.tron
+  console.log = console.tron
+
+  reactotron.clear()
+  console.log("Reactotron Configured")
 } else {
   /**
    * Important: Surround all reactotron usage with __DEV__

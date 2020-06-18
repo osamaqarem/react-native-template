@@ -30,7 +30,7 @@ const exampleEpic: MyEpic = (action$: Observable<PayloadAction<undefined>>, stat
         ofType(exampleSliceActions.ping.type, exampleSliceActions.pong.type),
         withLatestFrom(state$),
         map(([action, state]) => {
-            console.tron(`exampleEpic: I am reacting to ${state.example.globalValue}`)
+            console.log(`exampleEpic: I am reacting to ${state.example.globalValue}`)
 
             // Epics are a stream of actions-in, actions-out
             return { type: 'useless_action' }

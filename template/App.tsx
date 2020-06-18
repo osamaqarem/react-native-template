@@ -17,7 +17,7 @@ import { PortalProvider } from "./src/common/contexts/PortalContext"
 import store from "./src/redux/store"
 ;(function setup() {
   // Log environement variables
-  console.tron(BuildConfig)
+  console.log(BuildConfig)
 
   // React Navigation, optimize memory usage.
   enableScreens()
@@ -41,7 +41,7 @@ import store from "./src/redux/store"
   // Mirage – API Mocking
   if (BuildConfig.MOCK_EXAMPLE_API === "YES") {
     makeMirage()
-    __DEV__ && console.tron("Mirage Configured")
+    __DEV__ && console.log("Mirage Configured")
   }
 })()
 
