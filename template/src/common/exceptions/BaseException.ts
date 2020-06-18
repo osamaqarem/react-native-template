@@ -2,29 +2,29 @@
  * All custom exceptions should extend this class.
  */
 export default class BaseException extends Error {
-  private _status: number | string
-  private _message: string
-  private _url: string
-  private _originalError: object
-  public _type: string = 'BaseException'
+  private _status: Nullable<number | string>
+  private _message: Nullable<string>
+  private _url: Nullable<string>
+  private _originalError: Nullable<object>
+  public _type = 'BaseException'
 
-  get status(): number | string {
+  get status() {
     return this._status
   }
 
-  get message(): string {
-    return this._message
+  get message() {
+    return this._message || 'unknown'
   }
 
-  get url(): string {
+  get url() {
     return this._url
   }
 
-  get originalError(): object {
+  get originalError(): Nullable<object> {
     return this._originalError
   }
 
-  constructor(status: number | string, message: string, url: string, originalError: object) {
+  constructor(status: Nullable<number | string> = 'unknown', message: Nullable<string> = 'unknown', url: Nullable<string> = 'unknown', originalError: Nullable<object>) {
     super()
 
     this._status = status
