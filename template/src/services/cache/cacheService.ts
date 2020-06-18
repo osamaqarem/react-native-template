@@ -5,7 +5,7 @@ const put = async (key: string, value: string) => {
     await AsyncStorage.setItem(key, value)
   } catch (e) {
     console.warn("CacheService: Failed to put pair " + `[${key}, ${value}]`)
-    __DEV__ && console.tron(e)
+    __DEV__ && console.log(e)
   }
 }
 
@@ -14,7 +14,7 @@ const get = async (key: string) => {
     return await AsyncStorage.getItem(key)
   } catch (e) {
     console.warn("CacheService: Failed to get " + key)
-    __DEV__ && console.tron(e)
+    __DEV__ && console.log(e)
   }
 }
 
