@@ -1,4 +1,4 @@
-import { createSlice, ActionCreatorWithoutPayload, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { ofType } from "redux-observable"
 import { Observable } from "rxjs"
 import { map, withLatestFrom } from 'rxjs/operators'

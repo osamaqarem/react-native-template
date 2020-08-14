@@ -12,28 +12,43 @@ Install _fastlane_ using
 ```
 [sudo] gem install fastlane -NV
 ```
-or alternatively using `brew cask install fastlane`
+or alternatively using `brew install fastlane`
 
 # Available Actions
+### make_badge
+```
+fastlane make_badge
+```
+Make new versioned icon badges.
 ### bump_badge
 ```
 fastlane bump_badge
 ```
-Bump and badge.
+Bump and badge iOS and Android.
 
 ----
 
 ## Android
-### android build
+### android deploy_staging
 ```
-fastlane android build
+fastlane android deploy_staging
 ```
-Build the release APK.
-### android deploy
+Build, deploy staging Android.
+### android deploy_production
 ```
-fastlane android deploy
+fastlane android deploy_production
 ```
-Build the release APK, then upload to App Center.
+Build, deploy production Android.
+### android bump_badge_deploy_staging
+```
+fastlane android bump_badge_deploy_staging
+```
+Bump, badge, deploy staging Android.
+### android bump_badge_deploy_prod
+```
+fastlane android bump_badge_deploy_prod
+```
+Bump, badge, deploy production Android.
 
 ----
 
@@ -42,12 +57,27 @@ Build the release APK, then upload to App Center.
 ```
 fastlane ios certificates
 ```
-Fetch certificates and provisioning profiles.
-### ios deploy
+Set up certs and profiles for iOS.
+### ios deploy_staging
 ```
-fastlane ios deploy
+fastlane ios deploy_staging
 ```
-Fetch certificats then build the release IPA and upload to App Center.
+Sign, build, deploy staging iOS.
+### ios deploy_production
+```
+fastlane ios deploy_production
+```
+Sign, build, deploy production iOS.
+### ios bump_badge_deploy_staging
+```
+fastlane ios bump_badge_deploy_staging
+```
+Bump, badge, sign, build, deploy staging iOS.
+### ios bump_badge_deploy_prod
+```
+fastlane ios bump_badge_deploy_prod
+```
+Bump, badge, sign, build, deploy production iOS.
 
 ----
 

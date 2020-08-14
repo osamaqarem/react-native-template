@@ -9,7 +9,7 @@ import {
   Text,
   View,
 } from "react-native"
-import SplashScreen from "react-native-splash-screen"
+import SplashScreen from "react-native-bootsplash"
 
 /**
  * Displays a friendly UI to the user in the case of an error.
@@ -28,7 +28,7 @@ export default class RootErrorBoundary extends Component {
   }
 
   componentDidCatch() {
-    SplashScreen.hide()
+    SplashScreen.hide({ duration: 250 })
   }
 
   showError = () => {

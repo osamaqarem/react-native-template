@@ -1,4 +1,4 @@
-import SplashScreen from "react-native-splash-screen"
+import SplashScreen from "react-native-bootsplash"
 import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
 import React, { useEffect } from "react"
@@ -23,7 +23,7 @@ function Navigator() {
    */
   useEffect(() => {
     isMountedRef.current = true
-    SplashScreen.hide()
+    SplashScreen.hide({ duration: 250 })
     return () => {
       isMountedRef.current = false
     }

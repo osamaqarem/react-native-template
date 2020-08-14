@@ -17,6 +17,7 @@ import {
   ReloadInstructions,
 } from "react-native/Libraries/NewAppScreen"
 import { RootStackParamsList } from "../navigation/Navigator"
+import BuildConfig from "react-native-config"
 
 declare let global: { HermesInternal: null | {} }
 
@@ -32,6 +33,16 @@ const Landing = ({ navigation }: Props) => {
       <StatusBar
         barStyle={Platform.OS === "ios" ? "dark-content" : "light-content"}
       />
+      <Text style={styles.env}>
+        Environment:{" "}
+        <Text
+          style={{
+            fontWeight: "600",
+          }}
+        >
+          {BuildConfig.ENV}
+        </Text>
+      </Text>
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={styles.scrollView}
@@ -120,6 +131,15 @@ const styles = StyleSheet.create({
     padding: 4,
     paddingRight: 12,
     textAlign: "right",
+  },
+  env: {
+    fontSize: 16,
+    color: Colors.black,
+    textAlign: "left",
+    position: "absolute",
+    top: 6,
+    left: 6,
+    zIndex: 1,
   },
   templateTitle: {
     fontSize: 20,

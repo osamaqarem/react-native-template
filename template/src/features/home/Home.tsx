@@ -1,5 +1,4 @@
 import { StackNavigationProp } from "@react-navigation/stack"
-import { ApiResponse } from "apisauce"
 import React from "react"
 import {
   ActivityIndicator,
@@ -15,7 +14,7 @@ import useSwr from "swr"
 import Space from "../../common/components/abstract/Space"
 import { base64Util } from "../../common/helpers/base64Util"
 import { RootStoreType } from "../../redux/rootReducer"
-import { exampleSliceActions } from "../../redux/slices/exampleSlice"
+import { exampleActions } from "../../redux/slices/exampleSlice"
 import { githubService } from "../../services/network/github/githubService"
 import { RepoReadme } from "../../services/network/github/models"
 import { RootStackParamsList } from "../navigation/Navigator"
@@ -48,9 +47,9 @@ const ReduxExample = () => {
 
   const ping = () => {
     if (globalValue === "PING") {
-      dispatch(exampleSliceActions.pong())
+      dispatch(exampleActions.pong())
     } else {
-      dispatch(exampleSliceActions.ping())
+      dispatch(exampleActions.ping())
     }
   }
 
@@ -101,7 +100,6 @@ const styles = StyleSheet.create({
   },
   header: {
     alignSelf: "flex-start",
-    fontFamily: "montserrat_bold",
     fontSize: 20,
   },
 })

@@ -5,16 +5,19 @@ const palette = {
     white: "#fff",
   },
   fonts: {
-    montserrat: {
-      regular: 'montserrat_regular',
-      medium: 'montserrat_medium',
-      bold: 'montserrat_bold',
-    },
-    firasans: {
-      regular: 'firasans_regular',
-      medium: 'firasans_medium',
-      bold: 'firasans_bold',
-    },
+    // For example only. 
+    // Fonts must be linked to be used
+
+    // montserrat: {
+    //   regular: 'montserrat_regular',
+    //   medium: 'montserrat_medium',
+    //   bold: 'montserrat_bold',
+    // },
+    // firasans: {
+    //   regular: 'firasans_regular',
+    //   medium: 'firasans_medium',
+    //   bold: 'firasans_bold',
+    // },
   }
 }
 
@@ -25,15 +28,15 @@ export const theme = {
   typography: {
     header: {
       fontSize: 20,
-      fontFamily: palette.fonts.montserrat.bold
+      // fontFamily: palette.fonts.montserrat.bold
     },
     subheader: {
       fontSize: 18,
-      fontFamily: palette.fonts.firasans.medium
+      // fontFamily: palette.fonts.firasans.medium
     },
     body: {
       fontSize: 14,
-      fontFamily: palette.fonts.firasans.regular
+      // fontFamily: palette.fonts.firasans.regular
     },
   }
 }

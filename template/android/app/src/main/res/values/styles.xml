@@ -10,9 +10,9 @@
         <!-- <item name="colorControlActivated">#5e91f2</item> -->
     </style>
 
-        <!-- Status Bar Color during splash screen -->
-    <style name="SplashScreenTheme" parent="SplashScreen_SplashTheme">
-        <!-- <item name="colorPrimaryDark">#003b8e</item> -->
+    <style name="BootTheme" parent="AppTheme">
+        <!-- set the generated bootsplash.xml drawable as activity background -->
+        <item name="android:background">@drawable/bootsplash</item>
     </style>
 
 </resources>

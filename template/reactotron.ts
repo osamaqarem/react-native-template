@@ -1,7 +1,7 @@
-import Reactotron, { networking } from "reactotron-react-native"
+import AsyncStorage from "@react-native-community/async-storage"
+import Reactotron from "reactotron-react-native"
 // @ts-ignore
 import ReactotronFlipper from "reactotron-react-native/dist/flipper"
-import AsyncStorage from "@react-native-community/async-storage"
 import { reactotronRedux } from "reactotron-redux"
 
 declare global {

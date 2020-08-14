@@ -1,3 +1,3 @@
 export const images = {
-  reactIcon: require("./reactIcon.png"),
+  reactIcon: require("./appIcon.png"),
 }
