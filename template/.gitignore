@@ -20,7 +20,6 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-project.xcworkspace
 
 # Android/IntelliJ
 #
@@ -43,7 +42,7 @@ yarn-error.log
 # BUCK
 buck-out/
 \.buckd/
-# *.keystore
+*.keystore
 !debug.keystore
 
 # fastlane
@@ -63,8 +62,4 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 
-# API Secret
-secret.js
-
 package-lock.json
-sentry.properties

@@ -72,6 +72,7 @@
     "eslint-plugin-react-hooks": "^4.0.8",
     "eslint-plugin-react-native": "^3.8.1",
     "jest": "^25.5.4",
+    "jest-circus": "^26.4.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "miragejs": "^0.1.40",
     "prettier": "^2.0.5",

@@ -48,7 +48,9 @@ const Landing = ({ navigation }: Props) => {
         style={styles.scrollView}
       >
         <Header />
-        <Text style={styles.templateTitle}>@osamaq/react-native-template</Text>
+        <Text style={styles.templateTitle} testID="title">
+          @osamaq/react-native-template
+        </Text>
         {global.HermesInternal == null ? null : (
           <View style={styles.engine}>
             <Text style={styles.footer}>Engine: Hermes</Text>

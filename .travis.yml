@@ -24,7 +24,8 @@ matrix:
       before_script:
         - cd android
       script:
-        - ./gradlew assembleRelease
+        - detox-build:androidRelease
+        - detox-test:androidRelease
 
     - language: objective-c
       os: osx
@@ -46,4 +47,6 @@ matrix:
         - pod install
         - cd ..
       script:
-        - npm run ios
+        - set -o pipefail
+        - npm run detox-build:iosRelease
+        - npm run detox-test:iosRelease

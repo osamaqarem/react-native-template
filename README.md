@@ -38,8 +38,8 @@ A minimal template with architecture and boilerplate to let you focus on writing
 - [Redash](https://wcandillon.github.io/react-native-redash/) its lodash for animations.
 - [AsyncStorage](https://github.com/react-native-community/async-storage) you're gonna install it anyway.
 - [FastImage](https://github.com/DylanVann/react-native-fast-image) its more performant
-- [Detox](https://github.com/wix/Detox) (wip) for e2e.
-- [Mirage JS](https://github.com/miragejs/miragejs) the easiest way to mock APIs.
+- [Detox](https://github.com/wix/Detox) for e2e.
+- [Mirage JS](https://miragejs.com/) the easiest way to mock APIs.
 - [Fastlane](http://fastlane.tools/) for automation.
 - handy npm scripts.
 
@@ -49,7 +49,7 @@ Create a new project using the template.
 
 - **Note:** the command will fail if you have the global legacy react-native-cli installed. Make sure you uninstall it first. More info at [react-native-community/cli](https://github.com/react-native-community/cli#about).
 
-### RN 0.62.2
+### RN 0.63.2
 
 ```bash
 $ npx react-native init MyApp --template @osamaq/react-native-template
