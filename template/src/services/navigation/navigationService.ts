@@ -1,6 +1,6 @@
 import * as React from "react"
 import { RootStackParamsList } from "../../features/navigation/Navigator"
-import { CommonActions } from "@react-navigation/native"
+import { CommonActions, StackActions } from "@react-navigation/native"
 
 /**
  * Used in {@link Navigator} to keep track of navigation container mounts.
@@ -17,10 +17,12 @@ const ERROR_NOT_INIT =
 
 export type GetRouteParams<T extends keyof RootStackParamsList> = Pick<RootStackParamsList, T>[T]
 
+type Screens = keyof RootStackParamsList
+
 /**
  * Go to a screen using .navigate()
  */
-const navigate = (name: keyof RootStackParamsList, params?: object) => {
+const navigate = <T extends object>(name: Screens, params?: T) => {
   if (isMountedRef.current && navigationRef.current) {
     // Perform navigation if the app has mounted
     navigationRef.current.navigate(name, params)
@@ -32,7 +34,7 @@ const navigate = (name: keyof RootStackParamsList, params?: object) => {
 /**
  * Go to a screen and remove all other screens in the current stack.
  */
-const navigateAndReset = (name: keyof RootStackParamsList, params?: object) => {
+const navigateAndReset = <T extends object>(name: Screens, params?: T) => {
   if (isMountedRef.current && navigationRef.current) {
     // Perform navigation if the app has mounted
     navigationRef.current.dispatch(
@@ -56,8 +58,61 @@ const goBack = () => {
   }
 }
 
+/**
+ * Replace the current screen.
+ */
+const replace = <T extends object>(name: Screens, params?: T) => {
+  if (isMountedRef.current && navigationRef.current) {
+    navigationRef.current.dispatch(
+      StackActions.replace(name, params)
+    )
+  } else {
+    throw new Error(ERROR_NOT_INIT)
+  }
+}
+
+
+/**
+ * Custom navigation stack reset.
+ * e.g.
+ * navigationService.reset([
+ *        { name: "Screen1" },
+ *        { name: "Screen2" },
+ *        { name: "Screen3" },
+ *        { name: "Screen4" },
+ *      ], 3)
+ */
+const reset = <T extends object>(routes: { name: Screens, params?: T }[], index: number) => {
+  if (isMountedRef.current && navigationRef.current) {
+    navigationRef.current.dispatch(
+      CommonActions.reset({
+        index,
+        routes,
+      })
+    )
+  } else {
+    throw new Error(ERROR_NOT_INIT)
+  }
+}
+
+/**
+ * Pop the desired number of screens.
+ */
+const pop = (count: number) => {
+  if (isMountedRef.current && navigationRef.current) {
+    navigationRef.current.dispatch(
+      StackActions.pop(count)
+    )
+  } else {
+    throw new Error(ERROR_NOT_INIT)
+  }
+}
+
 export const navigationService = {
   navigate,
   navigateAndReset,
   goBack,
+  replace,
+  reset,
+  pop,
 }
