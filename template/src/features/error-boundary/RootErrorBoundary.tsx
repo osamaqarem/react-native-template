@@ -12,7 +12,8 @@ import {
 import SplashScreen from "react-native-bootsplash"
 
 /**
- * Displays a friendly UI to the user in the case of an error.
+ * Example UI to show in the case of a JavaScript error.
+ * TODO: also handle native exceptions.
  */
 export default class RootErrorBoundary extends Component {
   private static NO_STACK = "No stack trace."
@@ -76,18 +77,17 @@ export default class RootErrorBoundary extends Component {
             <Text style={styles.bigBoldText}>
               App couldn{"'"}t keep going...
             </Text>
-            <Text style={[styles.text, { marginBottom: 50 }]}>
-              It would be great if you can report this!
-            </Text>
             <Text style={[styles.text, styles.bold]} onPress={this.showError}>
               SHOW ERROR
             </Text>
-            <Text
-              style={[styles.text, styles.bold, { marginTop: 50 }]}
-              onPress={this.reloadApp}
-            >
-              RESTART APP
-            </Text>
+            {__DEV__ && (
+              <Text
+                style={[styles.text, styles.bold, { marginTop: 50 }]}
+                onPress={this.reloadApp}
+              >
+                RESTART APP
+              </Text>
+            )}
           </View>
         </View>
       )

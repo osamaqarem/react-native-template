@@ -17,7 +17,9 @@ type Args = Parameters<ApisauceInstance['get']>
 /**
  * Wrapper around API instance.
  * By default, apisauce does not throw on failure.
- * For SWR to work, the fetcher needs to throw on failure.
+ * 
+ * In order for useSWR() to correctly return the error, 
+ * the fetcher needs to throw on failure.
  */
 const client = {
     /**
@@ -32,7 +34,7 @@ const client = {
 }
 
 // Logging
-__DEV__ && client.addMonitor(res => console.log(res))
+__DEV__ && client.addMonitor(console.log)
 
 
 
@@ -50,7 +52,11 @@ const api = {
 const util = {
     throwOnError: <T>(response: ApiResponse<T>) => {
         if (!response.ok) {
-            const error = new HttpException(response.status || 'unknown', response.problem, response.config?.url || 'unknown', response)
+            const error = new HttpException(
+                response.status || 'unknown',
+                response.problem,
+                response.config?.url || 'unknown',
+                response)
 
             __DEV__ && console.log(error)
 
@@ -65,5 +71,6 @@ const util = {
 export const githubService = {
     api,
     paths,
-    client
+    client,
+    util
 }

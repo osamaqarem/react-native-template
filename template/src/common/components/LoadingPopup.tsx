@@ -9,7 +9,7 @@ interface LoadingPopupProps {
 }
 const LoadingPopup = ({ visible }: LoadingPopupProps) => {
   const opacity = useTimingTransition(visible, {
-    duration: visible ? 400 : 100,
+    duration: visible ? 100 : 50,
   })
 
   return (
@@ -20,7 +20,7 @@ const LoadingPopup = ({ visible }: LoadingPopupProps) => {
       >
         <View style={styles.card}>
           <ActivityIndicator size={44} animating={visible} />
-          <Text style={styles.text}>Loading... This could take a minute.</Text>
+          <Text style={styles.text}>Please wait...</Text>
         </View>
       </Animated.View>
     </Portal>

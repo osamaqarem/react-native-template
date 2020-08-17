@@ -1,19 +1,24 @@
-import { Dimensions, Platform } from "react-native"
+import { Dimensions } from "react-native"
+import Animated, { call, useCode } from 'react-native-reanimated'
 
 // Initial dimensions of the view (not accurate after e.g. rotation)
 const { height, width } = Dimensions.get("window")
 
+const useDebug = (values: { [key: string]: Animated.Node<number> }) => {
+  const keys = Object.keys(values)
+  const nodes = Object.values(values)
 
-// Useful to check if the iOS device has a notch.
-const isIphoneX =
-  Platform.OS === "ios" &&
-  !Platform.isPad &&
-  !Platform.isTVOS &&
-  (height === 812 || width === 812 || height === 896 || width === 896)
-
+  useCode(
+    () =>
+      call(nodes, (arrayOfNodes) => {
+        keys.map((key, i) => console.log(key + " " + arrayOfNodes[i]))
+      }),
+    [keys]
+  )
+}
 
 export const layoutUtil = {
   width,
   height,
-  isIphoneX,
+  useDebug
 }
