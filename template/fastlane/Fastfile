@@ -75,18 +75,20 @@ platform :ios do
 
   desc 'Build the staging release iOS application.'
   private_lane :build_staging do
+    package = load_json(json_path: "./package.json")
     gym(
       scheme: "STAGING",
-      workspace: './ios/' + ENV['APP_NAME'] + '.xcworkspace', 
+      workspace: './ios/' + package['name'] + '.xcworkspace', 
       export_method: 'ad-hoc'
     )
   end
   
   desc 'Build the production release iOS application.'
   private_lane :build_production do
+    package = load_json(json_path: "./package.json")
     gym(
       scheme: "PRODUCTION",
-      workspace: './ios/' + ENV['APP_NAME'] + '.xcworkspace', 
+      workspace: './ios/' + package['name'] + '.xcworkspace', 
       export_method: 'ad-hoc'
     )
   end
@@ -152,10 +154,10 @@ end
   desc 'iOS: Increment build number and set the version to package.json version.'
   private_lane :inc_ver_ios do
     increment_build_number(
-      xcodeproj: './ios/' + ENV['APP_NAME'] + '.xcodeproj'
+      xcodeproj: './ios/' + package['name'] + '.xcodeproj'
     )
     increment_version_number(
-      xcodeproj: './ios/' + ENV['APP_NAME'] + '.xcodeproj',
+      xcodeproj: './ios/' + package['name'] + '.xcodeproj',
       version_number: package['version']
     )
   end
@@ -196,7 +198,7 @@ end
       shield_scale: "0.85",
       shield_gravity: "South",
       shield_geometry: "+0+5%",
-      glob: "/ios/" + ENV['APP_NAME'] + "/Images.xcassets/AppIcon.appiconset/*.png",
+      glob: "/ios/" + package['name'] + "/Images.xcassets/AppIcon.appiconset/*.png",
     )
   end
 
