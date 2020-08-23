@@ -2,7 +2,7 @@
 
 In addition to configuring many libraries, this template also includes some boilerplate files that end up in most apps (e.g. theme). These files/components serve mainly as examples and are meant for you to change and expand upon or remove if unneeded.
 
-### Directory: ./ (**root**)
+### ./ (**root**)
 
 | File                          | Description                                                                                                                                                                                                                                                                                                                                 |
 | :---------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -16,11 +16,11 @@ In addition to configuring many libraries, this template also includes some boil
 | Gemfile                       | Main Gemfile. References our list of dependencies (plugins) for our fastlane setup.                                                                                                                                                                                                                                                         |
 | App.tsx                       | The root of our app. Contains setup to enable react-native-screens, initialize Sentry, enable LayoutAnimation for Android, instantiate our Mirage JS server. The app component renders our root error boundary, our redux store provider, our portal provider and our root navigator.                                                       |
 
-### Directory: ./**\_\_tests\_\_**
+### ./**\_\_tests\_\_**
 
 (Default contents; as per official template)
 
-### Directory: ./**android**
+### ./**android**
 
 | File                                       | Description                                                                                |
 | :----------------------------------------- | :----------------------------------------------------------------------------------------- |
@@ -31,14 +31,14 @@ In addition to configuring many libraries, this template also includes some boil
 | AndroidManifiest.xml                       | Modified for react-native-bootsplash integration.                                          |
 | bootsplash.xml<br>colors.xml<br>styles.xml | Added for react-native-bootsplash integration.                                             |
 
-### Directory: ./**e2e**
+### ./**e2e**
 
 | File                          | Description                                                      |
 | :---------------------------- | :--------------------------------------------------------------- |
 | config.json<br>environment.js | Added for Detox integration.                                     |
 | firstTest.e2e.js              | Smoke test for template to confirm detox integration is working. |
 
-### Directory: ./**fastlane**
+### ./**fastlane**
 
 | File       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -46,7 +46,7 @@ In addition to configuring many libraries, this template also includes some boil
 | Fastfile   | Fastlane automation configuration.<br><br>1- Automated deployment to App Center.<br>2- Automated versioning and icon badge generation.<br><br>If you are not familiar at all with fastlane, I recommend these 2 posts by me:<br><br>1- [React Native, fastlane and Visual Studio App Center](https://github.com/osamaq/reactnative-fastlane-appcenter).<br>2- [Automatic Versioning for React Native Apps](https://osamaq.com/automatic-versioning-for-react-native-apps/).<br><br>You can also read through the README.md file generated by fastlane after every run. It contains a list of the available commands. |
 | Pluginfile | List of dependencies (plugins) required by our Fastlane setup. Imported by the [main Gemfile](https://github.com/osamaq/react-native-template/blob/master/template/Gemfile).                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
-### Directory: ./**ios**
+### ./**ios**
 
 | File                        | Description                                                                                                                                       |
 | --------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -54,21 +54,21 @@ In addition to configuring many libraries, this template also includes some boil
 | BootSplash.storyboard       | Added for react-native-bootsplash integration.                                                                                                    |
 | (project schemes)           | Added `STAGING` and `PRODUCTION` schemes and modified `${APP_NAME}` and modified pre-actions for all schemes for react-native-config integration. |
 
-### Directory: ./**scripts**
+### ./**scripts**
 
 | File           | Description                                                                                                                                                                                                                                                                                                                                                  |
 | -------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | buildConfig.js | Node script to generate TypeScript types for react-native-config based on the contents of our `.env.x` files. <br>To run it, you can use `generate-build-config`.<br>To learn more, you can read my article: [Generating TypeScript Types for Environment Variables](https://osamaq.com/react-native-generating-typescript-types-for-environment-variables/) |
 | images.js      | Node script to generate image imports based on filenames in `src/common/assets/images`.<br><br>To run it you can use `generate-image-imports` npm script.                                                                                                                                                                                                    |
 
-### Directory: ./src/common/**assets**
+### ./src/common/**assets**
 
-| Folder | Description                                                                                                                                                                                                                                                                                                                             |
+| File   | Description                                                                                                                                                                                                                                                                                                                             |
 | ------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | fonts  | Example font files. Unlinked by default. <br>To link and use them in your app, see [linking fonts](https://github.com/osamaq/react-native-template/blob/master/template/src/common/assets/fonts/how-to-add-fonts.md">https://github.com/osamaq/react-native-template/blob/master/template/src/common/assets/fonts/how-to-add-fonts.md). |
 | images | Sample image file and sample `index.js` file generated by `generate-image-imports` npm script.                                                                                                                                                                                                                                          |
 
-### Directory: ./src/common/**components**
+### ./src/common/**components**
 
 | File                | Description                        |                                     Preview                                      |
 | ------------------- | :--------------------------------- | :------------------------------------------------------------------------------: |
@@ -78,13 +78,13 @@ In addition to configuring many libraries, this template also includes some boil
 | abstract/Space.tsx  | Sample spacer.                     |                                        -                                         |
 | abstract/Portal.tsx | Sample portal.                     |                                        -                                         |
 
-### Directory: ./src/common/**contexts**
+### ./src/common/**contexts**
 
 | File              | Description                                                       |
 | ----------------- | :---------------------------------------------------------------- |
 | PortalContext.tsx | Sample portal context and portal provider. Consumed by Portal.tsx |
 
-### Directory: ./src/common/**exceptions**
+### ./src/common/**exceptions**
 
 | File                    | Description                                                                                                                      |
 | ----------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
@@ -92,7 +92,7 @@ In addition to configuring many libraries, this template also includes some boil
 | HttpException.ts        | Sample exception that extends BaseException.<br><br>If thrown, we can match for it using `err instanceof HttpException`.         |
 | HttpTimeoutException.ts | Sample exception that extends BaseException. <br><br>If thrown, we can match for it using `err instanceof HttpTimeoutException`. |
 
-### Directory: ./src/common/**helpers**
+### ./src/common/**helpers**
 
 | File           | Description         |
 | -------------- | :------------------ |
@@ -102,7 +102,7 @@ In addition to configuring many libraries, this template also includes some boil
 | logUtil.ts     | Logging helpers.    |
 | networkUtil.ts | Networking helpers. |
 
-### Directory: ./src/common/**hooks**
+### ./src/common/**hooks**
 
 | File                     | Description                                                                                                                                   |                                                    Preview                                                    |
 | :----------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- | :-----------------------------------------------------------------------------------------------------------: |
@@ -110,44 +110,44 @@ In addition to configuring many libraries, this template also includes some boil
 |                          |                                                                                                                                               |                                                                                                               |
 | useModal.tsx             | Hook for managing modals.                                                                                                                     |                                                                                                               |
 
-### Directory: ./src/common/**theme**
+### ./src/common/**theme**
 
 | File     | Description                                                                                         |
 | -------- | :-------------------------------------------------------------------------------------------------- |
 | theme.ts | Sample app theme. Contains theme (common styles) and palette (app colors and fonts to choose from). |
 
-### Directory: ./src/common/**types**
+### ./src/common/**types**
 
 | File       | Description                                                                                                                          |
 | ---------- | :----------------------------------------------------------------------------------------------------------------------------------- |
 | env.d.ts   | Environment variables typings for react-native-config module. This file can be regenerated using `generate-build-config` npm script. |
 | types.d.ts | Common types.                                                                                                                        |
 
-### Directory: ./src/features/**error-boundary**
+### ./src/features/**error-boundary**
 
 | File                 | Description                                        |
 | -------------------- | :------------------------------------------------- |
 | RootErrorBoundary.ts | Sample error boundary used at the root of the app. |
 
-### Directory: ./src/features/**home**
+### ./src/features/**home**
 
 | File     | Description                                                                                                       |
 | -------- | :---------------------------------------------------------------------------------------------------------------- |
 | Home.tsx | This screen exists to showcase navigation (from Landing.tsx to Home.tsx), data fetching with SWR and redux usage. |
 
-### Directory: ./src/features/**landing**
+### ./src/features/**landing**
 
 | File        | Description                                                                                               |
 | ----------- | :-------------------------------------------------------------------------------------------------------- |
 | Landing.tsx | Template landing screen. Slightly modified from the official template. Has a button to go to Landing.tsx. |
 
-### Directory: ./src/features/**navigation**
+### ./src/features/**navigation**
 
 | File          | Description                                                                                     |
 | ------------- | :---------------------------------------------------------------------------------------------- |
 | Navigator.tsx | Stack navigator example.<br><br>react-native-bootsplash is used here to hide the splash screen. |
 
-### Directory: ./src/**redux**
+### ./src/**redux**
 
 | File           | Description                                                                                                                                  |
 | -------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -156,26 +156,26 @@ In addition to configuring many libraries, this template also includes some boil
 | rootReducer.ts | Our root reducer. You will rarely need to edit this file unless when adding new state slices.                                                |
 | store.ts       | Our redux store. You will rarely need to edit this file unless when adding new redux observable epics or modifying the store configuration.  |
 
-### Directory: ./src/services/**cache**
+### ./src/services/**cache**
 
 | File            | Description                                                |
 | --------------- | :--------------------------------------------------------- |
 | cacheService.ts | Wrapper around AsyncStorage. Add common interactions here. |
 
-### Directory: ./src/services/**navigation**
+### ./src/services/**navigation**
 
 | File                 | Description                                                                                                          |
 | -------------------- | :------------------------------------------------------------------------------------------------------------------- |
 | navigationService.ts | Global navigation service. Allows interacting with our navigator from outside React components (e.g. Redux actions). |
 
-### Directory: ./src/services/network/**github**
+### ./src/services/network/**github**
 
 | File             | Description                                      |
 | ---------------- | :----------------------------------------------- |
 | githubService.ts | Sample apisauce client setup for the GitHub API. |
 | models.ts        | Types related to the GitHub API.                 |
 
-### Directory: ./src/services/network/**mock**
+### ./src/services/network/**mock**
 
 | File      | Description                                                                                                                      |
 | --------- | :------------------------------------------------------------------------------------------------------------------------------- |
