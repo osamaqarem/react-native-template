@@ -13,17 +13,12 @@ const LoadingPopup = ({ visible }: LoadingPopupProps) => {
   })
 
   return (
-    <Portal>
-      <Animated.View
-        pointerEvents="none"
-        style={[styles.backdrop, { opacity }]}
-      >
-        <View style={styles.card}>
-          <ActivityIndicator size={44} animating={visible} />
-          <Text style={styles.text}>Please wait...</Text>
-        </View>
-      </Animated.View>
-    </Portal>
+    <Animated.View pointerEvents="none" style={[styles.backdrop, { opacity }]}>
+      <View style={styles.card}>
+        <ActivityIndicator size={44} animating={visible} />
+        <Text style={styles.text}>Please wait...</Text>
+      </View>
+    </Animated.View>
   )
 }
 
@@ -48,9 +43,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 5.0,
     elevation: 10,
-    width: 300,
+    minWidth: 200,
     padding: 10,
-    height: 100,
+    minHeight: 80,
     justifyContent: "space-evenly",
     alignItems: "center",
     flexDirection: "row",
