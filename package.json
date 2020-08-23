@@ -1,6 +1,6 @@
 {
   "name": "@osamaq/react-native-template",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A minimal template with good architecture and common packages to let you focus on writing features right away.",
   "scripts": {},
   "files": [
