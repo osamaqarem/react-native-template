@@ -161,7 +161,6 @@ const styles = StyleSheet.create({
     width: 90,
   },
   dismissText: {
-    paddingHorizontal: 19,
     fontWeight: "bold",
     textAlign: "center",
   },
