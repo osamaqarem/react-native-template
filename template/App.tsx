@@ -22,7 +22,7 @@ import store from "./src/redux/store"
   // React Navigation, optimize memory usage.
   enableScreens()
 
-  // Initialize sentry SDK. Insert your DSN string.
+  // Initialize sentry SDK (DSN string must be inserted in BuildConfig environment files).
   const { SENTRY_DSN } = BuildConfig
 
   if (typeof SENTRY_DSN === "string" && SENTRY_DSN.length > 0) {
